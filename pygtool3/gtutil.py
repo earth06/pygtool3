@@ -52,10 +52,8 @@ def read_nas(filename,header=False,na_values=-999):
         return df,head
     else:
         return df
-
 def normdate_to_datetime():
     """
     converting floating date into datetimeindex
     """
-    
     return

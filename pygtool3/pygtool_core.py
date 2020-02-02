@@ -379,7 +379,26 @@ class Gtool2d(Gtool3d):
         for i in range(self.count):
             dataarray[i,:,:]=self.getarr(timestep=i,cyclic=cyclic)
         return dataarray
-  
+def isgtoolinstance(arr,timestep=0,cyclic=False,zsel=0):
+	"""
+	evaluate whether first argument is Gtool* or not and return it as numpy.ndarray
+	Paramter
+	---------
+	arr : {Gtool2d,Gtool3d,numpy.ndarray},model data
+	timestep : int,default=0
+	cyclic : bool,default=False
+	zsel   : int,select model layer,default=0
+	Return
+	dat : numpy.ndarray ,  
+	---------
+	"""
+	if isinstance(arr,Gtool3d):
+		dat=arr.getarr(timestep=timestep,cyclic=cyclic)[zsel,:,:]
+	elif isinstance(arr,Gtool2d):
+		dat=arr.getarr(timestep=timestep,cyclic=cyclic)[:,:]
+	else:
+		dat=arr
+	return dat
 if __name__ == '__main__':
     print(str(thisdir))
     
