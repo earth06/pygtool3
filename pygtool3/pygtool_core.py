@@ -267,14 +267,9 @@ class Gtool3d:
         """
         get pd.DatetimeIndex
  
-        Parameters
-        ---------------
-        timestep : int (default 0)
-        freq     : string default 'MS' (follow pandas format cord)
-        
         Return
         ---------------
-        datetime :pd.DatetimeIndex (default return monthly)
+        datetime :pd.DatetimeIndex
         """
         datelist=[] 
         for i in range(self.count):
@@ -300,6 +295,16 @@ class Gtool3d:
             dataarray[i,:,:,:]=self.getarr(timestep=i,cyclic=cyclic) 
         return dataarray
     def to_xarray(self,lon=None,lat=None,sigma=None,cyclic=False,**kwargs):
+        """
+        convert Gtool to xarray
+        Parameter
+        ---------
+        lon :numpy.ndarray, array of longitude
+        lat :numpy.ndarray, array of latitude
+        sigma:numpy.ndarray, array of altitude
+        cyclic:bool
+        **kwargs:string,you can add your own attribute to xarray.DataSet
+        """
         head=self.getheader()
         item=head[2].decode().strip()
         title=head[3].decode().strip()

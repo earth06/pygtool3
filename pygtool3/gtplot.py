@@ -96,20 +96,24 @@ def DDlabel(ax,labelsize=18):
     ax.tick_params(labelsize=labelsize)
     return ax
 
-def contourf(xx,yy,arr,div=20,clabelsize=14,extend='both',levels=None,\
-            cmap='viridis',powerlimits=(-1,3),alpha=1,\
+def contourf(xx,yy,arr,cnum=20,clabelsize=14,extend='both',levels=None,\
+            cmap='viridis',alpha=1,\
             timestep=0,zsel=0,cyclic=False):
     """
     Parameter
     ---------------
-    xx,yy  :array_like
-    arr    :array_like
-            input data
-    div    :int or float
+    xx,yy  :numpy.ndarray
+    arr    :{numpy.ndarray,Gtool},data
+    cnum    :int or float,default:20
             the number of contour
-    powerlimits:tuple
-           exponent range 
-    
+    cmap    :string,colormap name,default:'viridis'
+    extend :string whether fill contour when out of range
+            {both,neither,max,min},default:'both'
+    levels :set contour level manually,default:None
+    alpha  :float{0-1},default:1
+    timestep:int ,model timestep,default:0
+    zsel :int, select model layer for plot,
+    cyclic :bool, cyclic logntiude or not,default:False
     Return
     ----------------
     fig
@@ -117,15 +121,15 @@ def contourf(xx,yy,arr,div=20,clabelsize=14,extend='both',levels=None,\
     cbar
 
     """
-    sformat.set_powerlimits((powerlimits))
+    sformat.set_powerlimits((-1,3))
     fig=plt.figure(figsize=(10,6),facecolor='w')
     ax=fig.add_subplot(1,1,1,projection=ccrs.PlateCarree(central_longitude=180))
     cax=fig.add_axes([0.25,0,0.5,0.05])
     ax=ckit.set_geogrid(ax)
     dat=isgtoolinstance(arr,timestep=timestep,cyclic=cyclic,zsel=zsel)
     if levels is None:
-        delta=(np.nanmax(dat)-np.nanmin(dat))/(div)
-        levels=np.arange(np.nanmin(dat),abs(np.nanmax(dat))*2 +delta,delta)[0:int(div)+1]
+        delta=(np.nanmax(dat)-np.nanmin(dat))/(cnum)
+        levels=np.arange(np.nanmin(dat),abs(np.nanmax(dat))*2 +delta,delta)[0:int(cnum)+1]
     cf=ax.contourf(xx,yy,dat
         ,levels=levels
         ,extend=extend
@@ -156,7 +160,9 @@ timestep=0,cyclic=False,zsel=0):
     vmax   :float,maximum value,default=arr.max()
     alpha  :float, 0-1 ,default=1
     extend :string {'max','min','both','neither'}
-    
+    timestep:int
+    zsel:int
+    cyclic:bool
     Return
     ----------------
     fig :matplotlib.Figure
@@ -238,7 +244,7 @@ timestep=0,cyclic=False,zsel=0):
     cbar.ax.tick_params(labelsize=clabelsize)
     cbar.ax.xaxis.offsetText.set_fontsize(offsetTextsize)
     return fig,ax,cbar
-def zonal_contourf(yy,zz,arr,div=20,clabelsize=14,extend='both',levels=None,\
+def zonal_contourf(yy,zz,arr,cnum=20,clabelsize=14,extend='both',levels=None,\
             cmap='viridis',powerlimits=(-1,3),alpha=1,\
             dlat=15.0,labelsize=14,
             timestep=0,xsel='mean',cyclic=False):
@@ -249,7 +255,7 @@ def zonal_contourf(yy,zz,arr,div=20,clabelsize=14,extend='both',levels=None,\
     xsel   :{int ,string},{index of logitude,'mean'} 
     arr    :array_like
             input data
-    div    :int or float
+    cnum    :int or float
             the number of contour
     powerlimits:tuple
            exponent range
@@ -276,8 +282,8 @@ def zonal_contourf(yy,zz,arr,div=20,clabelsize=14,extend='both',levels=None,\
         dat=dat[:,:,xsel]
     set_latticks(ax=ax,dlat=dlat,labelsize=labelsize)
     if levels is None:
-        delta=(np.nanmax(dat)-np.nanmin(dat))/(div)
-        levels=np.arange(np.nanmin(dat),abs(np.nanmax(dat))*2 +delta,delta)[0:int(div)+1]
+        delta=(np.nanmax(dat)-np.nanmin(dat))/(cnum)
+        levels=np.arange(np.nanmin(dat),abs(np.nanmax(dat))*2 +delta,delta)[0:int(cnum)+1]
 
     cf=ax.contourf(yy,zz,dat
         ,levels=levels
@@ -295,7 +301,7 @@ def zonal_contourf(yy,zz,arr,div=20,clabelsize=14,extend='both',levels=None,\
     ax.set_ylabel('eta')
     ax.grid()
     return fig,ax,cbar
-def zonal_logcontourf(yy,zz,arr,div=20,clabelsize=14,extend='both',vmax=None,vmin=None,\
+def zonal_logcontourf(yy,zz,arr,cnum=20,clabelsize=14,extend='both',vmax=None,vmin=None,\
             cmap='viridis',powerlimits=(-1,3),alpha=1,\
             dlat=15.0,labelsize=14,subs='all',
             timestep=0,xsel='mean',cyclic=False):
@@ -306,7 +312,7 @@ def zonal_logcontourf(yy,zz,arr,div=20,clabelsize=14,extend='both',vmax=None,vmi
     xsel   :{int ,string},{index of logitude,'mean'} 
     arr    :array_like
             input data
-    div    :int or float
+    cnum    :int or float
             the number of contour
     powerlimits:tuple
            exponent range
@@ -354,8 +360,8 @@ def zonal_logcontourf(yy,zz,arr,div=20,clabelsize=14,extend='both',vmax=None,vmi
     ax.set_ylabel('eta')
     ax.grid()
     return fig,ax,cbar
-def zonal_pcolormesh(yy,zz,arr,div=20,clabelsize=14,extend='both',\
-            cmap='viridis',powerlimits=(-1,3),alpha=1,\
+def zonal_pcolormesh(yy,zz,arr,cnum=20,clabelsize=14,extend='both',\
+            cmap='viridis',alpha=1,subs=(1,),
             dlat=15.0,labelsize=14,scale='normal',vmin=None,vmax=None,
             timestep=0,xsel='mean',cyclic=False):
     """
@@ -365,7 +371,7 @@ def zonal_pcolormesh(yy,zz,arr,div=20,clabelsize=14,extend='both',\
     xsel   :{int ,string},{index of logitude,'mean'} 
     arr    :array_like
             input data
-    div    :int or float
+    cnum    :int or float
             the number of contour
     powerlimits:tuple
            exponent range
@@ -379,7 +385,7 @@ def zonal_pcolormesh(yy,zz,arr,div=20,clabelsize=14,extend='both',\
     cbar
 
     """
-    sformat.set_powerlimits((powerlimits))
+    sformat.set_powerlimits((-1,3))
     fig=plt.figure(figsize=(9,6),facecolor='w')
     ax=fig.add_subplot(1,1,1)
     cax=fig.add_axes([0.25,0,0.5,0.05])
@@ -403,7 +409,7 @@ def zonal_pcolormesh(yy,zz,arr,div=20,clabelsize=14,extend='both',\
         ,alpha=alpha)
     if scale=='log':
         cbar=fig.colorbar(cf,cax,
-            ticks=ticker.LogLocator(subs=(1.0,)),
+            ticks=ticker.LogLocator(subs=subs),
             extend=extend,
             format=ticker.LogFormatterSciNotation(),
             orientation='horizontal')

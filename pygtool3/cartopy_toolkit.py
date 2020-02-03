@@ -11,11 +11,11 @@ import matplotlib.pyplot as plt
 
 def set_geogrid(ax,resolution='110m'
                ,dlon=60,dlat=30
-               ,manual_ticks=False,xticks=None,yticks=None
+               ,xticks=None,yticks=None
                ,bottom=True,left=True,right=False,top=False
                ,coastlinewidth=1
                ,coastlinecolor='black'
-               ,linewidth=0.5,fontsize=15,labelsize=15
+               ,linewidth=0.5,labelsize=15
                ,color='grey' ,alpha=0.8,linestyle='-' ):
     """
     parameter
@@ -23,9 +23,14 @@ def set_geogrid(ax,resolution='110m'
     ax        :cartopy.mpl.geoaxes
     dlon      :float  grid interval of longitude
     dlat      :float  grid interval of latitude
-    linewidth,fontsize,labelsize,alpha :float
+    linewidth,labelsize,alpha :float
     color     :string
     resolution :string '10m','50m','110m'
+    coastlinecolor :int
+    coastlinewidth :int
+    labelsize :int,tick labelsize,default:15
+    alpha :float,default:0.8
+    linestyle :string,gridliens style,default:'-'
     bottom    :boolean draw  xaxis ticklabel
     lfet      :boolean draw  yaxis ticklabel
     
@@ -46,8 +51,9 @@ def set_geogrid(ax,resolution='110m'
                       , draw_labels=False,
                       linewidth=linewidth, alpha=alpha
                       , color=color,linestyle=linestyle)
-    if manual_ticks == False: 
+    if xticks is None: 
         xticks=np.arange(0,360.1,dlon)
+    if yticks is None:
         yticks=np.arange(-90,90.1,dlat)
     gl.xlocator = mticker.FixedLocator(xticks)    
     gl.ylocator = mticker.FixedLocator(yticks)
