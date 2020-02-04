@@ -122,7 +122,7 @@ class GtoolGrid():
         return area
 class GtoolSigma():
     """
-    read sigma
+    read sigma-grid
     """
 
     head = ("head",">i")
@@ -162,6 +162,45 @@ class GtoolSigma():
         P=self.aa.reshape((altaxis,1,1)) \
          +self.bb.reshape((altaxis,1,1))*psarr
         return P
+class GtoolPressure():
+    """
+    read P-grid
+    """
+    head = ("head",">i")
+    tail = ("tail",">i")
+    head2 = ("head2",">i")
+    tail2 = ("tail2",">i")
+    def __init__(self,z=35,GTAXFILE='GTAXLOC.AR5PL35'):
+        self.z=z
+        dt = np.dtype([self.head
+                       ,("header",">64S16")
+                       ,self.tail,self.head2
+                       ,("arr",">"+str(self.z)+"f")
+                       ,self.tail2])     #big endian
+        file=thisdir+'/GTAXDIR/'+GTAXFILE
+        with open(file,'br') as data:
+            chunk=np.fromfile(data,dtype=dt,count=1)
+        self.chunk = chunk
+        self.pp=self.chunk[0]['arr']
+    def get_pressure(self):
+        """
+        return pressure as 3D
+        Parameter
+        ------------------
+        Return
+        ------------------
+        p np.ndarray,(z,1,1) [hPa]
+        """
+        return self.pp.reshape((self.z,1,1))
+    def get_dp(self):
+        """
+        calculate dp = P[k+1]-P[k]
+        Return
+        -----------------
+        dp : np.ndarray,(z-1,1,1) [hPa]
+        """
+        dp=self.pp[1:]-self.pp[:-1]
+        return dp.reshape((self.z-1,1,1))
 
 class Gtool3d:
     """
@@ -229,8 +268,8 @@ class Gtool3d:
         arr = self.chunk[timestep]['arr']
         arr = arr.reshape((self.z,self.y,self.x),order='C')
         if replace_nan:
-            arr[arr <= na_values] = np.nan
-
+            arr =np.where(arr==na_values,np.nan,arr)
+#            arr[arr <= na_values] = np.nan
         if cyclic:
             arr = cutil.add_cyclic_point(arr)
 #        print(self.getDate(timestep=timestep))
@@ -275,7 +314,7 @@ class Gtool3d:
         for i in range(self.count):
             datelist.append(self.getdate(timestep=i))
         return pd.to_datetime(datelist)
-    def getarrays(self,cyclic=False):
+    def getarrays(self,cyclic=False,na_values=-999,replace_nan=False):
         """
         get all timeseries of array
         
@@ -292,9 +331,9 @@ class Gtool3d:
             x = self.x
         dataarray=np.zeros((self.count,self.z,self.y,x))
         for i in range(self.count):
-            dataarray[i,:,:,:]=self.getarr(timestep=i,cyclic=cyclic) 
+            dataarray[i,:,:,:]=self.getarr(timestep=i,cyclic=cyclic,replace_nan=replace_nan,na_values=na_values) 
         return dataarray
-    def to_xarray(self,lon=None,lat=None,sigma=None,cyclic=False,**kwargs):
+    def to_xarray(self,lon=None,lat=None,sigma=None,cyclic=False,na_values=-999,replace_nan=False,**kwargs):
         """
         convert Gtool to xarray
         Parameter
@@ -310,7 +349,7 @@ class Gtool3d:
         title=head[3].decode().strip()
         unit=head[15].decode().strip()
         datetime=self.getdatetimeindex()
-        arrays=self.getarrays(cyclic=cyclic)
+        arrays=self.getarrays(cyclic=cyclic,na_values=na_values,replace_nan=replace_nan)
         kwargs['Convention']='COARDS'
         kwargs['title']=title
         kwargs['unit']=unit
@@ -342,7 +381,7 @@ class Gtool2d(Gtool3d):
     def __init__(self,file,count=1,x=128,y=64,z=None):
         super().__init__(file,count,x,y,z)
         pass
-    def getarr(self,timestep=0,cyclic=False,na_values=-999,miss=False):
+    def getarr(self,timestep=0,cyclic=False,na_values=-999,replace_nan=False):
         """
         get ndarray((y=64,x=128))
         
@@ -359,13 +398,14 @@ class Gtool2d(Gtool3d):
         arr = self.chunk[timestep]['arr']
 #succeed when order='C' not 'F'
         arr = arr.reshape((self.y,self.x),order='C')
-        if miss:
-            arr[arr <= na_values] = np.nan
+        if replace_nan:
+#            arr[arr <= na_values] = np.nan
+            arr =np.where(arr==na_values,np.nan,arr)
         if cyclic:
             arr = cutil.add_cyclic_point(arr)
 #        print(self.getDate(timestep=timestep))
         return arr
-    def getarrays(self,cyclic=False):
+    def getarrays(self,cyclic=False,replace_nan=False,na_values=-999):
         """
         compound all timeseries into array
         
@@ -382,7 +422,7 @@ class Gtool2d(Gtool3d):
             x = self.x
         dataarray=np.zeros((self.count,self.y,x))
         for i in range(self.count):
-            dataarray[i,:,:]=self.getarr(timestep=i,cyclic=cyclic)
+            dataarray[i,:,:]=self.getarr(timestep=i,cyclic=cyclic,na_values=na_values,replace_nan=replace_nan)
         return dataarray
 def isgtoolinstance(arr,timestep=0,cyclic=False,zsel=0):
 	"""

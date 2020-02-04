@@ -7,7 +7,7 @@ import sys
 import pathlib
 thisdir=str(pathlib.Path(__file__).resolve().parent)
 sys.path.append(thisdir)
-from pygtool_core import Gtool3d,Gtool2d,GtoolGrid,GtoolSigma
+from pygtool_core import Gtool3d,Gtool2d,GtoolGrid,GtoolSigma,GtoolPressure
 import cartopy_toolkit as ckit
 import gtplot
 import gtutil
@@ -66,4 +66,28 @@ def readsigma(z=36,gtaxfile='GTAXLOC.HETA36'):
     """
     gtoolsigma=GtoolSigma(z=z,GTAXFILE=gtaxfile)
     return gtoolsigma
+def readsigma(z=36,gtaxfile='GTAXLOC.HETA36'):
+    """
+    Parameter
+    -------------
+    z : int, num of z grid
+    gtaxfile : string, default:GTAXLOC.HETA36
 
+    Return
+    -------
+    gtoolsigma : `pygtool3.pygtool_core.GtoolSigma`
+    """
+    gtoolsigma=GtoolSigma(z=z,GTAXFILE=gtaxfile)
+    return gtoolsigma
+def readpressure(z=35,gtaxfile='GTAXLOC.AR5PL35'):
+    """
+    Parameter
+    --------------
+    z : int, num of z grid
+    gtaxfile :string,coords file, default:'GTAXLOC.AR5PL35'
+    Return
+    ------------
+    gtoolpres : `pygtool3.pygtool_core.GtoolPressure`
+    """
+    gtoolpres=GtoolPressure(z=z,GTAXFILE=gtaxfile)
+    return gtoolpres
