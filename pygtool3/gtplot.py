@@ -277,7 +277,7 @@ def zonal_contourf(yy,zz,arr,cnum=20,clabelsize=14,extend='both',levels=None,\
     else:
         dat=arr[:,:,:]
     if xsel=='mean':
-        dat=dat[:,:,:].mean(axis=2)
+        dat=np.nanmean(dat[:,:,:],axis=2)
     else:
         dat=dat[:,:,xsel]
     set_latticks(ax=ax,dlat=dlat,labelsize=labelsize)
@@ -297,7 +297,7 @@ def zonal_contourf(yy,zz,arr,cnum=20,clabelsize=14,extend='both',levels=None,\
 
     cbar.ax.tick_params(labelsize=clabelsize)
     cbar.ax.xaxis.offsetText.set_fontsize(14)
-    ax.set_ylim(1,0)
+#    ax.set_ylim(1,0)
     ax.set_ylabel('eta')
     ax.grid()
     return fig,ax,cbar
@@ -335,7 +335,7 @@ def zonal_logcontourf(yy,zz,arr,cnum=20,clabelsize=14,extend='both',vmax=None,vm
     else:
         dat=arr[:,:,:]
     if xsel=='mean':
-        dat=dat[:,:,:].mean(axis=2)
+        dat=np.nanmean(dat[:,:,:],axis=2)
     else:
         dat=dat[:,:,xsel]
     set_latticks(ax=ax,dlat=dlat,labelsize=labelsize)
@@ -394,7 +394,7 @@ def zonal_pcolormesh(yy,zz,arr,cnum=20,clabelsize=14,extend='both',\
     else:
         dat=arr[:,:,:]
     if xsel=='mean':
-        dat=dat[:,:,:].mean(axis=2)
+        dat=np.nanmean(dat[:,:,:],axis=2)
     else:
         dat=dat[:,:,xsel]
     set_latticks(ax=ax,dlat=dlat,labelsize=labelsize)
