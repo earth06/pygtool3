@@ -97,8 +97,9 @@ def DDlabel(ax,labelsize=18):
     return ax
 
 def contourf(xx,yy,arr,cnum=20,clabelsize=14,extend='both',levels=None,\
-            cmap='viridis',alpha=1,\
-            timestep=0,zsel=0,cyclic=False):
+    cmap='viridis',alpha=1,\
+    na_values=-999,replace_nan=False,
+    timestep=0,zsel=0,cyclic=False):
     """
     Parameter
     ---------------
@@ -126,7 +127,8 @@ def contourf(xx,yy,arr,cnum=20,clabelsize=14,extend='both',levels=None,\
     ax=fig.add_subplot(1,1,1,projection=ccrs.PlateCarree(central_longitude=180))
     cax=fig.add_axes([0.25,0,0.5,0.05])
     ax=ckit.set_geogrid(ax)
-    dat=isgtoolinstance(arr,timestep=timestep,cyclic=cyclic,zsel=zsel)
+    dat=isgtoolinstance(arr,timestep=timestep,cyclic=cyclic,zsel=zsel,replace_nan=replace_nan,
+            na_values=na_values)
     if levels is None:
         delta=(np.nanmax(dat)-np.nanmin(dat))/(cnum)
         levels=np.arange(np.nanmin(dat),abs(np.nanmax(dat))*2 +delta,delta)[0:int(cnum)+1]
@@ -145,9 +147,10 @@ def contourf(xx,yy,arr,cnum=20,clabelsize=14,extend='both',levels=None,\
     cbar.ax.xaxis.offsetText.set_fontsize(14)
     return fig,ax,cbar
 def logcontourf(xx,yy,arr,subs=(1.0,),clabelsize=14,\
-vmin=None,vmax=None,\
-cmap='viridis',alpha=1,extend='both',offsetTextsize=14,\
-timestep=0,cyclic=False,zsel=0):
+    vmin=None,vmax=None,\
+    cmap='viridis',alpha=1,extend='both',offsetTextsize=14,\
+    na_values=-999,replace_nan=False,
+    timestep=0,cyclic=False,zsel=0):
     """
     Parameter
     ---------------
@@ -173,7 +176,7 @@ timestep=0,cyclic=False,zsel=0):
     ax=fig.add_subplot(1,1,1,projection=ccrs.PlateCarree(central_longitude=180))
     cax=fig.add_axes([0.25,0,0.5,0.05])
     ax=ckit.set_geogrid(ax)
-    dat=isgtoolinstance(arr,timestep=timestep,cyclic=cyclic,zsel=zsel)
+    dat=isgtoolinstance(arr,timestep=timestep,cyclic=cyclic,zsel=zsel,na_values=na_values,replace_nan=replace_nan)
     if vmin is None:
         vmin=np.nanmin(dat)
     if vmax is None:
@@ -195,9 +198,10 @@ timestep=0,cyclic=False,zsel=0):
     cbar.ax.xaxis.offsetText.set_fontsize(offsetTextsize)
     return fig,ax,cbar
 def pcolormesh(xx,yy,arr,subs=(1.0,),clabelsize=14,\
-vmin=None,vmax=None,scale='normal',\
-cmap='viridis',alpha=1,extend='both',offsetTextsize=14,\
-timestep=0,cyclic=False,zsel=0):
+    vmin=None,vmax=None,scale='normal',\
+    cmap='viridis',alpha=1,extend='both',offsetTextsize=14,\
+    na_values=-999,replace_nan=False,
+    timestep=0,cyclic=False,zsel=0):
     """
     Parameter
     ---------------
@@ -222,7 +226,7 @@ timestep=0,cyclic=False,zsel=0):
     ax=fig.add_subplot(1,1,1,projection=ccrs.PlateCarree(central_longitude=180))
     cax=fig.add_axes([0.25,0,0.5,0.05])
     ax=ckit.set_geogrid(ax)
-    dat=isgtoolinstance(arr,timestep=timestep,cyclic=cyclic,zsel=zsel)
+    dat=isgtoolinstance(arr,timestep=timestep,cyclic=cyclic,zsel=zsel,replace_nan=replace_nan,na_values=na_values)
     if vmin is None:
         vmin=np.nanmin(dat)
     if vmax is None:
@@ -247,6 +251,8 @@ timestep=0,cyclic=False,zsel=0):
 def zonal_contourf(yy,zz,arr,cnum=20,clabelsize=14,extend='both',levels=None,\
             cmap='viridis',powerlimits=(-1,3),alpha=1,\
             dlat=15.0,labelsize=14,
+            na_values=-999,replace_nan=False,
+            ylabel='eta',
             timestep=0,xsel='mean',cyclic=False):
     """
     Parameter
@@ -273,7 +279,7 @@ def zonal_contourf(yy,zz,arr,cnum=20,clabelsize=14,extend='both',levels=None,\
     ax=fig.add_subplot(1,1,1)
     cax=fig.add_axes([0.25,0,0.5,0.05])
     if isinstance(arr,Gtool3d):
-        dat=arr.getarr(cyclic=cyclic,timestep=timestep,)[:,:,:]
+        dat=arr.getarr(cyclic=cyclic,timestep=timestep,replace_nan=replace_nan,na_values=na_values)[:,:,:]
     else:
         dat=arr[:,:,:]
     if xsel=='mean':
@@ -298,12 +304,12 @@ def zonal_contourf(yy,zz,arr,cnum=20,clabelsize=14,extend='both',levels=None,\
     cbar.ax.tick_params(labelsize=clabelsize)
     cbar.ax.xaxis.offsetText.set_fontsize(14)
 #    ax.set_ylim(1,0)
-    ax.set_ylabel('eta')
     ax.grid()
     return fig,ax,cbar
 def zonal_logcontourf(yy,zz,arr,cnum=20,clabelsize=14,extend='both',vmax=None,vmin=None,\
             cmap='viridis',powerlimits=(-1,3),alpha=1,\
             dlat=15.0,labelsize=14,subs='all',
+            replace_nan=False,na_values=-999,
             timestep=0,xsel='mean',cyclic=False):
     """
     Parameter
@@ -357,12 +363,12 @@ def zonal_logcontourf(yy,zz,arr,cnum=20,clabelsize=14,extend='both',vmax=None,vm
     cbar.ax.tick_params(labelsize=clabelsize)
     cbar.ax.xaxis.offsetText.set_fontsize(14)
     ax.set_ylim(1,0)
-    ax.set_ylabel('eta')
     ax.grid()
     return fig,ax,cbar
 def zonal_pcolormesh(yy,zz,arr,cnum=20,clabelsize=14,extend='both',\
             cmap='viridis',alpha=1,subs=(1,),
             dlat=15.0,labelsize=14,scale='normal',vmin=None,vmax=None,
+            na_values=-999,replace_nan=False,
             timestep=0,xsel='mean',cyclic=False):
     """
     Parameter
@@ -418,7 +424,6 @@ def zonal_pcolormesh(yy,zz,arr,cnum=20,clabelsize=14,extend='both',\
     cbar.ax.tick_params(labelsize=clabelsize)
     cbar.ax.xaxis.offsetText.set_fontsize(14)
     ax.set_ylim(1,0)
-    ax.set_ylabel('eta')
     ax.grid()
     return fig,ax,cbar
 

@@ -63,6 +63,14 @@ class GtoolLat():
         for i in range(len(lat)):
             print(i,':',lat[i])
 class GtoolGrid():
+    """
+    manipulate horizontal coordinate
+    Method
+    --------
+    getlonlat : return logitude,latitude as 1D array
+    getmesh : return longitude,latitude as 2D array
+    getarea : return area of grid as 2D array
+    """
     def __init__(self,x=128,y=64,lonfile=None,latfile=None):
         self.x=x
         self.y=y
@@ -165,6 +173,20 @@ class GtoolSigma():
 class GtoolPressure():
     """
     read P-grid
+    Parameter
+    ----------
+    z :int,num of vertical grid,default:35
+    GTAXFILE :string,coord file,default:GTAXLOC.AR5PL35
+    
+    Atribute
+    ---------
+    z :int,num of vertical grid
+    pp:numpy.ndarray,1D array of pressure,(z)
+
+    Method
+    ---------
+    get_pressure:return array of pressure as 3D
+    get_dp:return delta P as 3D array
     """
     head = ("head",">i")
     tail = ("tail",">i")
@@ -215,7 +237,7 @@ class Gtool3d:
     --------------
     __init__(self,data,count,x,y,z)
     getarr(self,timestep)
-    getheader()
+    getheader
     getDate 
     """
     head = ("head",">i4")
@@ -424,7 +446,7 @@ class Gtool2d(Gtool3d):
         for i in range(self.count):
             dataarray[i,:,:]=self.getarr(timestep=i,cyclic=cyclic,na_values=na_values,replace_nan=replace_nan)
         return dataarray
-def isgtoolinstance(arr,timestep=0,cyclic=False,zsel=0):
+def isgtoolinstance(arr,timestep=0,cyclic=False,zsel=0,replace_nan=False,na_values=-999):
 	"""
 	evaluate whether first argument is Gtool* or not and return it as numpy.ndarray
 	Paramter
