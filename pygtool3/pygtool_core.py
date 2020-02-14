@@ -6,6 +6,98 @@ import pandas as pd
 import pathlib
 
 thisdir=str(pathlib.Path(__file__).resolve().parent)
+class Gtool():
+    """
+    set up gtool format for creating gtool emission data
+    with open(fout,'bw'):
+        for time in (datetimes):
+            gt=Gtool()
+            gt.set_header()
+            gt.set_values()
+            gtooldat=gt.get_data()
+            gtooldat.tofile(fout)
+    """
+    head = ("head",">i")
+    tail = ("tail",">i")
+    head2 = ("head2",">i")
+    tail2 = ("tail2",">i")
+    index={'id':0,'dataset':1,'var':2,
+                  'title1':13,'title2':14,'unit':15,
+                  'time':24,'date':25,'utim':26,
+                  'xaxis':28,'x1':29,'x2':30,
+                  'yaxis':31,'y1':32,'y2':33,
+                  'zaxis':34,'z1':35,'z2':36,
+                  'cdate':59,'mdate':61,'msign':62,'size':63}
+    def __init__(self,x=128,y=64,z=36):
+        self.x=x
+        self.y=y
+        self.z=z
+        self.num=x*y*z
+        dt = np.dtype([self.head
+                   ,("header",">64S16")
+                   ,self.tail,self.head2
+                   ,("arr",">"+str(self.num)+"f")
+                   ,self.tail2])     #big endian
+        data=np.zeros(1,dtype=dt)
+        data['head']=1024
+        data['tail']=1024
+        data['head2']=self.num*4
+        data['tail2']=self.num*4
+        self.data=data
+    def set_sampleheader(self,sample=None):
+        """
+        set gtool header
+        Parameter
+        ---------
+        sample :np.ndarray,Gtool header from other file
+        """
+        self.data['header']=sample
+        return 0
+    def set_header(self,dataset='dataset',varname='var',title='title',\
+                 unit='kg/m2',author='unknown'):
+        """
+        edit header
+        Parameter
+        ---------
+        """
+        self.data['header'][0,self.index['dataset']]='{:<16}'.format(dataset)
+        self.data['header'][0,self.index['var']]='{:<16}'.format(varname)
+        self.data['header'][0,self.index['title']]='{:<16}'.format(title[0:16])
+        self.data['header'][0,self.index['title2']]='{:<16}'.format(title[16:32])
+        self.data['header'][0,self.index['unit']]='{:<16}'.format(unit)
+        now=datetime.datetime.now().strftime('%Y%m%d %H0000 ')
+        self.data['header'][0,self.index['mdate']]='{:<16}'.format(now)
+        self.data['header'][0,self.index['author']]='{:<16}'.format(author)
+    def set_datetime(self,datetime='19790101 000000 ',fmt='%Y%m%d 000000 '):
+        """
+        datetime :pandas.Timestamp,string('YYYYMMDD hhmmss ')
+        """
+        if isinstance(datetime,pd.Timestamp):
+            dt=datetime.strftime(fmt)
+        else:
+            dt=datetime
+        self.data['header'][0,self.index['date']]='{:<16}'.format(dt)
+    def set_values(self,arr):
+        """
+        set values
+        Parameter
+        -----------
+        arr :np.ndarray
+        """
+        self.data['arr']=arr.astype('f4').flatten(order='C')
+        return 0
+    def get_data(self):
+        return self.data
+    def to_gtool(self,file='gtool.out',datalist=None,datetimeindex=None):
+        """
+        save data as gtool format
+        """
+        with open(file,'ba') as f:
+            for dt,array in zip(datetimeindex,datalist):
+                self.set_datetime(dt)
+                self.set_values(array)
+                self.data.tofile(f)
+       
 class GtoolLon():
     head = ("head",">i")
     tail = ("tail",">i")
