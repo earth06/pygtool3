@@ -141,3 +141,37 @@ def getcmass_column(cmass=None,ps=None,T=None,sigma=None,sigma_M=None,\
     else:
         column=col3D[0:zmax,:,:].sum(axis=0)*fact
     return column
+def getvmr_column(vmr=None,ps=None,T=None,sigma=None,sigma_M=None,\
+                    timestep=0,zmax=None,fact=1.0e0,cyclic=False):
+    """
+    conduct vertical integration and return column concentration
+
+    Parameter
+    ---------
+    vmr : Gtool3d or numpy.ndarray,volume mixing ratio
+    ps : Gtool2d or numpy.ndarray, surface pressure[hPa]
+    T : Gtool3d or numpy.ndarray , temperature[K]
+    sigma : GtoolSigma,sigmascale for middle grid
+    sigma_M : GtoolSigma,sigmascale for boudary grid
+    timestep : int, set model timestep if passed data is Gtool* instance
+    cyclic : bool, whether longitude is cyclic or not.
+    fact :float, factor for adjusting unit of column concentration
+ 
+    Return
+    ----------
+    column : numpy.ndarray, column concentration of passed tracer
+    """
+    P=(sigma.get_pressure(ps,timestep=timestep,cyclic=cyclic))*1e2
+    PM=(sigma_M.get_pressure(ps,timestep=timestep,cyclic=cyclic))*1e2
+    dp=PM[1:,:,:]-PM[:-1,:,:]
+    grav=9.8e0
+    if isinstance(cmass,Gtool3d):
+        col3D=vmr.getarr(timestep=timestep,cyclic=cyclic)*dp/grav
+    else:
+        col3D=vmr*dz
+    if zmax is None:
+        column=col3D[0:,:,:].sum(axis=0)*fact
+    else:
+        column=col3D[0:zmax,:,:].sum(axis=0)*fact
+    return column
+

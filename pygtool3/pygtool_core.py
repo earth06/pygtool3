@@ -262,6 +262,28 @@ class GtoolSigma():
         P=self.aa.reshape((altaxis,1,1)) \
          +self.bb.reshape((altaxis,1,1))*psarr
         return P
+    def get_dp(self,ps,timestep=0,cyclic=False):
+        """
+        convert surface pressure to 3D pressure
+        Parameter
+        ------------------
+        ps : np.ndarray or Gtool2d , surface pressure
+        cyclic :bool,whether longitued is cyclic,default=False
+        Return
+        ------------------
+        dp np.ndarray [Pa]
+        """
+        if isinstance(ps,Gtool2d):
+            psarr=ps.getarr(cyclic=cyclic,timestep=timestep)
+        else:
+            psarr=ps
+        lataxis,lonaxis=psarr.shape
+        altaxis=self.aa.shape[0]
+        PM=self.aa.reshape((altaxis,1,1)) \
+         +self.bb.reshape((altaxis,1,1))*psarr
+        dp=(PM[1:,:,:]-PM[0:-1,:,:])*1e2
+        return dp
+
 class GtoolPressure():
     """
     read P-grid
