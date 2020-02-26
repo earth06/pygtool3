@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>gtplot module &#8212; pygtool3  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="gtutil module" href="gtutil.html" />
+    <link rel="prev" title="gtcalic module" href="gtcalic.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-gtplot">
+<span id="gtplot-module"></span><h1>gtplot module<a class="headerlink" href="#module-gtplot" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="gtplot.DDlabel">
+<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">DDlabel</code><span class="sig-paren">(</span><em class="sig-param">ax</em>, <em class="sig-param">labelsize=18</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#DDlabel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.DDlabel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gtplot.MMlabel">
+<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">MMlabel</code><span class="sig-paren">(</span><em class="sig-param">ax</em>, <em class="sig-param">labelsize=18</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#MMlabel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.MMlabel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="gtplot.MidpointNormalize">
+<em class="property">class </em><code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">MidpointNormalize</code><span class="sig-paren">(</span><em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">midpoint=None</em>, <em class="sig-param">clip=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#MidpointNormalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.MidpointNormalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.colors.Normalize</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gtplot.YYlabel">
+<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">YYlabel</code><span class="sig-paren">(</span><em class="sig-param">ax</em>, <em class="sig-param">base=1</em>, <em class="sig-param">month=12</em>, <em class="sig-param">day=1</em>, <em class="sig-param">labelsize=14</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#YYlabel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.YYlabel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gtplot.contourf">
+<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">contourf</code><span class="sig-paren">(</span><em class="sig-param">xx</em>, <em class="sig-param">yy</em>, <em class="sig-param">arr</em>, <em class="sig-param">cnum=20</em>, <em class="sig-param">clabelsize=14</em>, <em class="sig-param">extend='both'</em>, <em class="sig-param">levels=None</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">alpha=1</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">zsel=0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#contourf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.contourf" title="Permalink to this definition">¶</a></dt>
+<dd><p>xx,yy  :numpy.ndarray
+arr    :{numpy.ndarray,Gtool},data
+cnum    :int or float,default:20</p>
+<blockquote>
+<div><p>the number of contour</p>
+</div></blockquote>
+<p>cmap    :string,colormap name,default:’viridis’
+extend :string whether fill contour when out of range</p>
+<blockquote>
+<div><p>{both,neither,max,min},default:’both’</p>
+</div></blockquote>
+<p>levels :set contour level manually,default:None
+alpha  :float{0-1},default:1
+timestep:int ,model timestep,default:0
+zsel :int, select model layer for plot,
+cyclic :bool, cyclic logntiude or not,default:False
+Return
+—————-
+fig
+ax
+cbar</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gtplot.logcontourf">
+<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">logcontourf</code><span class="sig-paren">(</span><em class="sig-param">xx</em>, <em class="sig-param">yy</em>, <em class="sig-param">arr</em>, <em class="sig-param">subs=(1.0</em>, <em class="sig-param">)</em>, <em class="sig-param">clabelsize=14</em>, <em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">alpha=1</em>, <em class="sig-param">extend='both'</em>, <em class="sig-param">offsetTextsize=14</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">zsel=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#logcontourf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.logcontourf" title="Permalink to this definition">¶</a></dt>
+<dd><p>xx,yy  :array_like
+arr    :{Gtool2d,Gtool3d,numpy.ndarray},model data
+subs   :{sequence of float, ‘all’,’auto’,None}</p>
+<blockquote>
+<div><p>default=(1,) ex) (1.0,2.0)</p>
+</div></blockquote>
+<p>cmap   :string colormap
+vmin   :float,minimum value,default=arr.min()
+vmax   :float,maximum value,default=arr.max()
+alpha  :float, 0-1 ,default=1
+extend :string {‘max’,’min’,’both’,’neither’}
+timestep:int
+zsel:int
+cyclic:bool
+Return
+—————-
+fig :matplotlib.Figure
+ax  :matplotlib.axes
+cbar:matplotlib.colorbar</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gtplot.pcolormesh">
+<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">pcolormesh</code><span class="sig-paren">(</span><em class="sig-param">xx</em>, <em class="sig-param">yy</em>, <em class="sig-param">arr</em>, <em class="sig-param">subs=(1.0</em>, <em class="sig-param">)</em>, <em class="sig-param">clabelsize=14</em>, <em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">scale='normal'</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">alpha=1</em>, <em class="sig-param">extend='both'</em>, <em class="sig-param">offsetTextsize=14</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">zsel=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#pcolormesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.pcolormesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>xx,yy  :array_like
+arr    :{Gtool2d,Gtool3d,numpy.ndarray},model data
+subs   :{sequence of float, ‘all’,’auto’,None}</p>
+<blockquote>
+<div><p>default=(1,) ex) (1.0,2.0)</p>
+</div></blockquote>
+<p>cmap   :string colormap
+vmin   :float,minimum value,default=arr.min()
+vmax   :float,maximum value,default=arr.max()
+alpha  :float, 0-1 ,default=1
+extend :string {‘max’,’min’,’both’,’neither’}
+scale  :string ,{‘normal’,’log’}
+Return
+—————-
+fig :matplotlib.Figure
+ax  :matplotlib.axes
+cbar:matplotlib.colorbar</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gtplot.set_axis">
+<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">set_axis</code><span class="sig-paren">(</span><em class="sig-param">ax</em>, <em class="sig-param">xlabel=' '</em>, <em class="sig-param">ylabel=' '</em>, <em class="sig-param">fontsize=14</em>, <em class="sig-param">labelsize=14</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#set_axis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.set_axis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gtplot.set_latticks">
+<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">set_latticks</code><span class="sig-paren">(</span><em class="sig-param">ax</em>, <em class="sig-param">dlat=15</em>, <em class="sig-param">labelsize=16</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#set_latticks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.set_latticks" title="Permalink to this definition">¶</a></dt>
+<dd><p>set xticks as latitude</p>
+<p>ax  :matplotlib.axes
+dlat:float</p>
+<blockquote>
+<div><p>logitude interval:15 default</p>
+</div></blockquote>
+<dl class="simple">
+<dt>labelsize:int</dt><dd><p>tick label size:16 default</p>
+</dd>
+</dl>
+<p>ax</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gtplot.set_lonticks">
+<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">set_lonticks</code><span class="sig-paren">(</span><em class="sig-param">ax</em>, <em class="sig-param">dlon=30</em>, <em class="sig-param">labelsize=16</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#set_lonticks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.set_lonticks" title="Permalink to this definition">¶</a></dt>
+<dd><p>set xticks as logitude</p>
+<p>ax  :matplotlib.axes
+dlon:float</p>
+<blockquote>
+<div><p>logitude interval:30 default</p>
+</div></blockquote>
+<dl class="simple">
+<dt>labelsize:int </dt><dd><p>tick label size:16 default</p>
+</dd>
+</dl>
+<p>ax</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gtplot.zonal_contourf">
+<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">zonal_contourf</code><span class="sig-paren">(</span><em class="sig-param">yy</em>, <em class="sig-param">zz</em>, <em class="sig-param">arr</em>, <em class="sig-param">cnum=20</em>, <em class="sig-param">clabelsize=14</em>, <em class="sig-param">extend='both'</em>, <em class="sig-param">levels=None</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">powerlimits=(-1</em>, <em class="sig-param">3)</em>, <em class="sig-param">alpha=1</em>, <em class="sig-param">dlat=15.0</em>, <em class="sig-param">labelsize=14</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">ylabel='eta'</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">xsel='mean'</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#zonal_contourf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.zonal_contourf" title="Permalink to this definition">¶</a></dt>
+<dd><p>yy,zz  :array_like
+xsel   :{int ,string},{index of logitude,’mean’} 
+arr    :array_like</p>
+<blockquote>
+<div><p>input data</p>
+</div></blockquote>
+<dl class="simple">
+<dt>cnum    :int or float</dt><dd><p>the number of contour</p>
+</dd>
+<dt>powerlimits:tuple</dt><dd><p>exponent range</p>
+</dd>
+</dl>
+<p>fig
+ax
+cbar</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gtplot.zonal_logcontourf">
+<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">zonal_logcontourf</code><span class="sig-paren">(</span><em class="sig-param">yy</em>, <em class="sig-param">zz</em>, <em class="sig-param">arr</em>, <em class="sig-param">cnum=20</em>, <em class="sig-param">clabelsize=14</em>, <em class="sig-param">extend='both'</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">vmin=None</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">powerlimits=(-1</em>, <em class="sig-param">3)</em>, <em class="sig-param">alpha=1</em>, <em class="sig-param">dlat=15.0</em>, <em class="sig-param">labelsize=14</em>, <em class="sig-param">subs='all'</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">xsel='mean'</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#zonal_logcontourf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.zonal_logcontourf" title="Permalink to this definition">¶</a></dt>
+<dd><p>yy,zz  :array_like
+xsel   :{int ,string},{index of logitude,’mean’} 
+arr    :array_like</p>
+<blockquote>
+<div><p>input data</p>
+</div></blockquote>
+<dl>
+<dt>cnum    :int or float</dt><dd><p>the number of contour</p>
+</dd>
+<dt>powerlimits:tuple</dt><dd><blockquote>
+<div><p>exponent range</p>
+</div></blockquote>
+<dl class="simple">
+<dt>subs   :{sequence of float, ‘all’,’auto’,None}</dt><dd><p>default=(1,) ex) (1.0,2.0)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>fig
+ax
+cbar</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gtplot.zonal_pcolormesh">
+<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">zonal_pcolormesh</code><span class="sig-paren">(</span><em class="sig-param">yy</em>, <em class="sig-param">zz</em>, <em class="sig-param">arr</em>, <em class="sig-param">cnum=20</em>, <em class="sig-param">clabelsize=14</em>, <em class="sig-param">extend='both'</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">alpha=1</em>, <em class="sig-param">subs=(1</em>, <em class="sig-param">)</em>, <em class="sig-param">dlat=15.0</em>, <em class="sig-param">labelsize=14</em>, <em class="sig-param">scale='normal'</em>, <em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">xsel='mean'</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#zonal_pcolormesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.zonal_pcolormesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>yy,zz  :array_like
+xsel   :{int ,string},{index of logitude,’mean’} 
+arr    :array_like</p>
+<blockquote>
+<div><p>input data</p>
+</div></blockquote>
+<dl>
+<dt>cnum    :int or float</dt><dd><p>the number of contour</p>
+</dd>
+<dt>powerlimits:tuple</dt><dd><blockquote>
+<div><p>exponent range</p>
+</div></blockquote>
+<dl class="simple">
+<dt>subs   :{sequence of float, ‘all’,’auto’,None}</dt><dd><p>default=(1,) ex) (1.0,2.0)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>fig
+ax
+cbar</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">pygtool3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cartopy_toolkit.html">cartopy_toolkit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gtaxis.html">gtaxis module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gtcalic.html">gtcalic module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">gtplot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gtutil.html">gtutil module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pygtool.html">pygtool module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pygtool_core.html">pygtool_core module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="gtcalic.html" title="previous chapter">gtcalic module</a></li>
+      <li>Next: <a href="gtutil.html" title="next chapter">gtutil module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/gtplot.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

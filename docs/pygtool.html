@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>pygtool module &#8212; pygtool3  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pygtool_core module" href="pygtool_core.html" />
+    <link rel="prev" title="gtutil module" href="gtutil.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pygtool">
+<span id="pygtool-module"></span><h1>pygtool module<a class="headerlink" href="#module-pygtool" title="Permalink to this headline">¶</a></h1>
+<p><cite>pygtool3.pygtool</cite> is a interface to pygtool3.
+It opens gtool3 formatted data which was developed by Numaguchi(1999)
+We have to know whether input data is 2D or 3D in advance.</p>
+<dl class="function">
+<dt id="pygtool.read2d">
+<code class="sig-prename descclassname">pygtool.</code><code class="sig-name descname">read2d</code><span class="sig-paren">(</span><em class="sig-param">file</em>, <em class="sig-param">count=1</em>, <em class="sig-param">x=128</em>, <em class="sig-param">y=64</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool.html#read2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool.read2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>file : string, filename
+count : int, num of data, default:1
+x,y : int, num of each grid. default (x,y)=(128,64)</p>
+<p>gtool2d : <cite>pygtool3.pygtool_core.Gtool2d</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtool.read3d">
+<code class="sig-prename descclassname">pygtool.</code><code class="sig-name descname">read3d</code><span class="sig-paren">(</span><em class="sig-param">file</em>, <em class="sig-param">count=1</em>, <em class="sig-param">x=128</em>, <em class="sig-param">y=64</em>, <em class="sig-param">z=36</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool.html#read3d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool.read3d" title="Permalink to this definition">¶</a></dt>
+<dd><p>file  : string, filename
+count : int, num of data, default:1
+x,y,z : int, num of each grid. default (x,y,z)=(128,64,36)</p>
+<p>gtool3d : <cite>pygtool3.pygtool_core.Gtool3d</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtool.readgrid">
+<code class="sig-prename descclassname">pygtool.</code><code class="sig-name descname">readgrid</code><span class="sig-paren">(</span><em class="sig-param">x=128</em>, <em class="sig-param">y=64</em>, <em class="sig-param">lonfile=None</em>, <em class="sig-param">latfile=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool.html#readgrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool.readgrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>x,y : int, num of each grid. default (x,y)=(128,64)
+lonfile,latfile : string, gtool3 axis files</p>
+<blockquote>
+<div><p>default:None it reads GTAXDIR/GTAXLOC.GLON(x),GTAXLOC.GGLA(y)</p>
+</div></blockquote>
+<p>gtoolgrid : <cite>pygtool3.pygtool_core.GtoolGrid</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtool.readpressure">
+<code class="sig-prename descclassname">pygtool.</code><code class="sig-name descname">readpressure</code><span class="sig-paren">(</span><em class="sig-param">z=35</em>, <em class="sig-param">gtaxfile='GTAXLOC.AR5PL35'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool.html#readpressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool.readpressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>z : int, num of z grid
+gtaxfile :string,coords file, default:’GTAXLOC.AR5PL35’
+Return
+————
+gtoolpres : <cite>pygtool3.pygtool_core.GtoolPressure</cite></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtool.readsigma">
+<code class="sig-prename descclassname">pygtool.</code><code class="sig-name descname">readsigma</code><span class="sig-paren">(</span><em class="sig-param">z=36</em>, <em class="sig-param">gtaxfile='GTAXLOC.HETA36'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool.html#readsigma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool.readsigma" title="Permalink to this definition">¶</a></dt>
+<dd><p>z : int, num of z grid
+gtaxfile : string, default:GTAXLOC.HETA36</p>
+<p>gtoolsigma : <cite>pygtool3.pygtool_core.GtoolSigma</cite></p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">pygtool3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cartopy_toolkit.html">cartopy_toolkit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gtaxis.html">gtaxis module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gtcalic.html">gtcalic module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gtplot.html">gtplot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gtutil.html">gtutil module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pygtool module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pygtool_core.html">pygtool_core module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="gtutil.html" title="previous chapter">gtutil module</a></li>
+      <li>Next: <a href="pygtool_core.html" title="next chapter">pygtool_core module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/pygtool.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

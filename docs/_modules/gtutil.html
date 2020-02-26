@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>gtutil &#8212; pygtool3  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for gtutil</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">month</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Jan&#39;</span><span class="p">,</span><span class="s1">&#39;Feb&#39;</span><span class="p">,</span><span class="s1">&#39;Mar&#39;</span><span class="p">,</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span><span class="s1">&#39;May&#39;</span><span class="p">,</span><span class="s1">&#39;Jun&#39;</span><span class="p">,</span><span class="s1">&#39;Jul&#39;</span><span class="p">,</span><span class="s1">&#39;Aug&#39;</span><span class="p">,</span><span class="s1">&#39;Sep&#39;</span><span class="p">,</span><span class="s1">&#39;Oct&#39;</span><span class="p">,</span><span class="s1">&#39;Nov&#39;</span><span class="p">,</span><span class="s1">&#39;Dec&#39;</span><span class="p">]</span>
+<span class="n">season</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;DJF&#39;</span><span class="p">,</span><span class="s1">&#39;MAM&#39;</span><span class="p">,</span><span class="s1">&#39;JJA&#39;</span><span class="p">,</span><span class="s1">&#39;SON&#39;</span><span class="p">]</span>
+<span class="n">mdays</span><span class="o">=</span><span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">]</span>
+<span class="n">reg</span><span class="o">=</span><span class="p">[</span>   <span class="s1">&#39;AMN&#39;</span><span class="p">,</span> <span class="s1">&#39;AMM&#39;</span><span class="p">,</span> <span class="s1">&#39;AMS&#39;</span><span class="p">,</span> <span class="s1">&#39;AFN&#39;</span><span class="p">,</span> <span class="s1">&#39;AFS&#39;</span><span class="p">,</span>\
+        <span class="s1">&#39;EUR&#39;</span><span class="p">,</span> <span class="s1">&#39;CEU&#39;</span><span class="p">,</span> <span class="s1">&#39;SBR&#39;</span><span class="p">,</span> <span class="s1">&#39;IND&#39;</span><span class="p">,</span> <span class="s1">&#39;CHN&#39;</span><span class="p">,</span>\
+        <span class="s1">&#39;JPN&#39;</span><span class="p">,</span> <span class="s1">&#39;IDN&#39;</span><span class="p">,</span> <span class="s1">&#39;AUS&#39;</span><span class="p">,</span> <span class="s1">&#39;TLD&#39;</span><span class="p">]</span>
+<span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;head&quot;</span><span class="p">,</span><span class="s2">&quot;&gt;i4&quot;</span><span class="p">)</span>
+<span class="n">tail</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;tail&quot;</span><span class="p">,</span><span class="s2">&quot;&gt;i4&quot;</span><span class="p">)</span>
+<span class="n">head2</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;head2&quot;</span><span class="p">,</span><span class="s2">&quot;&gt;i4&quot;</span><span class="p">)</span>
+<span class="n">tail2</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;tail2&quot;</span><span class="p">,</span><span class="s2">&quot;&gt;i4&quot;</span><span class="p">)</span> 
+<span class="n">gthead</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span><span class="s2">&quot;&gt;64S16&quot;</span><span class="p">)</span>
+
+<span class="n">ffmt</span><span class="o">=</span><span class="p">(</span><span class="n">head</span><span class="p">,</span><span class="n">tail</span><span class="p">,</span><span class="n">head2</span><span class="p">,</span><span class="n">tail2</span><span class="p">)</span>
+<span class="n">mid_lon</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.40625</span><span class="p">,</span><span class="mf">360.1</span><span class="p">,</span><span class="mf">2.8125</span><span class="p">)</span>
+<span class="c1">#def lonlabel(left=):</span>
+
+<span class="c1">#def latlabel(left=-90,right=90,dlat=30):</span>
+<span class="c1">#    latlist=[]</span>
+<span class="c1">#    for i in range(lfet,right,dlat)</span>
+<div class="viewcode-block" id="get_area"><a class="viewcode-back" href="../gtutil.html#gtutil.get_area">[docs]</a><span class="k">def</span> <span class="nf">get_area</span><span class="p">(</span><span class="n">dlon</span><span class="o">=</span><span class="mf">2.5e0</span><span class="p">,</span><span class="n">dlat</span><span class="o">=</span><span class="mf">2.5e0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">er</span><span class="o">=</span><span class="mf">6370e3</span>
+    <span class="n">xxtmp</span><span class="p">,</span><span class="n">yytmp</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">,</span><span class="n">dlon</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span><span class="o">-</span><span class="mf">90.1</span><span class="p">,</span><span class="o">-</span><span class="n">dlat</span><span class="p">))</span>
+    <span class="n">area</span><span class="o">=</span><span class="p">(</span><span class="n">er</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">dlon</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">yytmp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]))</span>\
+                                  <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">yytmp</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:])))</span>\
+<span class="p">)</span>
+    <span class="k">return</span> <span class="n">area</span></div>
+<div class="viewcode-block" id="read_nas"><a class="viewcode-back" href="../gtutil.html#gtutil.read_nas">[docs]</a><span class="k">def</span> <span class="nf">read_nas</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">na_values</span><span class="o">=-</span><span class="mi">999</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    reading nas file with skipping data</span>
+<span class="sd">    return pd.Dataframe</span>
+
+<span class="sd">    Parameter</span>
+<span class="sd">    ---------</span>
+<span class="sd">    filename :string</span>
+<span class="sd">    header   :boolean</span>
+
+<span class="sd">    Return</span>
+<span class="sd">    ---------</span>
+<span class="sd">    df             :pd.Dataframe</span>
+<span class="sd">    head(optional) :list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;tr&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">line1</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="n">row</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">line1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">head</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">na_values</span><span class="o">=</span><span class="n">na_values</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">header</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">df</span><span class="p">,</span><span class="n">head</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">df</span></div>
+<div class="viewcode-block" id="normdate_to_datetime"><a class="viewcode-back" href="../gtutil.html#gtutil.normdate_to_datetime">[docs]</a><span class="k">def</span> <span class="nf">normdate_to_datetime</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    converting floating date into datetimeindex</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">pygtool3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../cartopy_toolkit.html">cartopy_toolkit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gtaxis.html">gtaxis module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gtcalic.html">gtcalic module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gtplot.html">gtplot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gtutil.html">gtutil module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygtool.html">pygtool module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygtool_core.html">pygtool_core module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

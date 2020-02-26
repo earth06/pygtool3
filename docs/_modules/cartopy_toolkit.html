@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>cartopy_toolkit &#8212; pygtool3  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for cartopy_toolkit</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding: utf-8</span>
+
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">from</span> <span class="nn">cartopy.mpl.ticker</span> <span class="k">import</span> <span class="n">LatitudeFormatter</span><span class="p">,</span><span class="n">LongitudeFormatter</span>
+<span class="kn">from</span> <span class="nn">cartopy.mpl.gridliner</span> <span class="k">import</span> <span class="n">LONGITUDE_FORMATTER</span><span class="p">,</span> <span class="n">LATITUDE_FORMATTER</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.ticker</span> <span class="k">as</span> <span class="nn">mticker</span>
+<span class="kn">import</span> <span class="nn">matplotlib.path</span> <span class="k">as</span> <span class="nn">mpath</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<div class="viewcode-block" id="set_geogrid"><a class="viewcode-back" href="../cartopy_toolkit.html#cartopy_toolkit.set_geogrid">[docs]</a><span class="k">def</span> <span class="nf">set_geogrid</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;110m&#39;</span>
+               <span class="p">,</span><span class="n">dlon</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span><span class="n">dlat</span><span class="o">=</span><span class="mi">30</span>
+               <span class="p">,</span><span class="n">xticks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">yticks</span><span class="o">=</span><span class="kc">None</span>
+               <span class="p">,</span><span class="n">bottom</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">left</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">top</span><span class="o">=</span><span class="kc">False</span>
+               <span class="p">,</span><span class="n">coastlinewidth</span><span class="o">=</span><span class="mi">1</span>
+               <span class="p">,</span><span class="n">coastlinecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span>
+               <span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">15</span>
+               <span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span> <span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span> <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    parameter</span>
+<span class="sd">    -------------</span>
+<span class="sd">    ax        :cartopy.mpl.geoaxes</span>
+<span class="sd">    dlon      :float  grid interval of longitude</span>
+<span class="sd">    dlat      :float  grid interval of latitude</span>
+<span class="sd">    linewidth,labelsize,alpha :float</span>
+<span class="sd">    color     :string</span>
+<span class="sd">    resolution :string &#39;10m&#39;,&#39;50m&#39;,&#39;110m&#39;</span>
+<span class="sd">    coastlinecolor :int</span>
+<span class="sd">    coastlinewidth :int</span>
+<span class="sd">    labelsize :int,tick labelsize,default:15</span>
+<span class="sd">    alpha :float,default:0.8</span>
+<span class="sd">    linestyle :string,gridliens style,default:&#39;-&#39;</span>
+<span class="sd">    bottom    :boolean draw  xaxis ticklabel</span>
+<span class="sd">    lfet      :boolean draw  yaxis ticklabel</span>
+<span class="sd">    </span>
+<span class="sd">    return </span>
+<span class="sd">    -------------</span>
+<span class="sd">    ax</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<span class="c1">#    labelpos=[bottom,left,top,right]</span>
+<span class="c1">#    </span>
+<span class="c1">#    plt.rcParams[&#39;ytick.left&#39;]=plt.rcParams[&#39;ytick.labelleft&#39;]=left</span>
+<span class="c1">#    plt.rcParams[&#39;ytick.right&#39;]=plt.rcParams[&#39;ytick.labelright&#39;]=right</span>
+<span class="c1">#    plt.rcParams[&#39;xtick.top&#39;]=plt.rcParams[&#39;xtick.labeltop&#39;]=top</span>
+<span class="c1">#    plt.rcParams[&#39;xtick.bottom&#39;]=plt.rcParams[&#39;xtick.labelbottom&#39;]=bottom</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="n">resolution</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="n">coastlinewidth</span>
+                                       <span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">coastlinecolor</span><span class="p">)</span>
+    <span class="n">gl</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
+                      <span class="p">,</span> <span class="n">draw_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                      <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidth</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span>
+                      <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">linestyle</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">xticks</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+        <span class="n">xticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">360.1</span><span class="p">,</span><span class="n">dlon</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">yticks</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">yticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mf">90.1</span><span class="p">,</span><span class="n">dlat</span><span class="p">)</span>
+    <span class="n">gl</span><span class="o">.</span><span class="n">xlocator</span> <span class="o">=</span> <span class="n">mticker</span><span class="o">.</span><span class="n">FixedLocator</span><span class="p">(</span><span class="n">xticks</span><span class="p">)</span>    
+    <span class="n">gl</span><span class="o">.</span><span class="n">ylocator</span> <span class="o">=</span> <span class="n">mticker</span><span class="o">.</span><span class="n">FixedLocator</span><span class="p">(</span><span class="n">yticks</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">projection</span><span class="p">)</span><span class="o">==</span><span class="nb">type</span><span class="p">(</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())):</span> 
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">xticks</span><span class="p">,</span><span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">yticks</span><span class="p">,</span><span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+    
+        <span class="n">latfmt</span><span class="o">=</span><span class="n">LatitudeFormatter</span><span class="p">()</span>
+        <span class="n">lonfmt</span><span class="o">=</span><span class="n">LongitudeFormatter</span><span class="p">(</span><span class="n">zero_direction_label</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">lonfmt</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">latfmt</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">bottom</span><span class="o">==</span><span class="kc">False</span><span class="p">):</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">NullFormatter</span><span class="p">())</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">left</span><span class="o">==</span><span class="kc">False</span><span class="p">):</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">NullFormatter</span><span class="p">())</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="n">labelsize</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span></div>
+<div class="viewcode-block" id="set_feature"><a class="viewcode-back" href="../cartopy_toolkit.html#cartopy_toolkit.set_feature">[docs]</a><span class="k">def</span> <span class="nf">set_feature</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="s1">&#39;110m&#39;</span>
+              <span class="p">,</span><span class="n">LAND</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">OCEAN</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">RIVERS</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">LAKES</span><span class="o">=</span><span class="kc">False</span>
+              <span class="p">,</span><span class="n">landalpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">landcolor</span><span class="o">=</span><span class="p">[</span><span class="mf">0.9375</span> <span class="p">,</span> <span class="mf">0.9375</span> <span class="p">,</span> <span class="mf">0.859375</span><span class="p">]</span>
+              <span class="p">,</span><span class="n">oceanalpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">oceancolor</span><span class="o">=</span><span class="p">[</span><span class="mf">0.59375</span> <span class="p">,</span> <span class="mf">0.71484375</span><span class="p">,</span> <span class="mf">0.8828125</span><span class="p">]</span>
+              <span class="p">,</span><span class="n">lakealpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">lakecolor</span><span class="o">=</span><span class="p">[</span><span class="mf">0.59375</span> <span class="p">,</span> <span class="mf">0.71484375</span><span class="p">,</span> <span class="mf">0.8828125</span><span class="p">]</span>
+              <span class="p">,</span><span class="n">riveralpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">rivercolor</span><span class="o">=</span><span class="p">[</span><span class="mf">0.59375</span> <span class="p">,</span> <span class="mf">0.71484375</span><span class="p">,</span> <span class="mf">0.8828125</span><span class="p">]):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    set LAND ,OCEAN,RIVERS,LAKES color</span>
+<span class="sd">    parameter</span>
+<span class="sd">    -----------</span>
+<span class="sd">    ax    :cartopy.mpl.geoaxes</span>
+<span class="sd">    scale :string  &#39;10m,50m or 110m&#39;</span>
+<span class="sd">    landalpha :float 0.9</span>
+<span class="sd">    oceanlapha:float 0.8</span>
+<span class="sd">    lakealpha :float 0.5</span>
+<span class="sd">    riveralpha:float 0.5</span>
+<span class="sd">    *color    :colorcode</span>
+<span class="sd">    LAND,OCEAN:bool  fill color when True (default True)</span>
+<span class="sd">    RIVERS,LAKES:bool as above (default False)</span>
+<span class="sd">    return</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ax    :as above</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">LAND</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="o">.</span><span class="n">with_scale</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+                <span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="n">landalpha</span>
+                <span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="n">landcolor</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">OCEAN</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">OCEAN</span><span class="o">.</span><span class="n">with_scale</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+                <span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="n">oceanalpha</span>
+                <span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="n">oceancolor</span><span class="p">)</span>
+<span class="c1">#    ax.add_feature(cfeature.COASTLINE.with_scale(scale))</span>
+<span class="c1">#    ax.add_feature(cfeature.BORDERS, linestyle=&#39;:&#39;)</span>
+    <span class="k">if</span> <span class="n">LAKES</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAKES</span><span class="o">.</span><span class="n">with_scale</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+                <span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">lakealpha</span>
+                <span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="n">lakecolor</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">RIVERS</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">RIVERS</span><span class="o">.</span><span class="n">with_scale</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+                <span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="n">riveralpha</span>
+                <span class="p">,</span><span class="n">facecolor</span><span class="o">=</span><span class="n">rivercolor</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span></div>
+
+<div class="viewcode-block" id="Polarmap"><a class="viewcode-back" href="../cartopy_toolkit.html#cartopy_toolkit.Polarmap">[docs]</a><span class="k">def</span> <span class="nf">Polarmap</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    display cricular map</span>
+<span class="sd">    this configure is available only in South and North Polar Stereo</span>
+
+<span class="sd">    Parameter</span>
+<span class="sd">    --------------</span>
+<span class="sd">    ax     :cartopy.mpl.geoaxes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">center</span><span class="p">,</span><span class="n">radius</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span><span class="mf">0.5</span>
+    <span class="n">verts</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">circle</span><span class="o">=</span><span class="n">mpath</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">verts</span><span class="o">*</span><span class="n">radius</span><span class="o">+</span><span class="n">center</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_boundary</span><span class="p">(</span><span class="n">circle</span><span class="p">,</span><span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ax</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">pygtool3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../cartopy_toolkit.html">cartopy_toolkit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gtaxis.html">gtaxis module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gtcalic.html">gtcalic module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gtplot.html">gtplot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gtutil.html">gtutil module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygtool.html">pygtool module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pygtool_core.html">pygtool_core module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

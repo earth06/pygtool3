@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>gtcalic module &#8212; pygtool3  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="gtplot module" href="gtplot.html" />
+    <link rel="prev" title="gtaxis module" href="gtaxis.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-gtcalic">
+<span id="gtcalic-module"></span><h1>gtcalic module<a class="headerlink" href="#module-gtcalic" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="gtcalic.corre_coef">
+<code class="sig-prename descclassname">gtcalic.</code><code class="sig-name descname">corre_coef</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtcalic.html#corre_coef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtcalic.corre_coef" title="Permalink to this definition">¶</a></dt>
+<dd><p>x     np.ndarray((time,y,x))
+y     np.ndarray((time,y,x))</p>
+<p>correlation  np.ndarray((y,x))</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gtcalic.get_area">
+<code class="sig-prename descclassname">gtcalic.</code><code class="sig-name descname">get_area</code><span class="sig-paren">(</span><em class="sig-param">dlon=2.5</em>, <em class="sig-param">dlat=2.5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtcalic.html#get_area"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtcalic.get_area" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gtcalic.getcmass_column">
+<code class="sig-prename descclassname">gtcalic.</code><code class="sig-name descname">getcmass_column</code><span class="sig-paren">(</span><em class="sig-param">cmass=None</em>, <em class="sig-param">ps=None</em>, <em class="sig-param">T=None</em>, <em class="sig-param">sigma=None</em>, <em class="sig-param">sigma_M=None</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">zmax=None</em>, <em class="sig-param">fact=1.0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtcalic.html#getcmass_column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtcalic.getcmass_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>conduct vertical integration and return column concentration</p>
+<p>Cmass : Gtool3d or numpy.ndarray, mass concentration
+ps : Gtool2d or numpy.ndarray, surface pressure[hPa]
+T : Gtool3d or numpy.ndarray , temperature[K]
+sigma : GtoolSigma,sigmascale for middle grid
+sigma_M : GtoolSigma,sigmascale for boudary grid
+timestep : int, set model timestep if passed data is Gtool* instance
+cyclic : bool, whether longitude is cyclic or not.
+fact :float, factor for adjusting unit of column concentration</p>
+<p>column : numpy.ndarray, column concentration of passed tracer</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gtcalic.getvmr_column">
+<code class="sig-prename descclassname">gtcalic.</code><code class="sig-name descname">getvmr_column</code><span class="sig-paren">(</span><em class="sig-param">vmr=None</em>, <em class="sig-param">ps=None</em>, <em class="sig-param">T=None</em>, <em class="sig-param">sigma=None</em>, <em class="sig-param">sigma_M=None</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">zmax=None</em>, <em class="sig-param">fact=1.0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtcalic.html#getvmr_column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtcalic.getvmr_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>conduct vertical integration and return column concentration</p>
+<p>vmr : Gtool3d or numpy.ndarray,volume mixing ratio
+ps : Gtool2d or numpy.ndarray, surface pressure[hPa]
+T : Gtool3d or numpy.ndarray , temperature[K]
+sigma : GtoolSigma,sigmascale for middle grid
+sigma_M : GtoolSigma,sigmascale for boudary grid
+timestep : int, set model timestep if passed data is Gtool* instance
+cyclic : bool, whether longitude is cyclic or not.
+fact :float, factor for adjusting unit of column concentration</p>
+<p>column : numpy.ndarray, column concentration of passed tracer</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gtcalic.min_max">
+<code class="sig-prename descclassname">gtcalic.</code><code class="sig-name descname">min_max</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">axis=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtcalic.html#min_max"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtcalic.min_max" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>return min_max standalization</dt><dd><p>x = (x-x.min)/(x.max-x.min)</p>
+</dd>
+</dl>
+<p>min=0 max=1</p>
+<p>x : numpy.ndarray(x,y)
+axis :int 0 #caliculate each col</p>
+<blockquote>
+<div><p>1 #           each row</p>
+</div></blockquote>
+<p>result : np.ndarray(x,y)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gtcalic.normdate_to_datetime">
+<code class="sig-prename descclassname">gtcalic.</code><code class="sig-name descname">normdate_to_datetime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtcalic.html#normdate_to_datetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtcalic.normdate_to_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>converting floating date into datetimeindex</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gtcalic.weighted_mean">
+<code class="sig-prename descclassname">gtcalic.</code><code class="sig-name descname">weighted_mean</code><span class="sig-paren">(</span><em class="sig-param">arr</em>, <em class="sig-param">area</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtcalic.html#weighted_mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtcalic.weighted_mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>arr   :array_like
+area  :array_like
+Return
+————–
+weighted_mean :np.ndarray</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gtcalic.zscore">
+<code class="sig-prename descclassname">gtcalic.</code><code class="sig-name descname">zscore</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">axis=None</em>, <em class="sig-param">ddof=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtcalic.html#zscore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtcalic.zscore" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>return zscore standalization</dt><dd><p>x =(x - x.mean)/x.std</p>
+</dd>
+</dl>
+<p>average=0 std=1</p>
+<p>x : numpy.ndarray(x,y)
+axis :int 0 #caliculate each col</p>
+<blockquote>
+<div><p>1 #           each row</p>
+</div></blockquote>
+<dl class="simple">
+<dt>ddof :int 0 #when caliculate std, devide by n</dt><dd><p>1 #                   , devide by n-1</p>
+</dd>
+</dl>
+<p>zcore : np.ndarray(x,y)</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">pygtool3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cartopy_toolkit.html">cartopy_toolkit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gtaxis.html">gtaxis module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">gtcalic module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gtplot.html">gtplot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gtutil.html">gtutil module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pygtool.html">pygtool module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pygtool_core.html">pygtool_core module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="gtaxis.html" title="previous chapter">gtaxis module</a></li>
+      <li>Next: <a href="gtplot.html" title="next chapter">gtplot module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/gtcalic.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

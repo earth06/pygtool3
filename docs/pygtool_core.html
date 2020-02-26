@@ -1,0 +1,576 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>pygtool_core module &#8212; pygtool3  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="pygtool module" href="pygtool.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pygtool_core">
+<span id="pygtool-core-module"></span><h1>pygtool_core module<a class="headerlink" href="#module-pygtool_core" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pygtool_core.Gtool">
+<em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">Gtool</code><span class="sig-paren">(</span><em class="sig-param">x=128</em>, <em class="sig-param">y=64</em>, <em class="sig-param">z=36</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>set up gtool format for creating gtool emission data
+with open(fout,’bw’):</p>
+<blockquote>
+<div><dl class="simple">
+<dt>for time in (datetimes):</dt><dd><p>gt=Gtool()
+gt.set_header()
+gt.set_values()
+gtooldat=gt.get_data()
+gtooldat.tofile(fout)</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="method">
+<dt id="pygtool_core.Gtool.get_data">
+<code class="sig-name descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.get_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.Gtool.head">
+<code class="sig-name descname">head</code><em class="property"> = ('head', '&gt;i')</em><a class="headerlink" href="#pygtool_core.Gtool.head" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.Gtool.head2">
+<code class="sig-name descname">head2</code><em class="property"> = ('head2', '&gt;i')</em><a class="headerlink" href="#pygtool_core.Gtool.head2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.Gtool.index">
+<code class="sig-name descname">index</code><em class="property"> = {'cdate': 59, 'dataset': 1, 'date': 25, 'id': 0, 'mdate': 61, 'msign': 62, 'size': 63, 'time': 24, 'title1': 13, 'title2': 14, 'unit': 15, 'utim': 26, 'var': 2, 'x1': 29, 'x2': 30, 'xaxis': 28, 'y1': 32, 'y2': 33, 'yaxis': 31, 'z1': 35, 'z2': 36, 'zaxis': 34}</em><a class="headerlink" href="#pygtool_core.Gtool.index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.Gtool.set_datetime">
+<code class="sig-name descname">set_datetime</code><span class="sig-paren">(</span><em class="sig-param">datetime='19790101 000000 '</em>, <em class="sig-param">fmt='%Y%m%d 000000 '</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.set_datetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.set_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>datetime :pandas.Timestamp,string(‘YYYYMMDD hhmmss ‘)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.Gtool.set_header">
+<code class="sig-name descname">set_header</code><span class="sig-paren">(</span><em class="sig-param">dataset='dataset'</em>, <em class="sig-param">varname='var'</em>, <em class="sig-param">title='title'</em>, <em class="sig-param">unit='kg/m2'</em>, <em class="sig-param">author='unknown'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.set_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.set_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>edit header
+Parameter
+———</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.Gtool.set_sampleheader">
+<code class="sig-name descname">set_sampleheader</code><span class="sig-paren">(</span><em class="sig-param">sample=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.set_sampleheader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.set_sampleheader" title="Permalink to this definition">¶</a></dt>
+<dd><p>set gtool header
+Parameter
+———
+sample :np.ndarray,Gtool header from other file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.Gtool.set_values">
+<code class="sig-name descname">set_values</code><span class="sig-paren">(</span><em class="sig-param">arr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.set_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.set_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>set values
+Parameter
+———–
+arr :np.ndarray</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.Gtool.tail">
+<code class="sig-name descname">tail</code><em class="property"> = ('tail', '&gt;i')</em><a class="headerlink" href="#pygtool_core.Gtool.tail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.Gtool.tail2">
+<code class="sig-name descname">tail2</code><em class="property"> = ('tail2', '&gt;i')</em><a class="headerlink" href="#pygtool_core.Gtool.tail2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.Gtool.to_gtool">
+<code class="sig-name descname">to_gtool</code><span class="sig-paren">(</span><em class="sig-param">file='gtool.out'</em>, <em class="sig-param">datalist=None</em>, <em class="sig-param">datetimeindex=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.to_gtool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.to_gtool" title="Permalink to this definition">¶</a></dt>
+<dd><p>save data as gtool format</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pygtool_core.Gtool2d">
+<em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">Gtool2d</code><span class="sig-paren">(</span><em class="sig-param">file</em>, <em class="sig-param">count=1</em>, <em class="sig-param">x=128</em>, <em class="sig-param">y=64</em>, <em class="sig-param">z=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pygtool_core.Gtool3d" title="pygtool_core.Gtool3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">pygtool_core.Gtool3d</span></code></a></p>
+<p>read surface
+Parameter
+—————–
+file  :  string filename
+count :  totaldata number</p>
+<dl class="method">
+<dt id="pygtool_core.Gtool2d.getarr">
+<code class="sig-name descname">getarr</code><span class="sig-paren">(</span><em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool2d.getarr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool2d.getarr" title="Permalink to this definition">¶</a></dt>
+<dd><p>get ndarray((y=64,x=128))</p>
+<p>timestep  : int (default 0)
+cyclic    : bool</p>
+<blockquote>
+<div><p>default = True
+if True ,add cyclic point on 2Darray</p>
+</div></blockquote>
+<p>arr    : numpy.ndarray((y=64,x=128))</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.Gtool2d.getarrays">
+<code class="sig-name descname">getarrays</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">na_values=-999</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool2d.getarrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool2d.getarrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>compound all timeseries into array</p>
+<p>cyclic :bool default:False
+Return
+———–
+dataarray : numpy.ndarray, (t,y,x)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pygtool_core.Gtool3d">
+<em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">Gtool3d</code><span class="sig-paren">(</span><em class="sig-param">file</em>, <em class="sig-param">count=1</em>, <em class="sig-param">x=128</em>, <em class="sig-param">y=64</em>, <em class="sig-param">z=36</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>read gtool format data 
+to generate this instance pass filename</p>
+<dl class="simple">
+<dt>head,tail,head2,tail2 :4byte binary</dt><dd><p>size info of fortran binary header</p>
+</dd>
+</dl>
+<p>__init__(self,data,count,x,y,z)
+getarr(self,timestep)
+getheader
+getDate</p>
+<dl class="method">
+<dt id="pygtool_core.Gtool3d.getarr">
+<code class="sig-name descname">getarr</code><span class="sig-paren">(</span><em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getarr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getarr" title="Permalink to this definition">¶</a></dt>
+<dd><p>get ndarray(z=36,y=64,x=128)</p>
+<dl class="simple">
+<dt>timestep<span class="classifier">int, default:0</span></dt><dd><p>1 origin and converted to 0 origin</p>
+</dd>
+</dl>
+<p>cyclic    : boolean default:False
+na_values : float default:-999
+replace_nan:boolean default:False
+Return
+—————-
+arr    : numpy.ndarray,default:(x,y,z)=(128,64,36)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.Gtool3d.getarrays">
+<code class="sig-name descname">getarrays</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getarrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getarrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>get all timeseries of array</p>
+<p>cyclic :bool default:False
+Return
+———–
+dataarray : numpy.ndarray, (t,z,y,x)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.Gtool3d.getdate">
+<code class="sig-name descname">getdate</code><span class="sig-paren">(</span><em class="sig-param">timestep=0</em>, <em class="sig-param">timespec='auto'</em>, <em class="sig-param">timeinfo=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getdate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getdate" title="Permalink to this definition">¶</a></dt>
+<dd><p>return datetime string as isoformat
+parameter
+————
+timstep  : int (default=0)
+timespec : string(default=’auto’)
+timeinfo  : boolean(default=True)</p>
+<p>label    :string isoformat</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.Gtool3d.getdatetimeindex">
+<code class="sig-name descname">getdatetimeindex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getdatetimeindex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getdatetimeindex" title="Permalink to this definition">¶</a></dt>
+<dd><p>get pd.DatetimeIndex</p>
+<p>datetime :pd.DatetimeIndex</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.Gtool3d.getfortranheader_footer">
+<code class="sig-name descname">getfortranheader_footer</code><span class="sig-paren">(</span><em class="sig-param">timestep=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getfortranheader_footer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getfortranheader_footer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.Gtool3d.getheader">
+<code class="sig-name descname">getheader</code><span class="sig-paren">(</span><em class="sig-param">timestep=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getheader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getheader" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.Gtool3d.head">
+<code class="sig-name descname">head</code><em class="property"> = ('head', '&gt;i4')</em><a class="headerlink" href="#pygtool_core.Gtool3d.head" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.Gtool3d.head2">
+<code class="sig-name descname">head2</code><em class="property"> = ('head2', '&gt;i4')</em><a class="headerlink" href="#pygtool_core.Gtool3d.head2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.Gtool3d.tail">
+<code class="sig-name descname">tail</code><em class="property"> = ('tail', '&gt;i4')</em><a class="headerlink" href="#pygtool_core.Gtool3d.tail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.Gtool3d.tail2">
+<code class="sig-name descname">tail2</code><em class="property"> = ('tail2', '&gt;i4')</em><a class="headerlink" href="#pygtool_core.Gtool3d.tail2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.Gtool3d.to_xarray">
+<code class="sig-name descname">to_xarray</code><span class="sig-paren">(</span><em class="sig-param">lon=None</em>, <em class="sig-param">lat=None</em>, <em class="sig-param">sigma=None</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.to_xarray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.to_xarray" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert Gtool to xarray
+Parameter
+———
+lon :numpy.ndarray, array of longitude
+lat :numpy.ndarray, array of latitude
+sigma:numpy.ndarray, array of altitude
+cyclic:bool
+<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs:string,you can add your own attribute to xarray.DataSet</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pygtool_core.GtoolGrid">
+<em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">GtoolGrid</code><span class="sig-paren">(</span><em class="sig-param">x=128</em>, <em class="sig-param">y=64</em>, <em class="sig-param">lonfile=None</em>, <em class="sig-param">latfile=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>manipulate horizontal coordinate
+Method
+——–
+getlonlat : return logitude,latitude as 1D array
+getmesh : return longitude,latitude as 2D array
+getarea : return area of grid as 2D array</p>
+<dl class="method">
+<dt id="pygtool_core.GtoolGrid.getarea">
+<code class="sig-name descname">getarea</code><span class="sig-paren">(</span><em class="sig-param">EARTH_RADIUS=6370000.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid.getarea"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid.getarea" title="Permalink to this definition">¶</a></dt>
+<dd><p>EARTH_RADIUS : float, default:6370e0[m]
+Return
+———-
+area : numpy.ndarray, area of each grid</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.GtoolGrid.getlonlat">
+<code class="sig-name descname">getlonlat</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid.getlonlat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid.getlonlat" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>cyclic<span class="classifier">bool, default:False</span></dt><dd><p>whether logitude is cyclic or not</p>
+</dd>
+</dl>
+<p>lon,lat : numpy.ndarray, 1D array</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.GtoolGrid.getmesh">
+<code class="sig-name descname">getmesh</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid.getmesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid.getmesh" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>cyclic<span class="classifier">bool default:False</span></dt><dd><p>whether logitude is cyclic or not</p>
+</dd>
+</dl>
+<p>xx,yy  : numpy.ndarray, meshed longitude,latitude</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.GtoolGrid.getmesh2">
+<code class="sig-name descname">getmesh2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid.getmesh2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid.getmesh2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pygtool_core.GtoolLat">
+<em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">GtoolLat</code><span class="sig-paren">(</span><em class="sig-param">y=64</em>, <em class="sig-param">GTAXFILE=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="pygtool_core.GtoolLat.getlat">
+<code class="sig-name descname">getlat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLat.getlat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLat.getlat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolLat.head">
+<code class="sig-name descname">head</code><em class="property"> = ('head', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolLat.head" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolLat.head2">
+<code class="sig-name descname">head2</code><em class="property"> = ('head2', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolLat.head2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.GtoolLat.showlat">
+<code class="sig-name descname">showlat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLat.showlat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLat.showlat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolLat.tail">
+<code class="sig-name descname">tail</code><em class="property"> = ('tail', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolLat.tail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolLat.tail2">
+<code class="sig-name descname">tail2</code><em class="property"> = ('tail2', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolLat.tail2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pygtool_core.GtoolLon">
+<em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">GtoolLon</code><span class="sig-paren">(</span><em class="sig-param">x=128</em>, <em class="sig-param">GTAXFILE=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="pygtool_core.GtoolLon.getlon">
+<code class="sig-name descname">getlon</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLon.getlon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLon.getlon" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolLon.head">
+<code class="sig-name descname">head</code><em class="property"> = ('head', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolLon.head" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolLon.head2">
+<code class="sig-name descname">head2</code><em class="property"> = ('head2', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolLon.head2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.GtoolLon.showlon">
+<code class="sig-name descname">showlon</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLon.showlon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLon.showlon" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolLon.tail">
+<code class="sig-name descname">tail</code><em class="property"> = ('tail', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolLon.tail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolLon.tail2">
+<code class="sig-name descname">tail2</code><em class="property"> = ('tail2', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolLon.tail2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pygtool_core.GtoolPressure">
+<em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">GtoolPressure</code><span class="sig-paren">(</span><em class="sig-param">z=35</em>, <em class="sig-param">GTAXFILE='GTAXLOC.AR5PL35'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolPressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolPressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>read P-grid
+Parameter
+———-
+z :int,num of vertical grid,default:35
+GTAXFILE :string,coord file,default:GTAXLOC.AR5PL35</p>
+<p>z :int,num of vertical grid
+pp:numpy.ndarray,1D array of pressure,(z)</p>
+<p>get_pressure:return array of pressure as 3D
+get_dp:return delta P as 3D array</p>
+<dl class="method">
+<dt id="pygtool_core.GtoolPressure.get_dp">
+<code class="sig-name descname">get_dp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolPressure.get_dp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolPressure.get_dp" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate dp = P[k+1]-P[k]
+Return
+—————–
+dp : np.ndarray,(z-1,1,1) [hPa]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.GtoolPressure.get_pressure">
+<code class="sig-name descname">get_pressure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolPressure.get_pressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolPressure.get_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>return pressure as 3D
+Parameter
+——————
+Return
+——————
+p np.ndarray,(z,1,1) [hPa]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolPressure.head">
+<code class="sig-name descname">head</code><em class="property"> = ('head', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolPressure.head" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolPressure.head2">
+<code class="sig-name descname">head2</code><em class="property"> = ('head2', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolPressure.head2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolPressure.tail">
+<code class="sig-name descname">tail</code><em class="property"> = ('tail', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolPressure.tail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolPressure.tail2">
+<code class="sig-name descname">tail2</code><em class="property"> = ('tail2', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolPressure.tail2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pygtool_core.GtoolSigma">
+<em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">GtoolSigma</code><span class="sig-paren">(</span><em class="sig-param">z=36</em>, <em class="sig-param">GTAXFILE='GTAXLOC.HETA36'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolSigma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolSigma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>read sigma-grid</p>
+<dl class="method">
+<dt id="pygtool_core.GtoolSigma.get_dp">
+<code class="sig-name descname">get_dp</code><span class="sig-paren">(</span><em class="sig-param">ps</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolSigma.get_dp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolSigma.get_dp" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert surface pressure to 3D pressure
+Parameter
+——————
+ps : np.ndarray or Gtool2d , surface pressure
+cyclic :bool,whether longitued is cyclic,default=False
+Return
+——————
+dp np.ndarray [Pa]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pygtool_core.GtoolSigma.get_pressure">
+<code class="sig-name descname">get_pressure</code><span class="sig-paren">(</span><em class="sig-param">ps</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolSigma.get_pressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolSigma.get_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert surface pressure to 3D pressure
+Parameter
+——————
+ps np.ndarray or Gtool2d , surface pressure
+Return
+——————
+p np.ndarray [hPa]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolSigma.head">
+<code class="sig-name descname">head</code><em class="property"> = ('head', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolSigma.head" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolSigma.head2">
+<code class="sig-name descname">head2</code><em class="property"> = ('head2', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolSigma.head2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolSigma.tail">
+<code class="sig-name descname">tail</code><em class="property"> = ('tail', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolSigma.tail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="pygtool_core.GtoolSigma.tail2">
+<code class="sig-name descname">tail2</code><em class="property"> = ('tail2', '&gt;i')</em><a class="headerlink" href="#pygtool_core.GtoolSigma.tail2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pygtool_core.isgtoolinstance">
+<code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">isgtoolinstance</code><span class="sig-paren">(</span><em class="sig-param">arr</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">zsel=0</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">na_values=-999</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#isgtoolinstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.isgtoolinstance" title="Permalink to this definition">¶</a></dt>
+<dd><p>evaluate whether first argument is Gtool* or not and return it as numpy.ndarray
+Paramter
+———
+arr : {Gtool2d,Gtool3d,numpy.ndarray},model data
+timestep : int,default=0
+cyclic : bool,default=False
+zsel   : int,select model layer,default=0
+Return
+dat : numpy.ndarray ,  
+———</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">pygtool3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cartopy_toolkit.html">cartopy_toolkit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gtaxis.html">gtaxis module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gtcalic.html">gtcalic module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gtplot.html">gtplot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gtutil.html">gtutil module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pygtool.html">pygtool module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pygtool_core module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="pygtool.html" title="previous chapter">pygtool module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/pygtool_core.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
