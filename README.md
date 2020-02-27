@@ -28,7 +28,7 @@ t=pygtool.read3d('./sampledata/T.clim',count=4)
 pygtool.gtplot.contourf(xx,yy,bc.getarr()[0,:,:])
 ```
 
-![](./test/sample.png)
+![](./test/Figure/sample.png)
 
 ## Requirement
 
@@ -44,15 +44,14 @@ cartopy
 
 xarray
 
-これらが正常にインストールされていれば、おそらく大丈夫です。
+numba
 
 ## Usage(使用方法)
 
-プロットに使う際は、モデルデータの読み込みに加え、格子情報のデータも読み込んでおく必要があります。
 
 ### import
 
-パッケージ化せずに使う場合は`sys`でモジュールサーチパスを追加してからimportしてください。(こっちの方が安全かもです)
+モジュールとして用いる場合は`sys`でモジュールサーチパスを追加してからimportしてください。(こっちの方が安全かもです)
 
 ```python
 import sys
@@ -60,19 +59,10 @@ sys.path.append('pygtool3')
 import pygtool
 ```
 
-pythonのパッケージに追加した場合は直接importできます
-
-(まだsetup.sh書いていない...)
-
-```python
-import pygtool
-```
-
-### reading model data(モデルデータの読み込み)
+### reading model data
 
 gtool3形式はFORTRANバイナリを直接ファイルに書き込んでいるようなものなので、netcdf4やHDF5のようにself-describedなデータ形式ではありません。そのため読み込みの際には、モデルの出力の次元(2D or 3D)、それぞれの軸の格子の数、データの総数を知っておく必要があります。誤った値を設定すると、格納するデータが意味不明な値になります。
 
-返り値は`pygtool_core.Gtool*`クラスとなっています。
 
 #### read 2D data(2次元)
 
@@ -82,7 +72,7 @@ surface_pressure=pygtool.read2d('./sampledata/ps',count=4)
 
 第１引数はファイルパス、`count`:データの総数
 
-x,yで格子の数を指定する。デフォルトでは(x,y)=(128,64)
+x,yで格子数を指定。デフォルトで(x,y)=(128,64)
 
 #### read 3D data(3次元)
 
@@ -130,7 +120,7 @@ sigma=pygtool.readsigma() #default
 
 #### calculate pressure(気圧の計算)
 
-地表面気圧から3次元の気圧配列を取得します。この計算は`GtoolSigma.get_pressure()`に実装されています。
+地表面気圧から3次元の気圧配列を取得する。
 
 ```python
 P=sigma.get_pressure(ps,cyclic=False,timestep=0)
@@ -138,7 +128,7 @@ P=sigma.get_pressure(ps,cyclic=False,timestep=0)
 
 ##### get column conc. from mass conc.(質量濃度からカラム量を計算)
 
-質量濃度(cmass)からカラム量を求めるためには気温(t),地表面気圧(ps)および、グリッドの中心、境界の格子情報インスタンスが必要になります。これらを`pygtool.gtcalic.getmass_column()`に渡すと、返り値としてカラム量を得ることができます。引数`fact`は単位調整用のファクターで初期値は1.0となっています。
+質量濃度(cmass)からカラム量を求めるためには気温(t),地表面気圧(ps)および、グリッドの中心、境界の格子情報インスタンスが必要になります。これらを`pygtool.gtcalic.getmass_column()`に渡すとことで、カラム量を得ることができます。引数`fact`は単位調整用のファクターで初期値は1.0となっています。
 
 ```python
 columnBC=pygtool.gtcalic.getcmass_column(cmass=bc,sigma=sigma,sigma_M=sigma_M,T=t,ps=ps,fact=1e6)
@@ -161,7 +151,7 @@ ax.set_title(bc.getdate())
 fig.suptitle('BC mass')
 ```
 
-![](./test/global_contour.png)
+![](./test/Figure/global_contour.png)
 
 ##### pygtool.gtplot.logcontourf
 
@@ -172,7 +162,7 @@ ax.set_title(bc.getdate())
 fig.suptitle('BC mass')
 ```
 
-![](./test/global_logcontourf.png)
+![](./test/Figure/global_logcontourf.png)
 
 ##### pygtool.gtplot.pcolormesh
 
@@ -183,7 +173,7 @@ ax.set_title(bc.getdate())
 fig.suptitle('BC mass')
 ```
 
-![](./test/global_pcolormesh.png)
+![](./test/Figure/global_pcolormesh.png)
 
 ```python
 fig,ax,cbar=pygtool.gtplot.pcolormesh(xx,yy,bc,scale='log')
@@ -191,7 +181,7 @@ cbar.set_label('[kg/m3]')
 ax.set_title(bc.getdate())
 fig.suptitle('BC mass')
 ```
-![](./test/global_pcolormesh_log.png)
+![](./test/Figure/global_pcolormesh_log.png)
 
 #### zonal mean(経度断面)
 
@@ -211,7 +201,7 @@ fig.suptitle('BC zonal mean')
 ax.set_title(bc.getdate())
 ```
 
-![](./test/zonal_contour.png)
+![](./test/Figure/zonal_contour.png)
 
 ##### pygtool.gtplot.zonal_logcontourf
 
@@ -221,7 +211,7 @@ fig.suptitle('BC zonal mean')
 ax.set_title(bc.getdate())
 ```
 
-![](./test/zonal_logcontourf.png)
+![](./test/Figure/zonal_logcontourf.png)
 
 ##### pygtool.gtplot.zonal_pcolormesh
 
@@ -231,7 +221,7 @@ fig.suptitle('BC zonal mean')
 ax.set_title(bc.getdate())
 ```
 
-![](./test/zonal_pcolormesh.png)
+![](./test/Figure/zonal_pcolormesh.png)
 
 ```python
 fig,ax,cbar=pygtool.gtplot.zonal_pcolormesh(yy,zz,bc,dlat=30,scale='log')
@@ -239,7 +229,7 @@ fig.suptitle('BC zonal mean')
 ax.set_title(bc.getdate())
 ```
 
-![](./test/zonal_pcolormesh_log.png)
+![](./test/Figure/zonal_pcolormesh_log.png)
 
 σ座標以外の座標系だと事前に座標変換の処理が必要になってきます。
 
@@ -258,5 +248,4 @@ ax.set_title(bc.getdate())
 [earth06](https://github.com/earth06)
 
 ## Document
-
-誰か作って!
+[作成中](https://earth06.github.io/pygtool3/)
