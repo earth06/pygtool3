@@ -18,25 +18,39 @@ def set_geogrid(ax,resolution='110m'
                ,linewidth=0.5,labelsize=15
                ,color='grey' ,alpha=0.8,linestyle='-' ):
     """
-    parameter
-    -------------
-    ax        :cartopy.mpl.geoaxes
-    dlon      :float  grid interval of longitude
-    dlat      :float  grid interval of latitude
-    linewidth,labelsize,alpha :float
-    color     :string
-    resolution :string '10m','50m','110m'
-    coastlinecolor :int
-    coastlinewidth :int
-    labelsize :int,tick labelsize,default:15
-    alpha :float,default:0.8
-    linestyle :string,gridliens style,default:'-'
-    bottom    :boolean draw  xaxis ticklabel
-    lfet      :boolean draw  yaxis ticklabel
+    Parameters
+    ----------
+    ax :cartopy.mpl.geoaxes
+        Axes
+    dlon :float, default 30
+          grid interval of longitude
+    dlat :float, default 15
+          grid interval of latitude
+    linewidth,labelsize :float,default (0.5, 15)
+        width and size of grid and tick label
+    color     :string, default 'grey'
+        color of gird line
+    resolution :string, default '110m'
+        resolution of coastline {'10m','50m','110m'}
+    coastlinecolor :int, default 'black'
+        color of coastline
+    coastlinewidth :int, default 1
+        width of coastline
+    labelsize :int, default 15
+        tick labelsize
+    alpha :float, default 0.8
+        alpha
+    linestyle :string, default '-'
+        gridliens style
+    bottom :boolean
+         whethet draw ticklabel of xaxis
+    left :boolean
+         whether draw ticklabel of yaxis
     
-    return 
-    -------------
-    ax
+    Returns
+    -------
+    ax :cartopy.mpl.Geoaxes
+        return ax with geogrid
     """
 #    labelpos=[bottom,left,top,right]
 #    
@@ -78,23 +92,40 @@ def set_feature(ax,scale='110m'
               ,oceanalpha=0.7,oceancolor=[0.59375 , 0.71484375, 0.8828125]
               ,lakealpha=0.5,lakecolor=[0.59375 , 0.71484375, 0.8828125]
               ,riveralpha=0.5,rivercolor=[0.59375 , 0.71484375, 0.8828125]):
-    '''
+    """
     set LAND ,OCEAN,RIVERS,LAKES color
-    parameter
-    -----------
-    ax    :cartopy.mpl.geoaxes
-    scale :string  '10m,50m or 110m'
-    landalpha :float 0.9
-    oceanlapha:float 0.8
-    lakealpha :float 0.5
-    riveralpha:float 0.5
-    *color    :colorcode
-    LAND,OCEAN:bool  fill color when True (default True)
-    RIVERS,LAKES:bool as above (default False)
-    return
+
+    Parameters
     ----------
-    ax    :as above
-    '''
+    ax    :cartopy.mpl.Geoaxes
+        Axes for geological plot
+    scale :string, default '110m'
+       resolution of land deature {'10m,50m or 110m'}
+    landalpha  :float, default 0.9
+        land alpha
+    oceanlapha :float, default 0.8
+        ocean alpha
+    lakealpha  :float, default 0.5
+        lake alpha
+    riveralpha :float, default 0.5
+        river alpha
+    landcolor :list of float
+        feature color of land
+    oceancolor :list of float
+        feature color of ocean
+    lakecolor :list of float
+        feature color of lake
+    rivercolor :list of float
+        feature color of river
+    LAND,OCEAN :boolean, default True
+        fill color when True
+    RIVERS,LAKES :boolean, default False
+        fill color when True
+
+    Returns
+    -------
+    ax :cartopy.mpl.geoaxes 
+    """
     if LAND:
         ax.add_feature(cfeature.LAND.with_scale(scale)
                 ,alpha=landalpha

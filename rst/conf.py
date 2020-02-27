@@ -12,7 +12,8 @@
 #
 import os
 import sys
-sys.path.insert(0, '/mnt/local/home/onishi/Git/pygtool3/pygtool3')
+#sys.path.insert(0, '/mnt/local/home/onishi/Git/pygtool3/pygtool3')
+sys.path.insert(0, '/home/takato/winHome/Pylib/pygtool3/pygtool3')
 import sphinx_rtd_theme
 
 # -- Project information -----------------------------------------------------

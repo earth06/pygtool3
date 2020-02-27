@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -193,7 +193,17 @@ gtooldat.tofile(fout)</p>
 <dl class="method">
 <dt id="pygtool_core.Gtool.set_datetime">
 <code class="sig-name descname">set_datetime</code><span class="sig-paren">(</span><em class="sig-param">datetime='19790101 000000 '</em>, <em class="sig-param">fmt='%Y%m%d 000000 '</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.set_datetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.set_datetime" title="Permalink to this definition">¶</a></dt>
-<dd><p>datetime :pandas.Timestamp,string(‘YYYYMMDD hhmmss ‘)</p>
+<dd><p>set datetime
+Parameter
+———
+datetime :pandas.Timestamp or string(‘YYYYMMDD hhmmss ‘)</p>
+<blockquote>
+<div><p>datetime label of gtool header</p>
+</div></blockquote>
+<dl class="simple">
+<dt>fmt :string,deafult=’%Y%m%d 000000 ‘</dt><dd><p>fomatter when write datetime on gtool header</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -207,10 +217,11 @@ Parameter
 <dl class="method">
 <dt id="pygtool_core.Gtool.set_sampleheader">
 <code class="sig-name descname">set_sampleheader</code><span class="sig-paren">(</span><em class="sig-param">sample=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.set_sampleheader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.set_sampleheader" title="Permalink to this definition">¶</a></dt>
-<dd><p>set gtool header
-Parameter
-———
-sample :np.ndarray,Gtool header from other file</p>
+<dd><p>set gtool header from other sample file</p>
+<dl class="simple">
+<dt>sample :np.ndarray</dt><dd><p>Gtool header from other file</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -220,6 +231,9 @@ sample :np.ndarray,Gtool header from other file</p>
 Parameter
 ———–
 arr :np.ndarray</p>
+<blockquote>
+<div><p>targets data which converted to gtool</p>
+</div></blockquote>
 </dd></dl>
 
 <dl class="attribute">
@@ -235,7 +249,19 @@ arr :np.ndarray</p>
 <dl class="method">
 <dt id="pygtool_core.Gtool.to_gtool">
 <code class="sig-name descname">to_gtool</code><span class="sig-paren">(</span><em class="sig-param">file='gtool.out'</em>, <em class="sig-param">datalist=None</em>, <em class="sig-param">datetimeindex=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.to_gtool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.to_gtool" title="Permalink to this definition">¶</a></dt>
-<dd><p>save data as gtool format</p>
+<dd><p>save data as gtool format
+Parameter
+———-
+file :string,default=’gtool.out’</p>
+<blockquote>
+<div><p>file name of output</p>
+</div></blockquote>
+<dl class="simple">
+<dt>datalist :list</dt><dd><p>list of array which has only one timestep model data</p>
+</dd>
+<dt>datetimeindex :pd.Datetimeindex or list</dt><dd><p>datetime of the model data</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -247,29 +273,47 @@ arr :np.ndarray</p>
 <p>read surface
 Parameter
 —————–
-file  :  string filename
-count :  totaldata number</p>
+file  : string</p>
+<blockquote>
+<div><p>filename</p>
+</div></blockquote>
+<dl class="simple">
+<dt>count<span class="classifier">int</span></dt><dd><p>the number of dasta</p>
+</dd>
+</dl>
 <dl class="method">
 <dt id="pygtool_core.Gtool2d.getarr">
 <code class="sig-name descname">getarr</code><span class="sig-paren">(</span><em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool2d.getarr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool2d.getarr" title="Permalink to this definition">¶</a></dt>
 <dd><p>get ndarray((y=64,x=128))</p>
-<p>timestep  : int (default 0)
-cyclic    : bool</p>
+<p>timestep  : int ,default 0
+cyclic    : bool, default = True</p>
 <blockquote>
-<div><p>default = True
-if True ,add cyclic point on 2Darray</p>
+<div><p>whether make logitude cyclic or not</p>
 </div></blockquote>
-<p>arr    : numpy.ndarray((y=64,x=128))</p>
+<dl class="simple">
+<dt>na_values<span class="classifier">float, default -999</span></dt><dd><p>set value which is treated as missing value</p>
+</dd>
+<dt>replace_nan<span class="classifier">boolean, default False</span></dt><dd><p>whether replace na_valuse into NaN or not</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>arr<span class="classifier">numpy.ndarray</span></dt><dd><p>model data</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool2d.getarrays">
 <code class="sig-name descname">getarrays</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">na_values=-999</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool2d.getarrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool2d.getarrays" title="Permalink to this definition">¶</a></dt>
-<dd><p>compound all timeseries into array</p>
-<p>cyclic :bool default:False
-Return
-———–
-dataarray : numpy.ndarray, (t,y,x)</p>
+<dd><p>compound all timeseries into one array</p>
+<dl class="simple">
+<dt>cyclic :bool, default False</dt><dd><p>whether make longitude cyclic or not</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>dataarray<span class="classifier">numpy.ndarray</span></dt><dd><p>model values but axis 0 is time</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -291,46 +335,67 @@ getDate</p>
 <dl class="method">
 <dt id="pygtool_core.Gtool3d.getarr">
 <code class="sig-name descname">getarr</code><span class="sig-paren">(</span><em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getarr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getarr" title="Permalink to this definition">¶</a></dt>
-<dd><p>get ndarray(z=36,y=64,x=128)</p>
+<dd><p>return model data as array</p>
 <dl class="simple">
-<dt>timestep<span class="classifier">int, default:0</span></dt><dd><p>1 origin and converted to 0 origin</p>
+<dt>timestep<span class="classifier">int, default 0</span></dt><dd><p>model timestep</p>
+</dd>
+<dt>cyclic<span class="classifier">boolean, default False</span></dt><dd><p>whether make logitude cyclic or not</p>
+</dd>
+<dt>na_values<span class="classifier">float, default -999</span></dt><dd><p>set value which is treated as missing value</p>
+</dd>
+<dt>replace_nan<span class="classifier">boolean, default False</span></dt><dd><p>whether replace na_valuse into NaN or not</p>
 </dd>
 </dl>
-<p>cyclic    : boolean default:False
-na_values : float default:-999
-replace_nan:boolean default:False
-Return
-—————-
-arr    : numpy.ndarray,default:(x,y,z)=(128,64,36)</p>
+<dl class="simple">
+<dt>arr<span class="classifier">numpy.ndarray, default (x,y,z)=(128,64,36)</span></dt><dd><p>model data</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool3d.getarrays">
 <code class="sig-name descname">getarrays</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getarrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getarrays" title="Permalink to this definition">¶</a></dt>
-<dd><p>get all timeseries of array</p>
-<p>cyclic :bool default:False
-Return
-———–
-dataarray : numpy.ndarray, (t,z,y,x)</p>
+<dd><p>get  all model data in read file</p>
+<dl class="simple">
+<dt>cyclic :boolean, default False</dt><dd><p>whether make logitude cyclic or not</p>
+</dd>
+<dt>na_values<span class="classifier">float, default -999</span></dt><dd><p>set value which is treated as missing value</p>
+</dd>
+<dt>replace_nan<span class="classifier">boolean, default False</span></dt><dd><p>whether replace na_valuse into NaN or not</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>dataarray<span class="classifier">numpy.ndarray </span></dt><dd><p>model data but axis 0 has time</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool3d.getdate">
 <code class="sig-name descname">getdate</code><span class="sig-paren">(</span><em class="sig-param">timestep=0</em>, <em class="sig-param">timespec='auto'</em>, <em class="sig-param">timeinfo=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getdate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getdate" title="Permalink to this definition">¶</a></dt>
-<dd><p>return datetime string as isoformat
+<dd><p>return datetime as isoformat
 parameter
 ————
-timstep  : int (default=0)
-timespec : string(default=’auto’)
-timeinfo  : boolean(default=True)</p>
-<p>label    :string isoformat</p>
+timstep  : int, default 0</p>
+<blockquote>
+<div><p>model timestep</p>
+</div></blockquote>
+<p>timespec : string, default ‘auto’
+timeinfo  : boolean, default True</p>
+<dl class="simple">
+<dt>label    :string</dt><dd><p>isoformated datetime</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool3d.getdatetimeindex">
 <code class="sig-name descname">getdatetimeindex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getdatetimeindex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getdatetimeindex" title="Permalink to this definition">¶</a></dt>
-<dd><p>get pd.DatetimeIndex</p>
-<p>datetime :pd.DatetimeIndex</p>
+<dd><p>return  datetimeindex of read file</p>
+<dl class="simple">
+<dt>datetime :pd.DatetimeIndex</dt><dd><p>datetimeindex of read file</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -369,11 +434,25 @@ timeinfo  : boolean(default=True)</p>
 <dd><p>convert Gtool to xarray
 Parameter
 ———
-lon :numpy.ndarray, array of longitude
-lat :numpy.ndarray, array of latitude
-sigma:numpy.ndarray, array of altitude
-cyclic:bool
-<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs:string,you can add your own attribute to xarray.DataSet</p>
+lon : numpy.ndarray</p>
+<blockquote>
+<div><p>array of longitude</p>
+</div></blockquote>
+<dl class="simple">
+<dt>lat<span class="classifier">numpy.ndarray</span></dt><dd><p>array of latitude</p>
+</dd>
+<dt>sigma<span class="classifier">numpy.ndarray</span></dt><dd><p>array of altitude</p>
+</dd>
+<dt>cyclic<span class="classifier">boolean</span></dt><dd><p>whether make logitude cyclic or not</p>
+</dd>
+<dt>na_values<span class="classifier">float, default -999</span></dt><dd><p>set value which is treated as missing value</p>
+</dd>
+<dt>replace_nan<span class="classifier">boolean, default False</span></dt><dd><p>whether replace na_valuse into NaN or not</p>
+</dd>
+<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs:string</dt><dd><p>you can add your own attribute to xarray.DataSet</p>
+</dd>
+</dl>
+<p>ds : xarray.Dataset</p>
 </dd></dl>
 
 </dd></dl>
@@ -391,30 +470,43 @@ getarea : return area of grid as 2D array</p>
 <dl class="method">
 <dt id="pygtool_core.GtoolGrid.getarea">
 <code class="sig-name descname">getarea</code><span class="sig-paren">(</span><em class="sig-param">EARTH_RADIUS=6370000.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid.getarea"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid.getarea" title="Permalink to this definition">¶</a></dt>
-<dd><p>EARTH_RADIUS : float, default:6370e0[m]
-Return
-———-
-area : numpy.ndarray, area of each grid</p>
+<dd><dl class="simple">
+<dt>EARTH_RADIUS<span class="classifier">float, default=6370e0</span></dt><dd><p>earth radius[m]</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>area<span class="classifier">numpy.ndarray </span></dt><dd><p>area of each grid[m]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.GtoolGrid.getlonlat">
 <code class="sig-name descname">getlonlat</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid.getlonlat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid.getlonlat" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>cyclic<span class="classifier">bool, default:False</span></dt><dd><p>whether logitude is cyclic or not</p>
+<dd><p>return horizontal coordinate
+Parameter
+———-
+cyclic : bool, default=False</p>
+<blockquote>
+<div><p>whether logitude is cyclic or not</p>
+</div></blockquote>
+<dl class="simple">
+<dt>lon,lat<span class="classifier">numpy.ndarray, </span></dt><dd><p>longitue and latitude 1D array</p>
 </dd>
 </dl>
-<p>lon,lat : numpy.ndarray, 1D array</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.GtoolGrid.getmesh">
 <code class="sig-name descname">getmesh</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid.getmesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid.getmesh" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
-<dt>cyclic<span class="classifier">bool default:False</span></dt><dd><p>whether logitude is cyclic or not</p>
+<dt>cyclic<span class="classifier">bool default=False</span></dt><dd><p>whether logitude is cyclic or not</p>
 </dd>
 </dl>
-<p>xx,yy  : numpy.ndarray, meshed longitude,latitude</p>
+<dl class="simple">
+<dt>xx,yy<span class="classifier">numpy.ndarray</span></dt><dd><p>meshed longitude and latitude which are used for plot</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
@@ -503,30 +595,39 @@ area : numpy.ndarray, area of each grid</p>
 <p>read P-grid
 Parameter
 ———-
-z :int,num of vertical grid,default:35
-GTAXFILE :string,coord file,default:GTAXLOC.AR5PL35</p>
-<p>z :int,num of vertical grid
-pp:numpy.ndarray,1D array of pressure,(z)</p>
-<p>get_pressure:return array of pressure as 3D
-get_dp:return delta P as 3D array</p>
+z :int,default 35</p>
+<blockquote>
+<div><p>num of vertical grid</p>
+</div></blockquote>
+<dl class="simple">
+<dt>GTAXFILE :string, default GTAXLOC.AR5PL35</dt><dd><p>file of vertical coordinate</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>z :int </dt><dd><p>num of vertical grid</p>
+</dd>
+<dt>pp:numpy.ndarray</dt><dd><p>1D array of pressure</p>
+</dd>
+</dl>
 <dl class="method">
 <dt id="pygtool_core.GtoolPressure.get_dp">
 <code class="sig-name descname">get_dp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolPressure.get_dp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolPressure.get_dp" title="Permalink to this definition">¶</a></dt>
-<dd><p>calculate dp = P[k+1]-P[k]
+<dd><p>calculate 
 Return
 —————–
-dp : np.ndarray,(z-1,1,1) [hPa]</p>
+dp : np.ndarray,</p>
+<blockquote>
+<div><p>dp = P[k+1]-P[k] [hPa]</p>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.GtoolPressure.get_pressure">
 <code class="sig-name descname">get_pressure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolPressure.get_pressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolPressure.get_pressure" title="Permalink to this definition">¶</a></dt>
 <dd><p>return pressure as 3D
-Parameter
-——————
 Return
 ——————
-p np.ndarray,(z,1,1) [hPa]</p>
+p : np.ndarray,(z,1,1) [hPa]</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -555,7 +656,8 @@ p np.ndarray,(z,1,1) [hPa]</p>
 <dt id="pygtool_core.GtoolSigma">
 <em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">GtoolSigma</code><span class="sig-paren">(</span><em class="sig-param">z=36</em>, <em class="sig-param">GTAXFILE='GTAXLOC.HETA36'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolSigma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolSigma" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>read sigma-grid</p>
+<p>read sigma-grid
+You can declare this class when you set sigma coordinate file</p>
 <dl class="method">
 <dt id="pygtool_core.GtoolSigma.get_dp">
 <code class="sig-name descname">get_dp</code><span class="sig-paren">(</span><em class="sig-param">ps</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolSigma.get_dp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolSigma.get_dp" title="Permalink to this definition">¶</a></dt>
@@ -563,22 +665,40 @@ p np.ndarray,(z,1,1) [hPa]</p>
 Parameter
 ——————
 ps : np.ndarray or Gtool2d , surface pressure
-cyclic :bool,whether longitued is cyclic,default=False
-Return
-——————
-dp np.ndarray [Pa]</p>
+cyclic :bool,default=False</p>
+<blockquote>
+<div><p>whether make longitude cyclic or not</p>
+</div></blockquote>
+<dl class="simple">
+<dt>timestep :int,default=0</dt><dd><p>model timestep</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>dp :np.ndarray</dt><dd><p>deltaP=P[k+1]-P[K](&lt;0)[Pa]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.GtoolSigma.get_pressure">
 <code class="sig-name descname">get_pressure</code><span class="sig-paren">(</span><em class="sig-param">ps</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolSigma.get_pressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolSigma.get_pressure" title="Permalink to this definition">¶</a></dt>
-<dd><p>convert surface pressure to 3D pressure
+<dd><p>extend surface pressure to 3D pressure by hydrostatic equilibrium
 Parameter
 ——————
-ps np.ndarray or Gtool2d , surface pressure
-Return
-——————
-p np.ndarray [hPa]</p>
+ps :np.ndarray or Gtool2d</p>
+<blockquote>
+<div><p>surface pressure</p>
+</div></blockquote>
+<dl class="simple">
+<dt>timestep :int,default=0</dt><dd><p>model timestep</p>
+</dd>
+<dt>cyclic :bool,default=False</dt><dd><p>whether make logitude cyclic or not</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>p :np.ndarray</dt><dd><p>pressure[hPa]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -606,15 +726,20 @@ p np.ndarray [hPa]</p>
 <dl class="function">
 <dt id="pygtool_core.isgtoolinstance">
 <code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">isgtoolinstance</code><span class="sig-paren">(</span><em class="sig-param">arr</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">zsel=0</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">na_values=-999</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#isgtoolinstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.isgtoolinstance" title="Permalink to this definition">¶</a></dt>
-<dd><p>evaluate whether first argument is Gtool* or not and return it as numpy.ndarray
+<dd><p>evaluate whether first argument is Gtool* instance and return it as numpy.ndarray
 Paramter
 ———
-arr : {Gtool2d,Gtool3d,numpy.ndarray},model data
-timestep : int,default=0
-cyclic : bool,default=False
-zsel   : int,select model layer,default=0
+arr : Gtool2d or Gtool3d or numpy.ndarray
+model data
+timestep : int, default 0
+model timestep
+cyclic : boolean, default False
+whether make logitude cyclic or not
+zsel : int,default 0
+select model layer
 Return
-dat : numpy.ndarray ,  
+dat : numpy.ndarray
+model values
 ———</p>
 </dd></dl>
 

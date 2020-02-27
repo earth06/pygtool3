@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -161,48 +161,65 @@ We have to know whether input data is 2D or 3D in advance.</p>
 <dl class="function">
 <dt id="pygtool.read2d">
 <code class="sig-prename descclassname">pygtool.</code><code class="sig-name descname">read2d</code><span class="sig-paren">(</span><em class="sig-param">file</em>, <em class="sig-param">count=1</em>, <em class="sig-param">x=128</em>, <em class="sig-param">y=64</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool.html#read2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool.read2d" title="Permalink to this definition">¶</a></dt>
-<dd><p>file : string, filename
-count : int, num of data, default:1
-x,y : int, num of each grid. default (x,y)=(128,64)</p>
-<p>gtool2d : <cite>pygtool3.pygtool_core.Gtool2d</cite></p>
+<dd><dl class="simple">
+<dt>file<span class="classifier">string</span></dt><dd><p>filename</p>
+</dd>
+<dt>count<span class="classifier">int, default 1</span></dt><dd><p>total number of data</p>
+</dd>
+<dt>x,y<span class="classifier">int, default (x,y)=(128,64)</span></dt><dd><p>num of each coordinate</p>
+</dd>
+</dl>
+<p>gtool2d : pygtool3.pygtool_core.Gtool2d</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pygtool.read3d">
 <code class="sig-prename descclassname">pygtool.</code><code class="sig-name descname">read3d</code><span class="sig-paren">(</span><em class="sig-param">file</em>, <em class="sig-param">count=1</em>, <em class="sig-param">x=128</em>, <em class="sig-param">y=64</em>, <em class="sig-param">z=36</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool.html#read3d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool.read3d" title="Permalink to this definition">¶</a></dt>
-<dd><p>file  : string, filename
-count : int, num of data, default:1
-x,y,z : int, num of each grid. default (x,y,z)=(128,64,36)</p>
-<p>gtool3d : <cite>pygtool3.pygtool_core.Gtool3d</cite></p>
+<dd><dl class="simple">
+<dt>file<span class="classifier">string</span></dt><dd><p>filename</p>
+</dd>
+<dt>count<span class="classifier">int, default 1</span></dt><dd><p>total number of model data</p>
+</dd>
+<dt>x,y,z<span class="classifier">int, default (x,y,z)=(128,64,36)</span></dt><dd><p>num of each coordinate.</p>
+</dd>
+</dl>
+<p>gtool3d :pygtool3.pygtool_core.Gtool3d</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pygtool.readgrid">
 <code class="sig-prename descclassname">pygtool.</code><code class="sig-name descname">readgrid</code><span class="sig-paren">(</span><em class="sig-param">x=128</em>, <em class="sig-param">y=64</em>, <em class="sig-param">lonfile=None</em>, <em class="sig-param">latfile=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool.html#readgrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool.readgrid" title="Permalink to this definition">¶</a></dt>
-<dd><p>x,y : int, num of each grid. default (x,y)=(128,64)
-lonfile,latfile : string, gtool3 axis files</p>
-<blockquote>
-<div><p>default:None it reads GTAXDIR/GTAXLOC.GLON(x),GTAXLOC.GGLA(y)</p>
-</div></blockquote>
-<p>gtoolgrid : <cite>pygtool3.pygtool_core.GtoolGrid</cite></p>
+<dd><dl class="simple">
+<dt>x,y<span class="classifier">int, default (x,y)=(128,64)</span></dt><dd><p>num of each coordinate</p>
+</dd>
+<dt>lonfile,latfile<span class="classifier">string, default None</span></dt><dd><p>gtool3 coordinate file
+in default case this reads GTAXDIR/GTAXLOC.GLON(x),GTAXLOC.GGLA(y)</p>
+</dd>
+</dl>
+<p>gtoolgrid : pygtool3.pygtool_core.GtoolGrid</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pygtool.readpressure">
 <code class="sig-prename descclassname">pygtool.</code><code class="sig-name descname">readpressure</code><span class="sig-paren">(</span><em class="sig-param">z=35</em>, <em class="sig-param">gtaxfile='GTAXLOC.AR5PL35'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool.html#readpressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool.readpressure" title="Permalink to this definition">¶</a></dt>
 <dd><p>z : int, num of z grid
-gtaxfile :string,coords file, default:’GTAXLOC.AR5PL35’
-Return
-————
-gtoolpres : <cite>pygtool3.pygtool_core.GtoolPressure</cite></p>
+gtaxfile :string, default ‘GTAXLOC.AR5PL35’</p>
+<blockquote>
+<div><p>coordinate file</p>
+</div></blockquote>
+<p>gtoolpres : pygtool3.pygtool_core.GtoolPressure</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pygtool.readsigma">
 <code class="sig-prename descclassname">pygtool.</code><code class="sig-name descname">readsigma</code><span class="sig-paren">(</span><em class="sig-param">z=36</em>, <em class="sig-param">gtaxfile='GTAXLOC.HETA36'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool.html#readsigma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool.readsigma" title="Permalink to this definition">¶</a></dt>
-<dd><p>z : int, num of z grid
-gtaxfile : string, default:GTAXLOC.HETA36</p>
-<p>gtoolsigma : <cite>pygtool3.pygtool_core.GtoolSigma</cite></p>
+<dd><dl class="simple">
+<dt>z<span class="classifier">int, default 36</span></dt><dd><p>num of z coordinate</p>
+</dd>
+<dt>gtaxfile<span class="classifier">string, default:GTAXLOC.HETA36</span></dt><dd><p>gtool3 coordinate file</p>
+</dd>
+</dl>
+<p>gtoolsigma : <cite>pygtool3.pygtool_core.Gtoolsigma</cite></p>
 </dd></dl>
 
 </div>

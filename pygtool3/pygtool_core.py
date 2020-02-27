@@ -46,10 +46,12 @@ class Gtool():
         self.data=data
     def set_sampleheader(self,sample=None):
         """
-        set gtool header
+        set gtool header from other sample file
+
         Parameter
         ---------
-        sample :np.ndarray,Gtool header from other file
+        sample :np.ndarray
+            Gtool header from other file
         """
         self.data['header']=sample
         return 0
@@ -70,7 +72,13 @@ class Gtool():
         self.data['header'][0,self.index['author']]='{:<16}'.format(author)
     def set_datetime(self,datetime='19790101 000000 ',fmt='%Y%m%d 000000 '):
         """
-        datetime :pandas.Timestamp,string('YYYYMMDD hhmmss ')
+        set datetime
+        Parameter
+        ---------
+        datetime :pandas.Timestamp or string('YYYYMMDD hhmmss ')
+            datetime label of gtool header
+        fmt :string,deafult='%Y%m%d 000000 '
+            fomatter when write datetime on gtool header
         """
         if isinstance(datetime,pd.Timestamp):
             dt=datetime.strftime(fmt)
@@ -83,6 +91,7 @@ class Gtool():
         Parameter
         -----------
         arr :np.ndarray
+            targets data which converted to gtool
         """
         self.data['arr']=arr.astype('f4').flatten(order='C')
         return 0
@@ -91,6 +100,14 @@ class Gtool():
     def to_gtool(self,file='gtool.out',datalist=None,datetimeindex=None):
         """
         save data as gtool format
+        Parameter
+        ----------
+        file :string,default='gtool.out'
+            file name of output
+        datalist :list
+            list of array which has only one timestep model data
+        datetimeindex :pd.Datetimeindex or list
+            datetime of the model data
         """
         with open(file,'ba') as f:
             for dt,array in zip(datetimeindex,datalist):
@@ -170,13 +187,15 @@ class GtoolGrid():
         self.latfile=latfile
     def getlonlat(self,cyclic=False):
         """
+        return horizontal coordinate
         Parameter
         ----------
-        cyclic : bool, default:False
+        cyclic : bool, default=False
             whether logitude is cyclic or not
         Return
         ----------
-        lon,lat : numpy.ndarray, 1D array
+        lon,lat : numpy.ndarray, 
+            longitue and latitude 1D array
         """
         lat=GtoolLat(self.y,GTAXFILE=self.latfile).getlat()
         lon=GtoolLon(self.x,GTAXFILE=self.lonfile).getlon(cyclic=cyclic)
@@ -185,11 +204,12 @@ class GtoolGrid():
         """
         Parameter
         ----------
-        cyclic : bool default:False
+        cyclic : bool default=False
             whether logitude is cyclic or not
         Return
         ----------
-        xx,yy  : numpy.ndarray, meshed longitude,latitude
+        xx,yy  : numpy.ndarray
+             meshed longitude and latitude which are used for plot
         """
         x,y=self.getlonlat(cyclic=cyclic)
         xx,yy=np.meshgrid(x,y)
@@ -203,10 +223,12 @@ class GtoolGrid():
         """
         Parameter
         ----------
-        EARTH_RADIUS : float, default:6370e0[m]
+        EARTH_RADIUS : float, default=6370e0
+            earth radius[m]
         Return
         ----------
-        area : numpy.ndarray, area of each grid
+        area : numpy.ndarray 
+            area of each grid[m]
         """
         lon,lat=self.getlonlat(cyclic=True)
         dlon=np.deg2rad(lon[1:]-lon[:-1])
@@ -223,6 +245,7 @@ class GtoolGrid():
 class GtoolSigma():
     """
     read sigma-grid
+    You can declare this class when you set sigma coordinate file
     """
 
     head = ("head",">i")
@@ -245,13 +268,19 @@ class GtoolSigma():
         self.bb=self.chunk[2]['arr']
     def get_pressure(self,ps,timestep=0,cyclic=False):
         """
-        convert surface pressure to 3D pressure
+        extend surface pressure to 3D pressure by hydrostatic equilibrium
         Parameter
         ------------------
-        ps np.ndarray or Gtool2d , surface pressure
+        ps :np.ndarray or Gtool2d
+            surface pressure
+        timestep :int,default=0
+            model timestep
+        cyclic :bool,default=False
+            whether make logitude cyclic or not
         Return
         ------------------
-        p np.ndarray [hPa]
+        p :np.ndarray
+            pressure[hPa]
         """
         if isinstance(ps,Gtool2d):
             psarr=ps.getarr(cyclic=cyclic,timestep=timestep)
@@ -268,10 +297,14 @@ class GtoolSigma():
         Parameter
         ------------------
         ps : np.ndarray or Gtool2d , surface pressure
-        cyclic :bool,whether longitued is cyclic,default=False
+        cyclic :bool,default=False
+            whether make longitude cyclic or not
+        timestep :int,default=0
+            model timestep
         Return
         ------------------
-        dp np.ndarray [Pa]
+        dp :np.ndarray
+            deltaP=P[k+1]-P[K](<0)[Pa]
         """
         if isinstance(ps,Gtool2d):
             psarr=ps.getarr(cyclic=cyclic,timestep=timestep)
@@ -289,18 +322,16 @@ class GtoolPressure():
     read P-grid
     Parameter
     ----------
-    z :int,num of vertical grid,default:35
-    GTAXFILE :string,coord file,default:GTAXLOC.AR5PL35
-    
+    z :int,default 35
+        num of vertical grid
+    GTAXFILE :string, default GTAXLOC.AR5PL35
+        file of vertical coordinate
     Atribute
     ---------
-    z :int,num of vertical grid
-    pp:numpy.ndarray,1D array of pressure,(z)
-
-    Method
-    ---------
-    get_pressure:return array of pressure as 3D
-    get_dp:return delta P as 3D array
+    z :int 
+        num of vertical grid
+    pp:numpy.ndarray
+        1D array of pressure
     """
     head = ("head",">i")
     tail = ("tail",">i")
@@ -321,19 +352,18 @@ class GtoolPressure():
     def get_pressure(self):
         """
         return pressure as 3D
-        Parameter
-        ------------------
         Return
         ------------------
-        p np.ndarray,(z,1,1) [hPa]
+        p : np.ndarray,(z,1,1) [hPa]
         """
         return self.pp.reshape((self.z,1,1))
     def get_dp(self):
         """
-        calculate dp = P[k+1]-P[k]
+        calculate 
         Return
         -----------------
-        dp : np.ndarray,(z-1,1,1) [hPa]
+        dp : np.ndarray,
+           dp = P[k+1]-P[k] [hPa]
         """
         dp=self.pp[1:]-self.pp[:-1]
         return dp.reshape((self.z-1,1,1))
@@ -363,10 +393,11 @@ class Gtool3d:
         Parameter
         ----------------
         file  : string 
-                filename of datafile
+            filename of datafile
         count : int  
-                num of data ex) daily=365,monthly=12
-        x,y,z :int,defalt: (lon,lat,alt)=(128,64,36)
+            the number of data 
+        x,y,z : int,defalt (x,y,z)=(128,64,36)
+            the number of each coordinate
         """
         data = open(file,'br')
         self.x=x
@@ -388,18 +419,22 @@ class Gtool3d:
     def getarr(self,timestep=0,cyclic=False,na_values=-999
                    ,replace_nan=False):
         """
-        get ndarray(z=36,y=64,x=128)
+        return model data as array
         
         Parameters
         -------------
-        timestep  :  int, default:0
-                  1 origin and converted to 0 origin
-        cyclic    : boolean default:False
-        na_values : float default:-999
-        replace_nan:boolean default:False
+        timestep  :  int, default 0
+            model timestep
+        cyclic    : boolean, default False
+            whether make logitude cyclic or not
+        na_values : float, default -999
+            set value which is treated as missing value
+        replace_nan : boolean, default False
+            whether replace na_valuse into NaN or not
         Return
         ----------------
-        arr    : numpy.ndarray,default:(x,y,z)=(128,64,36)
+        arr    : numpy.ndarray, default (x,y,z)=(128,64,36)
+            model data
         """
         arr = self.chunk[timestep]['arr']
         arr = arr.reshape((self.z,self.y,self.x),order='C')
@@ -415,16 +450,18 @@ class Gtool3d:
         return  self.chunk[timestep]['header']
     def getdate(self,timestep=0,timespec='auto',timeinfo=True):
         """
-        return datetime string as isoformat
+        return datetime as isoformat
         parameter
         ------------
-        timstep  : int (default=0)
-        timespec : string(default='auto')
-        timeinfo  : boolean(default=True)
+        timstep  : int, default 0
+            model timestep
+        timespec : string, default 'auto'
+        timeinfo  : boolean, default True
         
         return
         ---------
-        label    :string isoformat
+        label    :string
+            isoformated datetime
         
         """
         day=self.chunk[timestep]['header'][47].decode()
@@ -440,11 +477,12 @@ class Gtool3d:
         return head1,head2,tail1,tail2   
     def getdatetimeindex(self):
         """
-        get pd.DatetimeIndex
+        return  datetimeindex of read file
  
         Return
         ---------------
         datetime :pd.DatetimeIndex
+            datetimeindex of read file
         """
         datelist=[] 
         for i in range(self.count):
@@ -452,14 +490,21 @@ class Gtool3d:
         return pd.to_datetime(datelist)
     def getarrays(self,cyclic=False,na_values=-999,replace_nan=False):
         """
-        get all timeseries of array
+        get  all model data in read file
         
         Parameter
         -----------
-        cyclic :bool default:False
+        cyclic :boolean, default False
+            whether make logitude cyclic or not
+        na_values : float, default -999
+            set value which is treated as missing value
+        replace_nan : boolean, default False
+            whether replace na_valuse into NaN or not
+
         Return
         -----------
-        dataarray : numpy.ndarray, (t,z,y,x)
+        dataarray : numpy.ndarray 
+            model data but axis 0 has time
         """
         if cyclic:
             x = self.x+1
@@ -474,11 +519,25 @@ class Gtool3d:
         convert Gtool to xarray
         Parameter
         ---------
-        lon :numpy.ndarray, array of longitude
-        lat :numpy.ndarray, array of latitude
-        sigma:numpy.ndarray, array of altitude
-        cyclic:bool
-        **kwargs:string,you can add your own attribute to xarray.DataSet
+        lon : numpy.ndarray
+            array of longitude
+        lat : numpy.ndarray
+            array of latitude
+        sigma : numpy.ndarray
+            array of altitude
+        cyclic : boolean
+            whether make logitude cyclic or not
+        na_values : float, default -999
+            set value which is treated as missing value
+        replace_nan : boolean, default False
+            whether replace na_valuse into NaN or not
+       
+        **kwargs:string
+            you can add your own attribute to xarray.DataSet
+
+        Return
+        ---------
+        ds : xarray.Dataset
         """
         head=self.getheader()
         item=head[2].decode().strip()
@@ -511,8 +570,10 @@ class Gtool2d(Gtool3d):
     read surface
     Parameter
     -----------------
-    file  :  string filename
-    count :  totaldata number
+    file  : string
+        filename
+    count : int
+        the number of dasta
     """
     def __init__(self,file,count=1,x=128,y=64,z=None):
         super().__init__(file,count,x,y,z)
@@ -523,13 +584,17 @@ class Gtool2d(Gtool3d):
         
         Parameters
         ----------------
-        timestep  : int (default 0)
-        cyclic    : bool
-                default = True
-                if True ,add cyclic point on 2Darray
+        timestep  : int ,default 0
+        cyclic    : bool, default = True
+            whether make logitude cyclic or not
+        na_values : float, default -999
+            set value which is treated as missing value
+        replace_nan : boolean, default False
+            whether replace na_valuse into NaN or not
         Return
         ----------------
-        arr    : numpy.ndarray((y=64,x=128))
+        arr    : numpy.ndarray
+            model data
         """
         arr = self.chunk[timestep]['arr']
 #succeed when order='C' not 'F'
@@ -543,14 +608,16 @@ class Gtool2d(Gtool3d):
         return arr
     def getarrays(self,cyclic=False,replace_nan=False,na_values=-999):
         """
-        compound all timeseries into array
+        compound all timeseries into one array
         
         Parameter
         -----------
-        cyclic :bool default:False
+        cyclic :bool, default False
+            whether make longitude cyclic or not 
         Return
         -----------
-        dataarray : numpy.ndarray, (t,y,x)
+        dataarray : numpy.ndarray
+            model values but axis 0 is time
         """
         if cyclic:
             x = self.x+1
@@ -562,15 +629,20 @@ class Gtool2d(Gtool3d):
         return dataarray
 def isgtoolinstance(arr,timestep=0,cyclic=False,zsel=0,replace_nan=False,na_values=-999):
 	"""
-	evaluate whether first argument is Gtool* or not and return it as numpy.ndarray
+	evaluate whether first argument is Gtool* instance and return it as numpy.ndarray
 	Paramter
 	---------
-	arr : {Gtool2d,Gtool3d,numpy.ndarray},model data
-	timestep : int,default=0
-	cyclic : bool,default=False
-	zsel   : int,select model layer,default=0
+	arr : Gtool2d or Gtool3d or numpy.ndarray
+        model data
+	timestep : int, default 0
+        model timestep
+	cyclic : boolean, default False
+        whether make logitude cyclic or not
+	zsel : int,default 0
+        select model layer
 	Return
-	dat : numpy.ndarray ,  
+	dat : numpy.ndarray
+        model values
 	---------
 	"""
 	if isinstance(arr,Gtool3d):

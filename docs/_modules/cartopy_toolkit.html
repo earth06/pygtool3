@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -170,25 +170,39 @@
                <span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">15</span>
                <span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span> <span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span> <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    parameter</span>
-<span class="sd">    -------------</span>
-<span class="sd">    ax        :cartopy.mpl.geoaxes</span>
-<span class="sd">    dlon      :float  grid interval of longitude</span>
-<span class="sd">    dlat      :float  grid interval of latitude</span>
-<span class="sd">    linewidth,labelsize,alpha :float</span>
-<span class="sd">    color     :string</span>
-<span class="sd">    resolution :string &#39;10m&#39;,&#39;50m&#39;,&#39;110m&#39;</span>
-<span class="sd">    coastlinecolor :int</span>
-<span class="sd">    coastlinewidth :int</span>
-<span class="sd">    labelsize :int,tick labelsize,default:15</span>
-<span class="sd">    alpha :float,default:0.8</span>
-<span class="sd">    linestyle :string,gridliens style,default:&#39;-&#39;</span>
-<span class="sd">    bottom    :boolean draw  xaxis ticklabel</span>
-<span class="sd">    lfet      :boolean draw  yaxis ticklabel</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ax :cartopy.mpl.geoaxes</span>
+<span class="sd">        Axes</span>
+<span class="sd">    dlon :float, default 30</span>
+<span class="sd">          grid interval of longitude</span>
+<span class="sd">    dlat :float, default 15</span>
+<span class="sd">          grid interval of latitude</span>
+<span class="sd">    linewidth,labelsize :float,default (0.5, 15)</span>
+<span class="sd">        width and size of grid and tick label</span>
+<span class="sd">    color     :string, default &#39;grey&#39;</span>
+<span class="sd">        color of gird line</span>
+<span class="sd">    resolution :string, default &#39;110m&#39;</span>
+<span class="sd">        resolution of coastline {&#39;10m&#39;,&#39;50m&#39;,&#39;110m&#39;}</span>
+<span class="sd">    coastlinecolor :int, default &#39;black&#39;</span>
+<span class="sd">        color of coastline</span>
+<span class="sd">    coastlinewidth :int, default 1</span>
+<span class="sd">        width of coastline</span>
+<span class="sd">    labelsize :int, default 15</span>
+<span class="sd">        tick labelsize</span>
+<span class="sd">    alpha :float, default 0.8</span>
+<span class="sd">        alpha</span>
+<span class="sd">    linestyle :string, default &#39;-&#39;</span>
+<span class="sd">        gridliens style</span>
+<span class="sd">    bottom :boolean</span>
+<span class="sd">         whethet draw ticklabel of xaxis</span>
+<span class="sd">    left :boolean</span>
+<span class="sd">         whether draw ticklabel of yaxis</span>
 <span class="sd">    </span>
-<span class="sd">    return </span>
-<span class="sd">    -------------</span>
-<span class="sd">    ax</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ax :cartopy.mpl.Geoaxes</span>
+<span class="sd">        return ax with geogrid</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 <span class="c1">#    labelpos=[bottom,left,top,right]</span>
 <span class="c1">#    </span>
@@ -230,23 +244,40 @@
               <span class="p">,</span><span class="n">oceanalpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">oceancolor</span><span class="o">=</span><span class="p">[</span><span class="mf">0.59375</span> <span class="p">,</span> <span class="mf">0.71484375</span><span class="p">,</span> <span class="mf">0.8828125</span><span class="p">]</span>
               <span class="p">,</span><span class="n">lakealpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">lakecolor</span><span class="o">=</span><span class="p">[</span><span class="mf">0.59375</span> <span class="p">,</span> <span class="mf">0.71484375</span><span class="p">,</span> <span class="mf">0.8828125</span><span class="p">]</span>
               <span class="p">,</span><span class="n">riveralpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">rivercolor</span><span class="o">=</span><span class="p">[</span><span class="mf">0.59375</span> <span class="p">,</span> <span class="mf">0.71484375</span><span class="p">,</span> <span class="mf">0.8828125</span><span class="p">]):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    set LAND ,OCEAN,RIVERS,LAKES color</span>
-<span class="sd">    parameter</span>
-<span class="sd">    -----------</span>
-<span class="sd">    ax    :cartopy.mpl.geoaxes</span>
-<span class="sd">    scale :string  &#39;10m,50m or 110m&#39;</span>
-<span class="sd">    landalpha :float 0.9</span>
-<span class="sd">    oceanlapha:float 0.8</span>
-<span class="sd">    lakealpha :float 0.5</span>
-<span class="sd">    riveralpha:float 0.5</span>
-<span class="sd">    *color    :colorcode</span>
-<span class="sd">    LAND,OCEAN:bool  fill color when True (default True)</span>
-<span class="sd">    RIVERS,LAKES:bool as above (default False)</span>
-<span class="sd">    return</span>
+
+<span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    ax    :as above</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    ax    :cartopy.mpl.Geoaxes</span>
+<span class="sd">        Axes for geological plot</span>
+<span class="sd">    scale :string, default &#39;110m&#39;</span>
+<span class="sd">       resolution of land deature {&#39;10m,50m or 110m&#39;}</span>
+<span class="sd">    landalpha  :float, default 0.9</span>
+<span class="sd">        land alpha</span>
+<span class="sd">    oceanlapha :float, default 0.8</span>
+<span class="sd">        ocean alpha</span>
+<span class="sd">    lakealpha  :float, default 0.5</span>
+<span class="sd">        lake alpha</span>
+<span class="sd">    riveralpha :float, default 0.5</span>
+<span class="sd">        river alpha</span>
+<span class="sd">    landcolor :list of float</span>
+<span class="sd">        feature color of land</span>
+<span class="sd">    oceancolor :list of float</span>
+<span class="sd">        feature color of ocean</span>
+<span class="sd">    lakecolor :list of float</span>
+<span class="sd">        feature color of lake</span>
+<span class="sd">    rivercolor :list of float</span>
+<span class="sd">        feature color of river</span>
+<span class="sd">    LAND,OCEAN :boolean, default True</span>
+<span class="sd">        fill color when True</span>
+<span class="sd">    RIVERS,LAKES :boolean, default False</span>
+<span class="sd">        fill color when True</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ax :cartopy.mpl.geoaxes </span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">LAND</span><span class="p">:</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="o">.</span><span class="n">with_scale</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
                 <span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="n">landalpha</span>
