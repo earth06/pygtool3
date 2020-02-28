@@ -22,12 +22,19 @@ def sig2isopiesticpy(data,p3d,convP=None,idim=128,jdim=64,kmax=36):
     """
     interpolate sigma scaled array into isopiestic array
     
-    Parameter
+    Parameters
     ----------
-    data :numpy.ndarray (sigma,lat,lon) target data
-    p3d  :numpy.ndarray (sigma,lat,lon) pressure
-    convP:array_like     new pressure scale
-
+    data :numpy.ndarray (sigma,lat,lon)
+         target data
+    p3d  :numpy.ndarray (sigma,lat,lon) 
+         pressure
+    convP:array_like 
+         new pressure scale
+    
+    Returns
+    --------
+    iso_data :numpy.ndarray
+        array which converted to p-scale
     """
 
     if(type(convP) != np.ndarray):

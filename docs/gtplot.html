@@ -169,6 +169,41 @@
 <dt id="gtplot.MidpointNormalize">
 <em class="property">class </em><code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">MidpointNormalize</code><span class="sig-paren">(</span><em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">midpoint=None</em>, <em class="sig-param">clip=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#MidpointNormalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.MidpointNormalize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.colors.Normalize</span></code></p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(self, value[, clip])</p></td>
+<td><p>Normalize <em>value</em> data in the <code class="docutils literal notranslate"><span class="pre">[vmin,</span> <span class="pre">vmax]</span></code> interval into the <code class="docutils literal notranslate"><span class="pre">[0.0,</span> <span class="pre">1.0]</span></code> interval and return it.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">autoscale</span></code>(self, A)</p></td>
+<td><p>Set <em>vmin</em>, <em>vmax</em> to min, max of <em>A</em>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">autoscale_None</span></code>(self, A)</p></td>
+<td><p>Autoscale only None-valued vmin or vmax.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_value</span></code>(value)</p></td>
+<td><p>Homogenize the input <em>value</em> for easy and efficient normalization.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">scaled</span></code>(self)</p></td>
+<td><p>Return whether vmin and vmax are set.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 48%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>inverse</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -178,98 +213,124 @@
 
 <dl class="function">
 <dt id="gtplot.contourf">
-<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">contourf</code><span class="sig-paren">(</span><em class="sig-param">xx</em>, <em class="sig-param">yy</em>, <em class="sig-param">arr</em>, <em class="sig-param">cnum=20</em>, <em class="sig-param">clabelsize=14</em>, <em class="sig-param">extend='both'</em>, <em class="sig-param">levels=None</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">alpha=1</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">zsel=0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#contourf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.contourf" title="Permalink to this definition">¶</a></dt>
-<dd><p>xx,yy  :numpy.ndarray
-arr    :numpy.ndarray or Gtool*D
-cnum    :int or float, default 20</p>
-<blockquote>
-<div><p>the number of contour</p>
-</div></blockquote>
-<dl class="simple">
-<dt>cmap    :string, default ‘viridis’</dt><dd><p>colormap name</p>
+<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">contourf</code><span class="sig-paren">(</span><em class="sig-param">xx</em>, <em class="sig-param">yy</em>, <em class="sig-param">z</em>, <em class="sig-param">cnum=20</em>, <em class="sig-param">clabelsize=14</em>, <em class="sig-param">extend='both'</em>, <em class="sig-param">levels=None</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">alpha=1</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">zsel=0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#contourf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.contourf" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot contourf for geopositonal data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>xx,yy :numpy.ndarray</strong></dt><dd><p>the coordinates of the values in Z</p>
 </dd>
-<dt>extend :string, default ‘both’</dt><dd><p>whether fill contour when out of rang {both,neither,max,min}</p>
+<dt><strong>z :numpy.ndarray or Gtool*D</strong></dt><dd></dd>
+<dt><strong>cnum :int or float, default 20</strong></dt><dd><p>the number of contour</p>
 </dd>
-<dt>levels :array_like, default None</dt><dd><p>set contour level manually</p>
+<dt><strong>cmap    :string, default ‘viridis’</strong></dt><dd><p>colormap name</p>
+</dd>
+<dt><strong>extend :string, default ‘both’</strong></dt><dd><p>whether fill contour when out of the levels range {both,neither,max,min}</p>
+</dd>
+<dt><strong>levels :array_like, default None</strong></dt><dd><p>set contour level manually
+If None, levels are set based on z.min() and z.max()</p>
+</dd>
+<dt><strong>alpha  :float, default 1</strong></dt><dd></dd>
+<dt><strong>timestep:int, default 0</strong></dt><dd><p>model timestep</p>
+</dd>
+<dt><strong>zsel :int, default 0</strong></dt><dd><p>select model layer for plot</p>
+</dd>
+<dt><strong>cyclic :bool, default False</strong></dt><dd><p>cyclic logntiude or not</p>
 </dd>
 </dl>
-<p>alpha  :float, default 1
-timestep:int, default 0</p>
-<blockquote>
-<div><p>model timestep</p>
-</div></blockquote>
-<dl class="simple">
-<dt>zsel :int, default 0</dt><dd><p>select model layer for plot</p>
 </dd>
-<dt>cyclic :bool, default False</dt><dd><p>cyclic logntiude or not</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>fig :matplotlib.Figure</dt><dd><p>figure object for plotting</p>
+</dd>
+<dt>ax :matplotlib.Axes</dt><dd><p>axes object for plot</p>
+</dd>
+<dt>cbar :matplotlib.colorbar</dt><dd><p>colorbar object for contour</p>
 </dd>
 </dl>
-<p>fig :matplotlib.Figure
-ax :matplotlib.Axes
-cbar :matplotlib.colorbar</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="gtplot.logcontourf">
-<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">logcontourf</code><span class="sig-paren">(</span><em class="sig-param">xx</em>, <em class="sig-param">yy</em>, <em class="sig-param">arr</em>, <em class="sig-param">subs=(1.0</em>, <em class="sig-param">)</em>, <em class="sig-param">clabelsize=14</em>, <em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">alpha=1</em>, <em class="sig-param">extend='both'</em>, <em class="sig-param">offsetTextsize=14</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">zsel=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#logcontourf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.logcontourf" title="Permalink to this definition">¶</a></dt>
-<dd><p>xx,yy  :array_like
-arr    :Gtool2d or Gtool3d or numpy.ndarray</p>
-<blockquote>
-<div><p>model data</p>
-</div></blockquote>
-<dl class="simple">
-<dt>subs   :sequence of float, ‘all’,’auto’,None</dt><dd><p>default=(1,) ex) (1.0,2.0)</p>
+<code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">logcontourf</code><span class="sig-paren">(</span><em class="sig-param">xx</em>, <em class="sig-param">yy</em>, <em class="sig-param">z</em>, <em class="sig-param">subs=(1.0</em>, <em class="sig-param">)</em>, <em class="sig-param">clabelsize=14</em>, <em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">alpha=1</em>, <em class="sig-param">extend='both'</em>, <em class="sig-param">offsetTextsize=14</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">zsel=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#logcontourf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.logcontourf" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot log-scaled contourf for geopositional data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>xx,yy :array_like</strong></dt><dd><p>The coordinates of the values in z</p>
 </dd>
-<dt>cmap   :string, default ‘viridis’</dt><dd><p>colormap</p>
+<dt><strong>z :Gtool2d or Gtool3d or numpy.ndarray</strong></dt><dd><p>model data</p>
 </dd>
-<dt>vmin   :float</dt><dd><p>minimum value,default=arr.min()</p>
+<dt><strong>subs :sequence of float, ‘all’,’auto’,None</strong></dt><dd><p>default=(1,) ex) (1.0,2.0)</p>
 </dd>
-<dt>vmax   :float</dt><dd><p>maximum value,default=arr.max()</p>
+<dt><strong>cmap   :string, default ‘viridis’</strong></dt><dd><p>colormap</p>
+</dd>
+<dt><strong>vmin   :float</strong></dt><dd><p>minimum value,default=arr.min()</p>
+</dd>
+<dt><strong>vmax   :float</strong></dt><dd><p>maximum value,default=arr.max()</p>
+</dd>
+<dt><strong>alpha  :float, default 1</strong></dt><dd></dd>
+<dt><strong>extend :string</strong></dt><dd><p>{‘max’,’min’,’both’,’neither’}</p>
+</dd>
+<dt><strong>timestep:int, default 0</strong></dt><dd><p>model timestep</p>
+</dd>
+<dt><strong>zsel :int, default 0</strong></dt><dd><p>select model layer</p>
+</dd>
+<dt><strong>cyclic:bool, default False</strong></dt><dd><p>Whether make logitude cyclic or not</p>
 </dd>
 </dl>
-<p>alpha  :float, default 1
-extend :string</p>
-<blockquote>
-<div><p>{‘max’,’min’,’both’,’neither’}</p>
-</div></blockquote>
-<p>timestep:int, default 0
-zsel : int, default 0
-cyclic:bool, default False</p>
-<p>fig :matplotlib.Figure
-ax  :matplotlib.axes
-cbar:matplotlib.colorbar</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>fig :matplotlib.Figure</dt><dd><p>Figure object for plot</p>
+</dd>
+<dt>ax  :matplotlib.axes</dt><dd><p>Axes object for plot</p>
+</dd>
+<dt>cbar:matplotlib.colorbar</dt><dd><p>colorbar object for contour</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="gtplot.pcolormesh">
 <code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">pcolormesh</code><span class="sig-paren">(</span><em class="sig-param">xx</em>, <em class="sig-param">yy</em>, <em class="sig-param">arr</em>, <em class="sig-param">subs=(1.0</em>, <em class="sig-param">)</em>, <em class="sig-param">clabelsize=14</em>, <em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">scale='normal'</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">alpha=1</em>, <em class="sig-param">extend='both'</em>, <em class="sig-param">offsetTextsize=14</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">zsel=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#pcolormesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.pcolormesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>xx,yy  :array_like
-arr    :Gtool2d or Gtool3d or numpy.ndarray</p>
-<blockquote>
-<div><p>model data</p>
-</div></blockquote>
-<dl class="simple">
-<dt>subs   :{sequence of float, ‘all’,’auto’,None}</dt><dd><p>default=(1,) ex) (1.0,2.0)</p>
+<dd><p>pcolormesh for geopositional data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>xx,yy  :array_like</strong></dt><dd></dd>
+<dt><strong>arr    :Gtool2d or Gtool3d or numpy.ndarray</strong></dt><dd><p>model data</p>
 </dd>
-<dt>cmap   :string</dt><dd><p>colormap</p>
+<dt><strong>subs   :{sequence of float, ‘all’,’auto’,None}</strong></dt><dd><p>default=(1,) ex) (1.0,2.0)</p>
 </dd>
-<dt>vmin   :float</dt><dd><p>minimum value,default arr.min()</p>
+<dt><strong>cmap   :string</strong></dt><dd><p>colormap</p>
 </dd>
-<dt>vmax   :float</dt><dd><p>maximum value,default arr.max()</p>
+<dt><strong>vmin   :float</strong></dt><dd><p>minimum value,default arr.min()</p>
 </dd>
-</dl>
-<p>alpha  :float, default 1
-extend :string</p>
-<blockquote>
-<div><p>{‘max’,’min’,’both’,’neither’}</p>
-</div></blockquote>
-<dl class="simple">
-<dt>scale  :string</dt><dd><p>{‘normal’,’log’}</p>
+<dt><strong>vmax   :float</strong></dt><dd><p>maximum value,default arr.max()</p>
+</dd>
+<dt><strong>alpha  :float, default 1</strong></dt><dd></dd>
+<dt><strong>extend :string</strong></dt><dd><p>{‘max’,’min’,’both’,’neither’}</p>
+</dd>
+<dt><strong>scale  :string</strong></dt><dd><p>{‘normal’,’log’}</p>
 </dd>
 </dl>
-<p>fig :matplotlib.Figure
-ax  :matplotlib.Axes
-cbar:matplotlib.Colorbar</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>fig :matplotlib.Figure</dt><dd><p>Figure object for plot</p>
+</dd>
+<dt>ax  :matplotlib.axes</dt><dd><p>Axes object for plot</p>
+</dd>
+<dt>cbar:matplotlib.colorbar</dt><dd><p>colorbar object for contour</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -281,104 +342,144 @@ cbar:matplotlib.Colorbar</p>
 <dt id="gtplot.set_latticks">
 <code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">set_latticks</code><span class="sig-paren">(</span><em class="sig-param">ax</em>, <em class="sig-param">dlat=15</em>, <em class="sig-param">labelsize=16</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#set_latticks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.set_latticks" title="Permalink to this definition">¶</a></dt>
 <dd><p>set xticks as latitude</p>
-<p>ax  :matplotlib.axes
-dlat:float, default 15</p>
-<blockquote>
-<div><p>logitude interval</p>
-</div></blockquote>
-<dl class="simple">
-<dt>labelsize:int, default 16</dt><dd><p>tick label size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ax  :matplotlib.Axes</strong></dt><dd><p>axes for plotting</p>
+</dd>
+<dt><strong>dlat :float, default 15</strong></dt><dd><p>logitude interval</p>
+</dd>
+<dt><strong>labelsize :int, default 16</strong></dt><dd><p>tick label size</p>
 </dd>
 </dl>
-<p>ax</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>ax :matplotlib.Axes</dt><dd></dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="gtplot.set_lonticks">
 <code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">set_lonticks</code><span class="sig-paren">(</span><em class="sig-param">ax</em>, <em class="sig-param">dlon=30</em>, <em class="sig-param">labelsize=16</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#set_lonticks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.set_lonticks" title="Permalink to this definition">¶</a></dt>
 <dd><p>set xticks as logitude</p>
-<p>ax  :matplotlib.axes
-dlon:float, default 30</p>
-<blockquote>
-<div><p>logitude interval</p>
-</div></blockquote>
-<dl class="simple">
-<dt>labelsize:int, default 16</dt><dd><p>tick label size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ax  :matplotlib.Axes</strong></dt><dd><p>axes for plotting</p>
+</dd>
+<dt><strong>dlon:float, default 30</strong></dt><dd><p>logitude interval</p>
+</dd>
+<dt><strong>labelsize:int, default 16</strong></dt><dd><p>tick label size</p>
 </dd>
 </dl>
-<p>ax</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>ax :matplotlib.Axes</dt><dd><p>axes for plotting</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="gtplot.zonal_contourf">
 <code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">zonal_contourf</code><span class="sig-paren">(</span><em class="sig-param">yy</em>, <em class="sig-param">zz</em>, <em class="sig-param">arr</em>, <em class="sig-param">cnum=20</em>, <em class="sig-param">clabelsize=14</em>, <em class="sig-param">extend='both'</em>, <em class="sig-param">levels=None</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">powerlimits=(-1</em>, <em class="sig-param">3)</em>, <em class="sig-param">alpha=1</em>, <em class="sig-param">dlat=15.0</em>, <em class="sig-param">labelsize=14</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">ylabel='eta'</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">xsel='mean'</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#zonal_contourf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.zonal_contourf" title="Permalink to this definition">¶</a></dt>
-<dd><p>yy,zz  :array_like
-xsel   :int or string,{index of logitude,’mean’} 
-arr    :array_like</p>
-<blockquote>
-<div><p>input data</p>
-</div></blockquote>
-<dl class="simple">
-<dt>cnum    :int or float</dt><dd><p>the number of contour</p>
+<dd><p>plot zonal contourf</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>yy,zz  :array_like</strong></dt><dd><p>The coordinate of the arr</p>
 </dd>
-<dt>powerlimits:tuple</dt><dd><p>exponent range</p>
+<dt><strong>xsel   :int or string,{index of logitude,’mean’}</strong></dt><dd></dd>
+<dt><strong>arr    :array_like</strong></dt><dd><p>input data</p>
+</dd>
+<dt><strong>cnum    :int or float</strong></dt><dd><p>the number of contour</p>
+</dd>
+<dt><strong>powerlimits:tuple</strong></dt><dd><p>exponent range</p>
 </dd>
 </dl>
-<p>fig
-ax
-cbar</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>fig :matplotlib.Figure</dt><dd><p>figure object for plotting</p>
+</dd>
+<dt>ax :matplotlib.Axes</dt><dd><p>axes object for plotting</p>
+</dd>
+<dt>cbar :matplotlib.Colorbar</dt><dd><p>colorbar object for contour</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="gtplot.zonal_logcontourf">
 <code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">zonal_logcontourf</code><span class="sig-paren">(</span><em class="sig-param">yy</em>, <em class="sig-param">zz</em>, <em class="sig-param">arr</em>, <em class="sig-param">cnum=20</em>, <em class="sig-param">clabelsize=14</em>, <em class="sig-param">extend='both'</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">vmin=None</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">powerlimits=(-1</em>, <em class="sig-param">3)</em>, <em class="sig-param">alpha=1</em>, <em class="sig-param">dlat=15.0</em>, <em class="sig-param">labelsize=14</em>, <em class="sig-param">subs='all'</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">xsel='mean'</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#zonal_logcontourf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.zonal_logcontourf" title="Permalink to this definition">¶</a></dt>
-<dd><p>yy,zz  :array_like
-xsel   :{int ,string},{index of logitude,’mean’} 
-arr    :array_like</p>
-<blockquote>
-<div><p>input data</p>
-</div></blockquote>
-<dl>
-<dt>cnum    :int or float</dt><dd><p>the number of contour</p>
+<dd><p>plot log-scaled zonal contourf</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>yy,zz :array_like</strong></dt><dd></dd>
+<dt><strong>xsel :int or string, default ‘mean’</strong></dt><dd><p>index of logitude</p>
 </dd>
-<dt>powerlimits:tuple</dt><dd><blockquote>
-<div><p>exponent range</p>
-</div></blockquote>
-<dl class="simple">
-<dt>subs   :{sequence of float, ‘all’,’auto’,None}</dt><dd><p>default=(1,) ex) (1.0,2.0)</p>
+<dt><strong>arr :array_like</strong></dt><dd><p>input data</p>
+</dd>
+<dt><strong>cnum :int or float</strong></dt><dd><p>the number of contour</p>
+</dd>
+<dt><strong>powerlimits: tuple ,default (-1,3)</strong></dt><dd><p>exponent range</p>
+</dd>
+<dt><strong>subs   :sequence of float or {‘all’,’auto’,None}</strong></dt><dd><p>default=(1,) ex) (1.0,2.0)</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>fig :matplotlib.Figure</dt><dd><p>figure object for plotting</p>
+</dd>
+<dt>ax :matplotlib.Axes</dt><dd><p>axes object for plotting</p>
+</dd>
+<dt>cbar :matplotlib.Colorbar</dt><dd><p>colorbar object for contour</p>
 </dd>
 </dl>
 </dd>
 </dl>
-<p>fig
-ax
-cbar</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="gtplot.zonal_pcolormesh">
 <code class="sig-prename descclassname">gtplot.</code><code class="sig-name descname">zonal_pcolormesh</code><span class="sig-paren">(</span><em class="sig-param">yy</em>, <em class="sig-param">zz</em>, <em class="sig-param">arr</em>, <em class="sig-param">cnum=20</em>, <em class="sig-param">clabelsize=14</em>, <em class="sig-param">extend='both'</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">alpha=1</em>, <em class="sig-param">subs=(1</em>, <em class="sig-param">)</em>, <em class="sig-param">dlat=15.0</em>, <em class="sig-param">labelsize=14</em>, <em class="sig-param">scale='normal'</em>, <em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">xsel='mean'</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtplot.html#zonal_pcolormesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtplot.zonal_pcolormesh" title="Permalink to this definition">¶</a></dt>
-<dd><p>yy,zz  :array_like
-xsel   :{int ,string},{index of logitude,’mean’} 
-arr    :array_like</p>
-<blockquote>
-<div><p>input data</p>
-</div></blockquote>
-<dl>
-<dt>cnum    :int or float</dt><dd><p>the number of contour</p>
+<dd><p>plot zonal pcolormesh</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>yy,zz  :array_like</strong></dt><dd></dd>
+<dt><strong>xsel   :int or string, deafult ‘mean’</strong></dt><dd><p>index of logitude</p>
 </dd>
-<dt>powerlimits:tuple</dt><dd><blockquote>
-<div><p>exponent range</p>
-</div></blockquote>
-<dl class="simple">
-<dt>subs   :{sequence of float, ‘all’,’auto’,None}</dt><dd><p>default=(1,) ex) (1.0,2.0)</p>
+<dt><strong>arr    :array_like</strong></dt><dd><p>input data</p>
+</dd>
+<dt><strong>cnum    :int or float</strong></dt><dd><p>the number of contour</p>
+</dd>
+<dt><strong>powerlimits:tuple</strong></dt><dd><p>exponent range</p>
+</dd>
+<dt><strong>subs   :sequence of float or {‘all’,’auto’,None}</strong></dt><dd><p>default=(1,) ex) (1.0,2.0)</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>fig :matplotlib.Figure</dt><dd><p>figure object for plotting</p>
+</dd>
+<dt>ax :matplotlib.Axes</dt><dd><p>axes object for plotting</p>
+</dd>
+<dt>cbar :matplotlib.Colorbar</dt><dd><p>colorbar object for contour</p>
 </dd>
 </dl>
 </dd>
 </dl>
-<p>fig
-ax
-cbar</p>
 </dd></dl>
 
 </div>

@@ -158,21 +158,45 @@
 <dt id="pygtool_core.Gtool">
 <em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">Gtool</code><span class="sig-paren">(</span><em class="sig-param">x=128</em>, <em class="sig-param">y=64</em>, <em class="sig-param">z=36</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>set up gtool format for creating gtool emission data
-with open(fout,’bw’):</p>
-<blockquote>
-<div><dl class="simple">
-<dt>for time in (datetimes):</dt><dd><p>gt=Gtool()
-gt.set_header()
-gt.set_values()
-gtooldat=gt.get_data()
-gtooldat.tofile(fout)</p>
-</dd>
-</dl>
-</div></blockquote>
+<p>set up gtool format for creating gtool emission data</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pygtool_core.Gtool.set_datetime" title="pygtool_core.Gtool.set_datetime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_datetime</span></code></a>(self[, datetime, fmt])</p></td>
+<td><p>set datetime</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pygtool_core.Gtool.set_header" title="pygtool_core.Gtool.set_header"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_header</span></code></a>(self[, dataset, varname, title, …])</p></td>
+<td><p>edit header</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pygtool_core.Gtool.set_sampleheader" title="pygtool_core.Gtool.set_sampleheader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_sampleheader</span></code></a>(self[, sample])</p></td>
+<td><p>set gtool header from other sample file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pygtool_core.Gtool.set_values" title="pygtool_core.Gtool.set_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_values</span></code></a>(self, arr)</p></td>
+<td><p>set values</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pygtool_core.Gtool.to_gtool" title="pygtool_core.Gtool.to_gtool"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_gtool</span></code></a>(self[, file, datalist, datetimeindex])</p></td>
+<td><p>save data as gtool format</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 55%" />
+<col style="width: 45%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>get_data</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="pygtool_core.Gtool.get_data">
-<code class="sig-name descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.get_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_data</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.get_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -192,48 +216,68 @@ gtooldat.tofile(fout)</p>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool.set_datetime">
-<code class="sig-name descname">set_datetime</code><span class="sig-paren">(</span><em class="sig-param">datetime='19790101 000000 '</em>, <em class="sig-param">fmt='%Y%m%d 000000 '</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.set_datetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.set_datetime" title="Permalink to this definition">¶</a></dt>
-<dd><p>set datetime
-Parameter
-———
-datetime :pandas.Timestamp or string(‘YYYYMMDD hhmmss ‘)</p>
-<blockquote>
-<div><p>datetime label of gtool header</p>
-</div></blockquote>
-<dl class="simple">
-<dt>fmt :string,deafult=’%Y%m%d 000000 ‘</dt><dd><p>fomatter when write datetime on gtool header</p>
+<code class="sig-name descname">set_datetime</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">datetime='19790101 000000 '</em>, <em class="sig-param">fmt='%Y%m%d 000000 '</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.set_datetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.set_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>set datetime</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>datetime :pandas.Timestamp or string(‘YYYYMMDD hhmmss ‘)</strong></dt><dd><p>datetime label of gtool header</p>
+</dd>
+<dt><strong>fmt :string,deafult=’%Y%m%d 000000 ‘</strong></dt><dd><p>fomatter when write datetime on gtool header</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool.set_header">
-<code class="sig-name descname">set_header</code><span class="sig-paren">(</span><em class="sig-param">dataset='dataset'</em>, <em class="sig-param">varname='var'</em>, <em class="sig-param">title='title'</em>, <em class="sig-param">unit='kg/m2'</em>, <em class="sig-param">author='unknown'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.set_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.set_header" title="Permalink to this definition">¶</a></dt>
-<dd><p>edit header
-Parameter
-———</p>
+<code class="sig-name descname">set_header</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">dataset='dataset'</em>, <em class="sig-param">varname='var'</em>, <em class="sig-param">title='title'</em>, <em class="sig-param">unit='kg/m2'</em>, <em class="sig-param">author='unknown'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.set_header"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.set_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>edit header</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>dataset :string, default ‘dataset’</strong></dt><dd><p>dataset name such as GFED,NCEP etc…</p>
+</dd>
+<dt><strong>varname :string, default ‘var’</strong></dt><dd><p>variable name of the data such as BCFLX</p>
+</dd>
+<dt><strong>title :string, default ‘title’</strong></dt><dd><p>title of the data</p>
+</dd>
+<dt><strong>unit :string, default ‘kg/m2’</strong></dt><dd><p>unit of the data</p>
+</dd>
+<dt><strong>author :string, default ‘unkown’</strong></dt><dd><p>author of the data</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool.set_sampleheader">
-<code class="sig-name descname">set_sampleheader</code><span class="sig-paren">(</span><em class="sig-param">sample=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.set_sampleheader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.set_sampleheader" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_sampleheader</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sample=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.set_sampleheader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.set_sampleheader" title="Permalink to this definition">¶</a></dt>
 <dd><p>set gtool header from other sample file</p>
-<dl class="simple">
-<dt>sample :np.ndarray</dt><dd><p>Gtool header from other file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sample :np.ndarray</strong></dt><dd><p>Gtool header from other file</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool.set_values">
-<code class="sig-name descname">set_values</code><span class="sig-paren">(</span><em class="sig-param">arr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.set_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.set_values" title="Permalink to this definition">¶</a></dt>
-<dd><p>set values
-Parameter
-———–
-arr :np.ndarray</p>
-<blockquote>
-<div><p>targets data which converted to gtool</p>
-</div></blockquote>
+<code class="sig-name descname">set_values</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">arr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.set_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.set_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>set values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>arr :np.ndarray</strong></dt><dd><p>targets data which converted to gtool</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -248,18 +292,18 @@ arr :np.ndarray</p>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool.to_gtool">
-<code class="sig-name descname">to_gtool</code><span class="sig-paren">(</span><em class="sig-param">file='gtool.out'</em>, <em class="sig-param">datalist=None</em>, <em class="sig-param">datetimeindex=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.to_gtool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.to_gtool" title="Permalink to this definition">¶</a></dt>
-<dd><p>save data as gtool format
-Parameter
-———-
-file :string,default=’gtool.out’</p>
-<blockquote>
-<div><p>file name of output</p>
-</div></blockquote>
-<dl class="simple">
-<dt>datalist :list</dt><dd><p>list of array which has only one timestep model data</p>
+<code class="sig-name descname">to_gtool</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">file='gtool.out'</em>, <em class="sig-param">datalist=None</em>, <em class="sig-param">datetimeindex=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool.to_gtool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool.to_gtool" title="Permalink to this definition">¶</a></dt>
+<dd><p>save data as gtool format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file :string,default=’gtool.out’</strong></dt><dd><p>file name of output</p>
 </dd>
-<dt>datetimeindex :pd.Datetimeindex or list</dt><dd><p>datetime of the model data</p>
+<dt><strong>datalist :list</strong></dt><dd><p>list of array which has only one timestep model data</p>
+</dd>
+<dt><strong>datetimeindex :pd.Datetimeindex or list</strong></dt><dd><p>datetime of the model data</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -270,48 +314,96 @@ file :string,default=’gtool.out’</p>
 <dt id="pygtool_core.Gtool2d">
 <em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">Gtool2d</code><span class="sig-paren">(</span><em class="sig-param">file</em>, <em class="sig-param">count=1</em>, <em class="sig-param">x=128</em>, <em class="sig-param">y=64</em>, <em class="sig-param">z=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool2d" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pygtool_core.Gtool3d" title="pygtool_core.Gtool3d"><code class="xref py py-class docutils literal notranslate"><span class="pre">pygtool_core.Gtool3d</span></code></a></p>
-<p>read surface
-Parameter
-—————–
-file  : string</p>
-<blockquote>
-<div><p>filename</p>
-</div></blockquote>
-<dl class="simple">
-<dt>count<span class="classifier">int</span></dt><dd><p>the number of dasta</p>
+<p>read surface model data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file  :string</strong></dt><dd><p>filename</p>
+</dd>
+<dt><strong>count :int</strong></dt><dd><p>the number of data</p>
 </dd>
 </dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pygtool_core.Gtool2d.getarr" title="pygtool_core.Gtool2d.getarr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getarr</span></code></a>(self[, timestep, cyclic, na_values, …])</p></td>
+<td><p>get ndarray((y=64,x=128))</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pygtool_core.Gtool2d.getarrays" title="pygtool_core.Gtool2d.getarrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getarrays</span></code></a>(self[, cyclic, replace_nan, na_values])</p></td>
+<td><p>compound all timeseries into one array</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">getdate</span></code>(self[, timestep, timespec, timeinfo])</p></td>
+<td><p>return datetime as isoformat</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">getdatetimeindex</span></code>(self)</p></td>
+<td><p>return  datetimeindex of read file</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">getfortranheader_footer</span></code>(self[, timestep])</p></td>
+<td><p>return fortran header footer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_xarray</span></code>(self[, lon, lat, sigma, cyclic, …])</p></td>
+<td><p>convert Gtool to xarray</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 57%" />
+<col style="width: 43%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>getheader</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="pygtool_core.Gtool2d.getarr">
-<code class="sig-name descname">getarr</code><span class="sig-paren">(</span><em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool2d.getarr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool2d.getarr" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getarr</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool2d.getarr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool2d.getarr" title="Permalink to this definition">¶</a></dt>
 <dd><p>get ndarray((y=64,x=128))</p>
-<p>timestep  : int ,default 0
-cyclic    : bool, default = True</p>
-<blockquote>
-<div><p>whether make logitude cyclic or not</p>
-</div></blockquote>
-<dl class="simple">
-<dt>na_values<span class="classifier">float, default -999</span></dt><dd><p>set value which is treated as missing value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>timestep  :int ,default 0</strong></dt><dd></dd>
+<dt><strong>cyclic    :boolean, default = True</strong></dt><dd><p>whether make logitude cyclic or not</p>
 </dd>
-<dt>replace_nan<span class="classifier">boolean, default False</span></dt><dd><p>whether replace na_valuse into NaN or not</p>
+<dt><strong>na_values :float, default -999</strong></dt><dd><p>set value which is treated as missing value</p>
+</dd>
+<dt><strong>replace_nan :boolean, default False</strong></dt><dd><p>whether replace na_valuse into NaN or not</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>arr<span class="classifier">numpy.ndarray</span></dt><dd><p>model data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>arr    :numpy.ndarray</dt><dd><p>model data</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool2d.getarrays">
-<code class="sig-name descname">getarrays</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">na_values=-999</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool2d.getarrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool2d.getarrays" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getarrays</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">na_values=-999</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool2d.getarrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool2d.getarrays" title="Permalink to this definition">¶</a></dt>
 <dd><p>compound all timeseries into one array</p>
-<dl class="simple">
-<dt>cyclic :bool, default False</dt><dd><p>whether make longitude cyclic or not</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>cyclic :bool, default False</strong></dt><dd><p>whether make longitude cyclic or not</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>dataarray<span class="classifier">numpy.ndarray</span></dt><dd><p>model values but axis 0 is time</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>dataarray :numpy.ndarray</dt><dd><p>model values but axis 0 is time</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -324,88 +416,155 @@ cyclic    : bool, default = True</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>read gtool format data 
 to generate this instance pass filename</p>
-<dl class="simple">
-<dt>head,tail,head2,tail2 :4byte binary</dt><dd><p>size info of fortran binary header</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>head,tail,head2,tail2 :4byte binary</strong></dt><dd><p>size info of fortran binary header</p>
 </dd>
 </dl>
-<p>__init__(self,data,count,x,y,z)
-getarr(self,timestep)
-getheader
-getDate</p>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pygtool_core.Gtool3d.getarr" title="pygtool_core.Gtool3d.getarr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getarr</span></code></a>(self[, timestep, cyclic, na_values, …])</p></td>
+<td><p>return model data as array</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pygtool_core.Gtool3d.getarrays" title="pygtool_core.Gtool3d.getarrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getarrays</span></code></a>(self[, cyclic, na_values, replace_nan])</p></td>
+<td><p>get  all model data in read file</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pygtool_core.Gtool3d.getdate" title="pygtool_core.Gtool3d.getdate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getdate</span></code></a>(self[, timestep, timespec, timeinfo])</p></td>
+<td><p>return datetime as isoformat</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pygtool_core.Gtool3d.getdatetimeindex" title="pygtool_core.Gtool3d.getdatetimeindex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getdatetimeindex</span></code></a>(self)</p></td>
+<td><p>return  datetimeindex of read file</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pygtool_core.Gtool3d.getfortranheader_footer" title="pygtool_core.Gtool3d.getfortranheader_footer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getfortranheader_footer</span></code></a>(self[, timestep])</p></td>
+<td><p>return fortran header footer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pygtool_core.Gtool3d.to_xarray" title="pygtool_core.Gtool3d.to_xarray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_xarray</span></code></a>(self[, lon, lat, sigma, cyclic, …])</p></td>
+<td><p>convert Gtool to xarray</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 57%" />
+<col style="width: 43%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>getheader</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="pygtool_core.Gtool3d.getarr">
-<code class="sig-name descname">getarr</code><span class="sig-paren">(</span><em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getarr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getarr" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getarr</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getarr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getarr" title="Permalink to this definition">¶</a></dt>
 <dd><p>return model data as array</p>
-<dl class="simple">
-<dt>timestep<span class="classifier">int, default 0</span></dt><dd><p>model timestep</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>timestep  :int, default 0</strong></dt><dd><p>model timestep</p>
 </dd>
-<dt>cyclic<span class="classifier">boolean, default False</span></dt><dd><p>whether make logitude cyclic or not</p>
+<dt><strong>cyclic    :boolean, default False</strong></dt><dd><p>whether make logitude cyclic or not</p>
 </dd>
-<dt>na_values<span class="classifier">float, default -999</span></dt><dd><p>set value which is treated as missing value</p>
+<dt><strong>na_values :float, default -999</strong></dt><dd><p>set value which is treated as missing value</p>
 </dd>
-<dt>replace_nan<span class="classifier">boolean, default False</span></dt><dd><p>whether replace na_valuse into NaN or not</p>
+<dt><strong>replace_nan :boolean, default False</strong></dt><dd><p>whether replace na_valuse into NaN or not</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>arr<span class="classifier">numpy.ndarray, default (x,y,z)=(128,64,36)</span></dt><dd><p>model data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>arr    :numpy.ndarray, default (x,y,z)=(128,64,36)</dt><dd><p>model data</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool3d.getarrays">
-<code class="sig-name descname">getarrays</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getarrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getarrays" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getarrays</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getarrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getarrays" title="Permalink to this definition">¶</a></dt>
 <dd><p>get  all model data in read file</p>
-<dl class="simple">
-<dt>cyclic :boolean, default False</dt><dd><p>whether make logitude cyclic or not</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>cyclic :boolean, default False</strong></dt><dd><p>whether make logitude cyclic or not</p>
 </dd>
-<dt>na_values<span class="classifier">float, default -999</span></dt><dd><p>set value which is treated as missing value</p>
+<dt><strong>na_values :float, default -999</strong></dt><dd><p>set value which is treated as missing value</p>
 </dd>
-<dt>replace_nan<span class="classifier">boolean, default False</span></dt><dd><p>whether replace na_valuse into NaN or not</p>
+<dt><strong>replace_nan :boolean, default False</strong></dt><dd><p>whether replace na_valuse into NaN or not</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>dataarray<span class="classifier">numpy.ndarray </span></dt><dd><p>model data but axis 0 has time</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>dataarray</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>model data but axis 0 has time</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool3d.getdate">
-<code class="sig-name descname">getdate</code><span class="sig-paren">(</span><em class="sig-param">timestep=0</em>, <em class="sig-param">timespec='auto'</em>, <em class="sig-param">timeinfo=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getdate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getdate" title="Permalink to this definition">¶</a></dt>
-<dd><p>return datetime as isoformat
-parameter
-————
-timstep  : int, default 0</p>
-<blockquote>
-<div><p>model timestep</p>
-</div></blockquote>
-<p>timespec : string, default ‘auto’
-timeinfo  : boolean, default True</p>
-<dl class="simple">
+<code class="sig-name descname">getdate</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">timespec='auto'</em>, <em class="sig-param">timeinfo=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getdate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getdate" title="Permalink to this definition">¶</a></dt>
+<dd><p>return datetime as isoformat</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>timstep  :int, default 0</strong></dt><dd><p>model timestep</p>
+</dd>
+<dt><strong>timespec :string, default ‘auto’</strong></dt><dd></dd>
+<dt><strong>timeinfo  :boolean, default True</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
 <dt>label    :string</dt><dd><p>isoformated datetime</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool3d.getdatetimeindex">
-<code class="sig-name descname">getdatetimeindex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getdatetimeindex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getdatetimeindex" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getdatetimeindex</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getdatetimeindex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getdatetimeindex" title="Permalink to this definition">¶</a></dt>
 <dd><p>return  datetimeindex of read file</p>
-<dl class="simple">
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
 <dt>datetime :pd.DatetimeIndex</dt><dd><p>datetimeindex of read file</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool3d.getfortranheader_footer">
-<code class="sig-name descname">getfortranheader_footer</code><span class="sig-paren">(</span><em class="sig-param">timestep=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getfortranheader_footer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getfortranheader_footer" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">getfortranheader_footer</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">timestep=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getfortranheader_footer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getfortranheader_footer" title="Permalink to this definition">¶</a></dt>
+<dd><p>return fortran header footer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>h1,h2,t1,t2 :tuple of int</dt><dd><p>4byte integer</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool3d.getheader">
-<code class="sig-name descname">getheader</code><span class="sig-paren">(</span><em class="sig-param">timestep=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getheader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getheader" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getheader</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">timestep=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.getheader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.getheader" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -430,29 +589,33 @@ timeinfo  : boolean, default True</p>
 
 <dl class="method">
 <dt id="pygtool_core.Gtool3d.to_xarray">
-<code class="sig-name descname">to_xarray</code><span class="sig-paren">(</span><em class="sig-param">lon=None</em>, <em class="sig-param">lat=None</em>, <em class="sig-param">sigma=None</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.to_xarray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.to_xarray" title="Permalink to this definition">¶</a></dt>
-<dd><p>convert Gtool to xarray
-Parameter
-———
-lon : numpy.ndarray</p>
-<blockquote>
-<div><p>array of longitude</p>
-</div></blockquote>
-<dl class="simple">
-<dt>lat<span class="classifier">numpy.ndarray</span></dt><dd><p>array of latitude</p>
+<code class="sig-name descname">to_xarray</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">lon=None</em>, <em class="sig-param">lat=None</em>, <em class="sig-param">sigma=None</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">na_values=-999</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#Gtool3d.to_xarray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.Gtool3d.to_xarray" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert Gtool to xarray</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>lon :numpy.ndarray</strong></dt><dd><p>array of longitude</p>
 </dd>
-<dt>sigma<span class="classifier">numpy.ndarray</span></dt><dd><p>array of altitude</p>
+<dt><strong>lat :numpy.ndarray</strong></dt><dd><p>array of latitude</p>
 </dd>
-<dt>cyclic<span class="classifier">boolean</span></dt><dd><p>whether make logitude cyclic or not</p>
+<dt><strong>sigma :numpy.ndarray</strong></dt><dd><p>array of altitude</p>
 </dd>
-<dt>na_values<span class="classifier">float, default -999</span></dt><dd><p>set value which is treated as missing value</p>
+<dt><strong>cyclic :boolean</strong></dt><dd><p>whether make logitude cyclic or not</p>
 </dd>
-<dt>replace_nan<span class="classifier">boolean, default False</span></dt><dd><p>whether replace na_valuse into NaN or not</p>
+<dt><strong>na_values :float, default -999</strong></dt><dd><p>set value which is treated as missing value</p>
 </dd>
-<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs:string</dt><dd><p>you can add your own attribute to xarray.DataSet</p>
+<dt><strong>replace_nan :boolean, default False</strong></dt><dd><p>whether replace na_valuse into NaN or not</p>
+</dd>
+<dt><strong>**kwargs :string</strong></dt><dd><p>you can add your own attribute to xarray.DataSet</p>
 </dd>
 </dl>
-<p>ds : xarray.Dataset</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>ds :xarray.Dataset</dt><dd></dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -461,58 +624,84 @@ lon : numpy.ndarray</p>
 <dt id="pygtool_core.GtoolGrid">
 <em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">GtoolGrid</code><span class="sig-paren">(</span><em class="sig-param">x=128</em>, <em class="sig-param">y=64</em>, <em class="sig-param">lonfile=None</em>, <em class="sig-param">latfile=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>manipulate horizontal coordinate
-Method
-——–
-getlonlat : return logitude,latitude as 1D array
-getmesh : return longitude,latitude as 2D array
-getarea : return area of grid as 2D array</p>
+<p>manipulate horizontal coordinate</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pygtool_core.GtoolGrid.getarea" title="pygtool_core.GtoolGrid.getarea"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getarea</span></code></a>(self[, EARTH_RADIUS])</p></td>
+<td><p>calculate area of each grid</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pygtool_core.GtoolGrid.getlonlat" title="pygtool_core.GtoolGrid.getlonlat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getlonlat</span></code></a>(self[, cyclic])</p></td>
+<td><p>return horizontal coordinate</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pygtool_core.GtoolGrid.getmesh" title="pygtool_core.GtoolGrid.getmesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getmesh</span></code></a>(self[, cyclic])</p></td>
+<td><p>extend logitude and latitude to 2D</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="pygtool_core.GtoolGrid.getarea">
-<code class="sig-name descname">getarea</code><span class="sig-paren">(</span><em class="sig-param">EARTH_RADIUS=6370000.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid.getarea"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid.getarea" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>EARTH_RADIUS<span class="classifier">float, default=6370e0</span></dt><dd><p>earth radius[m]</p>
+<code class="sig-name descname">getarea</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">EARTH_RADIUS=6370000.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid.getarea"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid.getarea" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate area of each grid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>EARTH_RADIUS :float, default=6370e0</strong></dt><dd><p>earth radius[m]</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>area<span class="classifier">numpy.ndarray </span></dt><dd><p>area of each grid[m]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>area :numpy.ndarray</dt><dd><p>area of each grid[m]</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.GtoolGrid.getlonlat">
-<code class="sig-name descname">getlonlat</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid.getlonlat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid.getlonlat" title="Permalink to this definition">¶</a></dt>
-<dd><p>return horizontal coordinate
-Parameter
-———-
-cyclic : bool, default=False</p>
-<blockquote>
-<div><p>whether logitude is cyclic or not</p>
-</div></blockquote>
-<dl class="simple">
-<dt>lon,lat<span class="classifier">numpy.ndarray, </span></dt><dd><p>longitue and latitude 1D array</p>
+<code class="sig-name descname">getlonlat</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid.getlonlat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid.getlonlat" title="Permalink to this definition">¶</a></dt>
+<dd><p>return horizontal coordinate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>cyclic :bool, default=False</strong></dt><dd><p>whether logitude is cyclic or not</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>lon,lat :numpy.ndarray,</dt><dd><p>longitue and latitude 1D array</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.GtoolGrid.getmesh">
-<code class="sig-name descname">getmesh</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid.getmesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid.getmesh" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>cyclic<span class="classifier">bool default=False</span></dt><dd><p>whether logitude is cyclic or not</p>
+<code class="sig-name descname">getmesh</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid.getmesh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid.getmesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>extend logitude and latitude to 2D</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>cyclic :bool default=False</strong></dt><dd><p>whether logitude is cyclic or not</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>xx,yy<span class="classifier">numpy.ndarray</span></dt><dd><p>meshed longitude and latitude which are used for plot</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>xx,yy  :numpy.ndarray</dt><dd><p>meshed longitude and latitude which are used for plot</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
-
-<dl class="method">
-<dt id="pygtool_core.GtoolGrid.getmesh2">
-<code class="sig-name descname">getmesh2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolGrid.getmesh2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolGrid.getmesh2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 
@@ -520,9 +709,24 @@ cyclic : bool, default=False</p>
 <dt id="pygtool_core.GtoolLat">
 <em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">GtoolLat</code><span class="sig-paren">(</span><em class="sig-param">y=64</em>, <em class="sig-param">GTAXFILE=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 48%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>getlat</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>showlat</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="pygtool_core.GtoolLat.getlat">
-<code class="sig-name descname">getlat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLat.getlat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLat.getlat" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getlat</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLat.getlat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLat.getlat" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -537,7 +741,7 @@ cyclic : bool, default=False</p>
 
 <dl class="method">
 <dt id="pygtool_core.GtoolLat.showlat">
-<code class="sig-name descname">showlat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLat.showlat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLat.showlat" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showlat</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLat.showlat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLat.showlat" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -556,9 +760,24 @@ cyclic : bool, default=False</p>
 <dt id="pygtool_core.GtoolLon">
 <em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">GtoolLon</code><span class="sig-paren">(</span><em class="sig-param">x=128</em>, <em class="sig-param">GTAXFILE=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 48%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>getlon</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>showlon</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="pygtool_core.GtoolLon.getlon">
-<code class="sig-name descname">getlon</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLon.getlon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLon.getlon" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getlon</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLon.getlon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLon.getlon" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -573,7 +792,7 @@ cyclic : bool, default=False</p>
 
 <dl class="method">
 <dt id="pygtool_core.GtoolLon.showlon">
-<code class="sig-name descname">showlon</code><span class="sig-paren">(</span><em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLon.showlon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLon.showlon" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showlon</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolLon.showlon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolLon.showlon" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -592,42 +811,66 @@ cyclic : bool, default=False</p>
 <dt id="pygtool_core.GtoolPressure">
 <em class="property">class </em><code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">GtoolPressure</code><span class="sig-paren">(</span><em class="sig-param">z=35</em>, <em class="sig-param">GTAXFILE='GTAXLOC.AR5PL35'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolPressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolPressure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>read P-grid
-Parameter
-———-
-z :int,default 35</p>
-<blockquote>
-<div><p>num of vertical grid</p>
-</div></blockquote>
-<dl class="simple">
-<dt>GTAXFILE :string, default GTAXLOC.AR5PL35</dt><dd><p>file of vertical coordinate</p>
+<p>read P-grid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>z :int,default 35</strong></dt><dd><p>num of vertical grid</p>
+</dd>
+<dt><strong>GTAXFILE :string, default GTAXLOC.AR5PL35</strong></dt><dd><p>file of vertical coordinate</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>z :int </dt><dd><p>num of vertical grid</p>
 </dd>
-<dt>pp:numpy.ndarray</dt><dd><p>1D array of pressure</p>
+<dt class="field-even">Attributes</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>z :int</strong></dt><dd><p>num of vertical grid</p>
+</dd>
+<dt><strong>pp :numpy.ndarray</strong></dt><dd><p>1D array of pressure</p>
 </dd>
 </dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pygtool_core.GtoolPressure.get_dp" title="pygtool_core.GtoolPressure.get_dp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dp</span></code></a>(self)</p></td>
+<td><p>calculate dp</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pygtool_core.GtoolPressure.get_pressure" title="pygtool_core.GtoolPressure.get_pressure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pressure</span></code></a>(self)</p></td>
+<td><p>return pressure as 3D</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="pygtool_core.GtoolPressure.get_dp">
-<code class="sig-name descname">get_dp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolPressure.get_dp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolPressure.get_dp" title="Permalink to this definition">¶</a></dt>
-<dd><p>calculate 
-Return
-—————–
-dp : np.ndarray,</p>
-<blockquote>
-<div><p>dp = P[k+1]-P[k] [hPa]</p>
-</div></blockquote>
+<code class="sig-name descname">get_dp</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolPressure.get_dp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolPressure.get_dp" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate dp</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>dp :np.ndarray,</dt><dd><p>dp = P[k+1]-P[k] [hPa]</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.GtoolPressure.get_pressure">
-<code class="sig-name descname">get_pressure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolPressure.get_pressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolPressure.get_pressure" title="Permalink to this definition">¶</a></dt>
-<dd><p>return pressure as 3D
-Return
-——————
-p : np.ndarray,(z,1,1) [hPa]</p>
+<code class="sig-name descname">get_pressure</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolPressure.get_pressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolPressure.get_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>return pressure as 3D</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>p :np.ndarray,(z,1,1) [hPa]</dt><dd><p>pressure</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
@@ -658,45 +901,65 @@ p : np.ndarray,(z,1,1) [hPa]</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>read sigma-grid
 You can declare this class when you set sigma coordinate file</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pygtool_core.GtoolSigma.get_dp" title="pygtool_core.GtoolSigma.get_dp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dp</span></code></a>(self, ps[, timestep, cyclic])</p></td>
+<td><p>convert surface pressure to 3D pressure</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pygtool_core.GtoolSigma.get_pressure" title="pygtool_core.GtoolSigma.get_pressure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pressure</span></code></a>(self, ps[, timestep, cyclic])</p></td>
+<td><p>extend surface pressure to 3D pressure by hydrostatic equilibrium</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="pygtool_core.GtoolSigma.get_dp">
-<code class="sig-name descname">get_dp</code><span class="sig-paren">(</span><em class="sig-param">ps</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolSigma.get_dp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolSigma.get_dp" title="Permalink to this definition">¶</a></dt>
-<dd><p>convert surface pressure to 3D pressure
-Parameter
-——————
-ps : np.ndarray or Gtool2d , surface pressure
-cyclic :bool,default=False</p>
-<blockquote>
-<div><p>whether make longitude cyclic or not</p>
-</div></blockquote>
-<dl class="simple">
-<dt>timestep :int,default=0</dt><dd><p>model timestep</p>
+<code class="sig-name descname">get_dp</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">ps</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolSigma.get_dp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolSigma.get_dp" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert surface pressure to 3D pressure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ps :np.ndarray or Gtool2d</strong></dt><dd><p>surface pressure</p>
+</dd>
+<dt><strong>cyclic :bool,default=False</strong></dt><dd><p>whether make longitude cyclic or not</p>
+</dd>
+<dt><strong>timestep :int,default=0</strong></dt><dd><p>model timestep</p>
 </dd>
 </dl>
-<dl class="simple">
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
 <dt>dp :np.ndarray</dt><dd><p>deltaP=P[k+1]-P[K](&lt;0)[Pa]</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="pygtool_core.GtoolSigma.get_pressure">
-<code class="sig-name descname">get_pressure</code><span class="sig-paren">(</span><em class="sig-param">ps</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolSigma.get_pressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolSigma.get_pressure" title="Permalink to this definition">¶</a></dt>
-<dd><p>extend surface pressure to 3D pressure by hydrostatic equilibrium
-Parameter
-——————
-ps :np.ndarray or Gtool2d</p>
-<blockquote>
-<div><p>surface pressure</p>
-</div></blockquote>
-<dl class="simple">
-<dt>timestep :int,default=0</dt><dd><p>model timestep</p>
+<code class="sig-name descname">get_pressure</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">ps</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#GtoolSigma.get_pressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.GtoolSigma.get_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>extend surface pressure to 3D pressure by hydrostatic equilibrium</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>ps :np.ndarray or Gtool2d</strong></dt><dd><p>surface pressure</p>
 </dd>
-<dt>cyclic :bool,default=False</dt><dd><p>whether make logitude cyclic or not</p>
+<dt><strong>timestep :int, default 0</strong></dt><dd><p>model timestep</p>
+</dd>
+<dt><strong>cyclic :bool, default False</strong></dt><dd><p>whether make logitude cyclic or not</p>
 </dd>
 </dl>
-<dl class="simple">
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
 <dt>p :np.ndarray</dt><dd><p>pressure[hPa]</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -726,21 +989,30 @@ ps :np.ndarray or Gtool2d</p>
 <dl class="function">
 <dt id="pygtool_core.isgtoolinstance">
 <code class="sig-prename descclassname">pygtool_core.</code><code class="sig-name descname">isgtoolinstance</code><span class="sig-paren">(</span><em class="sig-param">arr</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">cyclic=False</em>, <em class="sig-param">zsel=0</em>, <em class="sig-param">replace_nan=False</em>, <em class="sig-param">na_values=-999</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygtool_core.html#isgtoolinstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pygtool_core.isgtoolinstance" title="Permalink to this definition">¶</a></dt>
-<dd><p>evaluate whether first argument is Gtool* instance and return it as numpy.ndarray
-Paramter
-———
-arr : Gtool2d or Gtool3d or numpy.ndarray
-model data
-timestep : int, default 0
+<dd><blockquote>
+<div><p>evaluate whether first argument is Gtool* instance</p>
+</div></blockquote>
+<p>and return it as numpy.ndarray</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>arr :Gtool2d or Gtool3d or numpy.ndarray</strong></dt><dd><p>model data
+timestep :int, default 0
 model timestep
-cyclic : boolean, default False
+cyclic :boolean, default False
 whether make logitude cyclic or not
-zsel : int,default 0
-select model layer
-Return
-dat : numpy.ndarray
-model values
-———</p>
+zsel :int, default 0
+select model layer</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>dat :numpy.ndarray</dt><dd><p>model values</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

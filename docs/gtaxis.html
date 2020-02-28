@@ -157,16 +157,31 @@
 <span id="gtaxis-module"></span><h1>gtaxis module<a class="headerlink" href="#module-gtaxis" title="Permalink to this headline">¶</a></h1>
 <dl class="attribute">
 <dt id="gtaxis.sig2isopiestic">
-<code class="sig-prename descclassname">gtaxis.</code><code class="sig-name descname">sig2isopiestic</code><a class="reference internal" href="_modules/gtaxis.html#sig2isopiestic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtaxis.sig2isopiestic" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">gtaxis.</code><code class="sig-name descname">sig2isopiestic</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">p3d</em>, <em class="sig-param">convP</em>, <em class="sig-param">idim=128</em>, <em class="sig-param">jdim=64</em>, <em class="sig-param">kmax=36</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtaxis.html#sig2isopiestic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtaxis.sig2isopiestic" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="gtaxis.sig2isopiesticpy">
 <code class="sig-prename descclassname">gtaxis.</code><code class="sig-name descname">sig2isopiesticpy</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">p3d</em>, <em class="sig-param">convP=None</em>, <em class="sig-param">idim=128</em>, <em class="sig-param">jdim=64</em>, <em class="sig-param">kmax=36</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtaxis.html#sig2isopiesticpy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtaxis.sig2isopiesticpy" title="Permalink to this definition">¶</a></dt>
 <dd><p>interpolate sigma scaled array into isopiestic array</p>
-<p>data :numpy.ndarray (sigma,lat,lon) target data
-p3d  :numpy.ndarray (sigma,lat,lon) pressure
-convP:array_like     new pressure scale</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data :numpy.ndarray (sigma,lat,lon)</strong></dt><dd><p>target data</p>
+</dd>
+<dt><strong>p3d  :numpy.ndarray (sigma,lat,lon)</strong></dt><dd><p>pressure</p>
+</dd>
+<dt><strong>convP:array_like</strong></dt><dd><p>new pressure scale</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>iso_data :numpy.ndarray</dt><dd><p>array which converted to p-scale</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

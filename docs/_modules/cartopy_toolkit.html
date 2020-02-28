@@ -170,6 +170,8 @@
                <span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">15</span>
                <span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span> <span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span> <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    draw grid liens</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    ax :cartopy.mpl.geoaxes</span>
@@ -198,7 +200,7 @@
 <span class="sd">         whethet draw ticklabel of xaxis</span>
 <span class="sd">    left :boolean</span>
 <span class="sd">         whether draw ticklabel of yaxis</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    ax :cartopy.mpl.Geoaxes</span>
@@ -303,9 +305,10 @@
 <span class="sd">    display cricular map</span>
 <span class="sd">    this configure is available only in South and North Polar Stereo</span>
 
-<span class="sd">    Parameter</span>
+<span class="sd">    Parameters</span>
 <span class="sd">    --------------</span>
 <span class="sd">    ax     :cartopy.mpl.geoaxes</span>
+<span class="sd">        geopositional axes for plot</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">center</span><span class="p">,</span><span class="n">radius</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span><span class="mf">0.5</span>

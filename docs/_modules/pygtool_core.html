@@ -161,13 +161,6 @@
 <div class="viewcode-block" id="Gtool"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.Gtool">[docs]</a><span class="k">class</span> <span class="nc">Gtool</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    set up gtool format for creating gtool emission data</span>
-<span class="sd">    with open(fout,&#39;bw&#39;):</span>
-<span class="sd">        for time in (datetimes):</span>
-<span class="sd">            gt=Gtool()</span>
-<span class="sd">            gt.set_header()</span>
-<span class="sd">            gt.set_values()</span>
-<span class="sd">            gtooldat=gt.get_data()</span>
-<span class="sd">            gtooldat.tofile(fout)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;head&quot;</span><span class="p">,</span><span class="s2">&quot;&gt;i&quot;</span><span class="p">)</span>
     <span class="n">tail</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;tail&quot;</span><span class="p">,</span><span class="s2">&quot;&gt;i&quot;</span><span class="p">)</span>
@@ -200,8 +193,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        set gtool header from other sample file</span>
 
-<span class="sd">        Parameter</span>
-<span class="sd">        ---------</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        sample :np.ndarray</span>
 <span class="sd">            Gtool header from other file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -211,8 +204,19 @@
                  <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;kg/m2&#39;</span><span class="p">,</span><span class="n">author</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        edit header</span>
-<span class="sd">        Parameter</span>
-<span class="sd">        ---------</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dataset :string, default &#39;dataset&#39;</span>
+<span class="sd">            dataset name such as GFED,NCEP etc...</span>
+<span class="sd">        varname :string, default &#39;var&#39;</span>
+<span class="sd">            variable name of the data such as BCFLX</span>
+<span class="sd">        title :string, default &#39;title&#39;</span>
+<span class="sd">            title of the data</span>
+<span class="sd">        unit :string, default &#39;kg/m2&#39;</span>
+<span class="sd">            unit of the data</span>
+<span class="sd">        author :string, default &#39;unkown&#39;</span>
+<span class="sd">            author of the data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="s1">&#39;dataset&#39;</span><span class="p">]]</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{:&lt;16}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">]]</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{:&lt;16}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">varname</span><span class="p">)</span>
@@ -225,8 +229,9 @@
 <div class="viewcode-block" id="Gtool.set_datetime"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.Gtool.set_datetime">[docs]</a>    <span class="k">def</span> <span class="nf">set_datetime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">datetime</span><span class="o">=</span><span class="s1">&#39;19790101 000000 &#39;</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1"> 000000 &#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        set datetime</span>
-<span class="sd">        Parameter</span>
-<span class="sd">        ---------</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        datetime :pandas.Timestamp or string(&#39;YYYYMMDD hhmmss &#39;)</span>
 <span class="sd">            datetime label of gtool header</span>
 <span class="sd">        fmt :string,deafult=&#39;%Y%m%d 000000 &#39;</span>
@@ -240,8 +245,9 @@
 <div class="viewcode-block" id="Gtool.set_values"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.Gtool.set_values">[docs]</a>    <span class="k">def</span> <span class="nf">set_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">arr</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        set values</span>
-<span class="sd">        Parameter</span>
-<span class="sd">        -----------</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        arr :np.ndarray</span>
 <span class="sd">            targets data which converted to gtool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -252,7 +258,8 @@
 <div class="viewcode-block" id="Gtool.to_gtool"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.Gtool.to_gtool">[docs]</a>    <span class="k">def</span> <span class="nf">to_gtool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;gtool.out&#39;</span><span class="p">,</span><span class="n">datalist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">datetimeindex</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        save data as gtool format</span>
-<span class="sd">        Parameter</span>
+
+<span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        file :string,default=&#39;gtool.out&#39;</span>
 <span class="sd">            file name of output</span>
@@ -326,11 +333,6 @@
 <div class="viewcode-block" id="GtoolGrid"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.GtoolGrid">[docs]</a><span class="k">class</span> <span class="nc">GtoolGrid</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    manipulate horizontal coordinate</span>
-<span class="sd">    Method</span>
-<span class="sd">    --------</span>
-<span class="sd">    getlonlat : return logitude,latitude as 1D array</span>
-<span class="sd">    getmesh : return longitude,latitude as 2D array</span>
-<span class="sd">    getarea : return area of grid as 2D array</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span><span class="n">lonfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">latfile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">=</span><span class="n">x</span>
@@ -340,13 +342,15 @@
 <div class="viewcode-block" id="GtoolGrid.getlonlat"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.GtoolGrid.getlonlat">[docs]</a>    <span class="k">def</span> <span class="nf">getlonlat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        return horizontal coordinate</span>
-<span class="sd">        Parameter</span>
+
+<span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        cyclic : bool, default=False</span>
+<span class="sd">        cyclic :bool, default=False</span>
 <span class="sd">            whether logitude is cyclic or not</span>
-<span class="sd">        Return</span>
-<span class="sd">        ----------</span>
-<span class="sd">        lon,lat : numpy.ndarray, </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        lon,lat :numpy.ndarray, </span>
 <span class="sd">            longitue and latitude 1D array</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">lat</span><span class="o">=</span><span class="n">GtoolLat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span><span class="n">GTAXFILE</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">latfile</span><span class="p">)</span><span class="o">.</span><span class="n">getlat</span><span class="p">()</span>
@@ -354,32 +358,40 @@
         <span class="k">return</span> <span class="n">lon</span><span class="p">,</span><span class="n">lat</span></div>
 <div class="viewcode-block" id="GtoolGrid.getmesh"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.GtoolGrid.getmesh">[docs]</a>    <span class="k">def</span> <span class="nf">getmesh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Parameter</span>
+<span class="sd">        extend logitude and latitude to 2D        </span>
+
+<span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        cyclic : bool default=False</span>
+<span class="sd">        cyclic :bool default=False</span>
 <span class="sd">            whether logitude is cyclic or not</span>
-<span class="sd">        Return</span>
-<span class="sd">        ----------</span>
-<span class="sd">        xx,yy  : numpy.ndarray</span>
-<span class="sd">             meshed longitude and latitude which are used for plot</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        xx,yy  :numpy.ndarray</span>
+<span class="sd">            meshed longitude and latitude which are used for plot</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getlonlat</span><span class="p">(</span><span class="n">cyclic</span><span class="o">=</span><span class="n">cyclic</span><span class="p">)</span>
         <span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">xx</span><span class="p">,</span><span class="n">yy</span></div>
-<div class="viewcode-block" id="GtoolGrid.getmesh2"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.GtoolGrid.getmesh2">[docs]</a>    <span class="k">def</span> <span class="nf">getmesh2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">y</span><span class="o">=</span><span class="n">readlat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">getlat</span><span class="p">()</span>
-        <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.40625</span><span class="p">,</span><span class="mf">360.1</span><span class="p">,</span><span class="mf">2.8125</span><span class="p">)</span>
-        <span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">xx</span><span class="p">,</span><span class="n">yy</span></div>
+<span class="c1">#    def getmesh2(self):</span>
+<span class="c1">#        &quot;&quot;&quot;</span>
+<span class="c1">#        &quot;&quot;&quot;</span>
+<span class="c1">#        y=readlat(self.y).getlat()</span>
+<span class="c1">#        x=np.arange(1.40625,360.1,2.8125)</span>
+<span class="c1">#        xx,yy=np.meshgrid(x,y)</span>
+<span class="c1">#        return xx,yy</span>
 <div class="viewcode-block" id="GtoolGrid.getarea"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.GtoolGrid.getarea">[docs]</a>    <span class="k">def</span> <span class="nf">getarea</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">EARTH_RADIUS</span><span class="o">=</span><span class="mf">6370e3</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Parameter</span>
+<span class="sd">        calculate area of each grid        </span>
+
+<span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        EARTH_RADIUS : float, default=6370e0</span>
+<span class="sd">        EARTH_RADIUS :float, default=6370e0</span>
 <span class="sd">            earth radius[m]</span>
-<span class="sd">        Return</span>
-<span class="sd">        ----------</span>
-<span class="sd">        area : numpy.ndarray </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        area :numpy.ndarray </span>
 <span class="sd">            area of each grid[m]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">lon</span><span class="p">,</span><span class="n">lat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getlonlat</span><span class="p">(</span><span class="n">cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -421,16 +433,18 @@
 <div class="viewcode-block" id="GtoolSigma.get_pressure"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.GtoolSigma.get_pressure">[docs]</a>    <span class="k">def</span> <span class="nf">get_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ps</span><span class="p">,</span><span class="n">timestep</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        extend surface pressure to 3D pressure by hydrostatic equilibrium</span>
-<span class="sd">        Parameter</span>
-<span class="sd">        ------------------</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        ps :np.ndarray or Gtool2d</span>
 <span class="sd">            surface pressure</span>
-<span class="sd">        timestep :int,default=0</span>
+<span class="sd">        timestep :int, default 0</span>
 <span class="sd">            model timestep</span>
-<span class="sd">        cyclic :bool,default=False</span>
+<span class="sd">        cyclic :bool, default False</span>
 <span class="sd">            whether make logitude cyclic or not</span>
-<span class="sd">        Return</span>
-<span class="sd">        ------------------</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
 <span class="sd">        p :np.ndarray</span>
 <span class="sd">            pressure[hPa]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -446,15 +460,18 @@
 <div class="viewcode-block" id="GtoolSigma.get_dp"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.GtoolSigma.get_dp">[docs]</a>    <span class="k">def</span> <span class="nf">get_dp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ps</span><span class="p">,</span><span class="n">timestep</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        convert surface pressure to 3D pressure</span>
-<span class="sd">        Parameter</span>
-<span class="sd">        ------------------</span>
-<span class="sd">        ps : np.ndarray or Gtool2d , surface pressure</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ps :np.ndarray or Gtool2d</span>
+<span class="sd">            surface pressure</span>
 <span class="sd">        cyclic :bool,default=False</span>
 <span class="sd">            whether make longitude cyclic or not</span>
 <span class="sd">        timestep :int,default=0</span>
 <span class="sd">            model timestep</span>
-<span class="sd">        Return</span>
-<span class="sd">        ------------------</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
 <span class="sd">        dp :np.ndarray</span>
 <span class="sd">            deltaP=P[k+1]-P[K](&lt;0)[Pa]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -472,17 +489,19 @@
 <div class="viewcode-block" id="GtoolPressure"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.GtoolPressure">[docs]</a><span class="k">class</span> <span class="nc">GtoolPressure</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    read P-grid</span>
-<span class="sd">    Parameter</span>
+
+<span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    z :int,default 35</span>
 <span class="sd">        num of vertical grid</span>
 <span class="sd">    GTAXFILE :string, default GTAXLOC.AR5PL35</span>
 <span class="sd">        file of vertical coordinate</span>
-<span class="sd">    Atribute</span>
-<span class="sd">    ---------</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
 <span class="sd">    z :int </span>
 <span class="sd">        num of vertical grid</span>
-<span class="sd">    pp:numpy.ndarray</span>
+<span class="sd">    pp :numpy.ndarray</span>
 <span class="sd">        1D array of pressure</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;head&quot;</span><span class="p">,</span><span class="s2">&quot;&gt;i&quot;</span><span class="p">)</span>
@@ -504,18 +523,21 @@
 <div class="viewcode-block" id="GtoolPressure.get_pressure"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.GtoolPressure.get_pressure">[docs]</a>    <span class="k">def</span> <span class="nf">get_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        return pressure as 3D</span>
-<span class="sd">        Return</span>
-<span class="sd">        ------------------</span>
-<span class="sd">        p : np.ndarray,(z,1,1) [hPa]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        p :np.ndarray,(z,1,1) [hPa]</span>
+<span class="sd">            pressure</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span></div>
 <div class="viewcode-block" id="GtoolPressure.get_dp"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.GtoolPressure.get_dp">[docs]</a>    <span class="k">def</span> <span class="nf">get_dp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        calculate </span>
-<span class="sd">        Return</span>
-<span class="sd">        -----------------</span>
-<span class="sd">        dp : np.ndarray,</span>
-<span class="sd">           dp = P[k+1]-P[k] [hPa]</span>
+<span class="sd">        calculate dp</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dp :np.ndarray,</span>
+<span class="sd">            dp = P[k+1]-P[k] [hPa]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pp</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">pp</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">dp</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span></div></div>
@@ -525,16 +547,10 @@
 <span class="sd">    read gtool format data </span>
 <span class="sd">    to generate this instance pass filename</span>
 
-<span class="sd">    Constant value</span>
-<span class="sd">    ---------------</span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
 <span class="sd">    head,tail,head2,tail2 :4byte binary</span>
-<span class="sd">             size info of fortran binary header</span>
-<span class="sd">    Method</span>
-<span class="sd">    --------------</span>
-<span class="sd">    __init__(self,data,count,x,y,z)</span>
-<span class="sd">    getarr(self,timestep)</span>
-<span class="sd">    getheader</span>
-<span class="sd">    getDate </span>
+<span class="sd">        size info of fortran binary header</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;head&quot;</span><span class="p">,</span><span class="s2">&quot;&gt;i4&quot;</span><span class="p">)</span>
     <span class="n">tail</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;tail&quot;</span><span class="p">,</span><span class="s2">&quot;&gt;i4&quot;</span><span class="p">)</span>
@@ -542,13 +558,13 @@
     <span class="n">tail2</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;tail2&quot;</span><span class="p">,</span><span class="s2">&quot;&gt;i4&quot;</span><span class="p">)</span> 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">,</span><span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="mi">36</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Parameter</span>
-<span class="sd">        ----------------</span>
-<span class="sd">        file  : string </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        file  :string </span>
 <span class="sd">            filename of datafile</span>
-<span class="sd">        count : int  </span>
+<span class="sd">        count :int  </span>
 <span class="sd">            the number of data </span>
-<span class="sd">        x,y,z : int,defalt (x,y,z)=(128,64,36)</span>
+<span class="sd">        x,y,z :int,defalt (x,y,z)=(128,64,36)</span>
 <span class="sd">            the number of each coordinate</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="s1">&#39;br&#39;</span><span class="p">)</span>
@@ -574,18 +590,19 @@
 <span class="sd">        return model data as array</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
-<span class="sd">        -------------</span>
-<span class="sd">        timestep  :  int, default 0</span>
+<span class="sd">        ----------</span>
+<span class="sd">        timestep  :int, default 0</span>
 <span class="sd">            model timestep</span>
-<span class="sd">        cyclic    : boolean, default False</span>
+<span class="sd">        cyclic    :boolean, default False</span>
 <span class="sd">            whether make logitude cyclic or not</span>
-<span class="sd">        na_values : float, default -999</span>
+<span class="sd">        na_values :float, default -999</span>
 <span class="sd">            set value which is treated as missing value</span>
-<span class="sd">        replace_nan : boolean, default False</span>
+<span class="sd">        replace_nan :boolean, default False</span>
 <span class="sd">            whether replace na_valuse into NaN or not</span>
-<span class="sd">        Return</span>
-<span class="sd">        ----------------</span>
-<span class="sd">        arr    : numpy.ndarray, default (x,y,z)=(128,64,36)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        arr    :numpy.ndarray, default (x,y,z)=(128,64,36)</span>
 <span class="sd">            model data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chunk</span><span class="p">[</span><span class="n">timestep</span><span class="p">][</span><span class="s1">&#39;arr&#39;</span><span class="p">]</span>
@@ -603,18 +620,19 @@
 <div class="viewcode-block" id="Gtool3d.getdate"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.Gtool3d.getdate">[docs]</a>    <span class="k">def</span> <span class="nf">getdate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">timestep</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">timespec</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span><span class="n">timeinfo</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        return datetime as isoformat</span>
-<span class="sd">        parameter</span>
-<span class="sd">        ------------</span>
-<span class="sd">        timstep  : int, default 0</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        timstep  :int, default 0</span>
 <span class="sd">            model timestep</span>
-<span class="sd">        timespec : string, default &#39;auto&#39;</span>
-<span class="sd">        timeinfo  : boolean, default True</span>
-<span class="sd">        </span>
-<span class="sd">        return</span>
-<span class="sd">        ---------</span>
+<span class="sd">        timespec :string, default &#39;auto&#39;</span>
+<span class="sd">        timeinfo  :boolean, default True</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
 <span class="sd">        label    :string</span>
 <span class="sd">            isoformated datetime</span>
-<span class="sd">        </span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">day</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk</span><span class="p">[</span><span class="n">timestep</span><span class="p">][</span><span class="s1">&#39;header&#39;</span><span class="p">][</span><span class="mi">47</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
         <span class="n">label</span><span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">day</span><span class="p">,</span> <span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1"> %H%M%S &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="n">timespec</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
@@ -622,17 +640,25 @@
             <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">label</span></div>
 <div class="viewcode-block" id="Gtool3d.getfortranheader_footer"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.Gtool3d.getfortranheader_footer">[docs]</a>    <span class="k">def</span> <span class="nf">getfortranheader_footer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">timestep</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="n">head1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk</span><span class="p">[</span><span class="n">timestep</span><span class="p">][</span><span class="s1">&#39;head&#39;</span><span class="p">]</span>
-        <span class="n">head2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk</span><span class="p">[</span><span class="n">timestep</span><span class="p">][</span><span class="s1">&#39;head2&#39;</span><span class="p">]</span>
-        <span class="n">tail1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk</span><span class="p">[</span><span class="n">timestep</span><span class="p">][</span><span class="s1">&#39;tail&#39;</span><span class="p">]</span>
-        <span class="n">tail2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk</span><span class="p">[</span><span class="n">timestep</span><span class="p">][</span><span class="s1">&#39;tail2&#39;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">head1</span><span class="p">,</span><span class="n">head2</span><span class="p">,</span><span class="n">tail1</span><span class="p">,</span><span class="n">tail2</span>   </div>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return fortran header footer</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        h1,h2,t1,t2 :tuple of int</span>
+<span class="sd">            4byte integer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">h1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk</span><span class="p">[</span><span class="n">timestep</span><span class="p">][</span><span class="s1">&#39;head&#39;</span><span class="p">]</span>
+        <span class="n">h2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk</span><span class="p">[</span><span class="n">timestep</span><span class="p">][</span><span class="s1">&#39;head2&#39;</span><span class="p">]</span>
+        <span class="n">t1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk</span><span class="p">[</span><span class="n">timestep</span><span class="p">][</span><span class="s1">&#39;tail&#39;</span><span class="p">]</span>
+        <span class="n">t2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk</span><span class="p">[</span><span class="n">timestep</span><span class="p">][</span><span class="s1">&#39;tail2&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">h1</span><span class="p">,</span><span class="n">h2</span><span class="p">,</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span>   </div>
 <div class="viewcode-block" id="Gtool3d.getdatetimeindex"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.Gtool3d.getdatetimeindex">[docs]</a>    <span class="k">def</span> <span class="nf">getdatetimeindex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        return  datetimeindex of read file</span>
-<span class="sd"> </span>
-<span class="sd">        Return</span>
-<span class="sd">        ---------------</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
 <span class="sd">        datetime :pd.DatetimeIndex</span>
 <span class="sd">            datetimeindex of read file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -643,18 +669,18 @@
 <div class="viewcode-block" id="Gtool3d.getarrays"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.Gtool3d.getarrays">[docs]</a>    <span class="k">def</span> <span class="nf">getarrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">na_values</span><span class="o">=-</span><span class="mi">999</span><span class="p">,</span><span class="n">replace_nan</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        get  all model data in read file</span>
-<span class="sd">        </span>
-<span class="sd">        Parameter</span>
-<span class="sd">        -----------</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        cyclic :boolean, default False</span>
 <span class="sd">            whether make logitude cyclic or not</span>
-<span class="sd">        na_values : float, default -999</span>
+<span class="sd">        na_values :float, default -999</span>
 <span class="sd">            set value which is treated as missing value</span>
-<span class="sd">        replace_nan : boolean, default False</span>
+<span class="sd">        replace_nan :boolean, default False</span>
 <span class="sd">            whether replace na_valuse into NaN or not</span>
 
-<span class="sd">        Return</span>
-<span class="sd">        -----------</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
 <span class="sd">        dataarray : numpy.ndarray </span>
 <span class="sd">            model data but axis 0 has time</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -669,27 +695,27 @@
 <div class="viewcode-block" id="Gtool3d.to_xarray"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.Gtool3d.to_xarray">[docs]</a>    <span class="k">def</span> <span class="nf">to_xarray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lon</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">lat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">na_values</span><span class="o">=-</span><span class="mi">999</span><span class="p">,</span><span class="n">replace_nan</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        convert Gtool to xarray</span>
-<span class="sd">        Parameter</span>
-<span class="sd">        ---------</span>
-<span class="sd">        lon : numpy.ndarray</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        lon :numpy.ndarray</span>
 <span class="sd">            array of longitude</span>
-<span class="sd">        lat : numpy.ndarray</span>
+<span class="sd">        lat :numpy.ndarray</span>
 <span class="sd">            array of latitude</span>
-<span class="sd">        sigma : numpy.ndarray</span>
+<span class="sd">        sigma :numpy.ndarray</span>
 <span class="sd">            array of altitude</span>
-<span class="sd">        cyclic : boolean</span>
+<span class="sd">        cyclic :boolean</span>
 <span class="sd">            whether make logitude cyclic or not</span>
-<span class="sd">        na_values : float, default -999</span>
+<span class="sd">        na_values :float, default -999</span>
 <span class="sd">            set value which is treated as missing value</span>
-<span class="sd">        replace_nan : boolean, default False</span>
+<span class="sd">        replace_nan :boolean, default False</span>
 <span class="sd">            whether replace na_valuse into NaN or not</span>
-<span class="sd">       </span>
-<span class="sd">        **kwargs:string</span>
+<span class="sd">        **kwargs :string</span>
 <span class="sd">            you can add your own attribute to xarray.DataSet</span>
 
-<span class="sd">        Return</span>
-<span class="sd">        ---------</span>
-<span class="sd">        ds : xarray.Dataset</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ds :xarray.Dataset</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">head</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getheader</span><span class="p">()</span>
         <span class="n">item</span><span class="o">=</span><span class="n">head</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
@@ -719,13 +745,14 @@
         <span class="k">return</span> <span class="n">ds</span></div></div>
 <div class="viewcode-block" id="Gtool2d"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.Gtool2d">[docs]</a><span class="k">class</span> <span class="nc">Gtool2d</span><span class="p">(</span><span class="n">Gtool3d</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    read surface</span>
-<span class="sd">    Parameter</span>
-<span class="sd">    -----------------</span>
-<span class="sd">    file  : string</span>
+<span class="sd">    read surface model data</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file  :string</span>
 <span class="sd">        filename</span>
-<span class="sd">    count : int</span>
-<span class="sd">        the number of dasta</span>
+<span class="sd">    count :int</span>
+<span class="sd">        the number of data</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">,</span><span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="n">count</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
@@ -733,19 +760,20 @@
 <div class="viewcode-block" id="Gtool2d.getarr"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.Gtool2d.getarr">[docs]</a>    <span class="k">def</span> <span class="nf">getarr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">timestep</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">na_values</span><span class="o">=-</span><span class="mi">999</span><span class="p">,</span><span class="n">replace_nan</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        get ndarray((y=64,x=128))</span>
-<span class="sd">        </span>
+
 <span class="sd">        Parameters</span>
-<span class="sd">        ----------------</span>
-<span class="sd">        timestep  : int ,default 0</span>
-<span class="sd">        cyclic    : bool, default = True</span>
+<span class="sd">        ----------</span>
+<span class="sd">        timestep  :int ,default 0</span>
+<span class="sd">        cyclic    :boolean, default = True</span>
 <span class="sd">            whether make logitude cyclic or not</span>
-<span class="sd">        na_values : float, default -999</span>
+<span class="sd">        na_values :float, default -999</span>
 <span class="sd">            set value which is treated as missing value</span>
-<span class="sd">        replace_nan : boolean, default False</span>
+<span class="sd">        replace_nan :boolean, default False</span>
 <span class="sd">            whether replace na_valuse into NaN or not</span>
-<span class="sd">        Return</span>
-<span class="sd">        ----------------</span>
-<span class="sd">        arr    : numpy.ndarray</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        arr    :numpy.ndarray</span>
 <span class="sd">            model data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chunk</span><span class="p">[</span><span class="n">timestep</span><span class="p">][</span><span class="s1">&#39;arr&#39;</span><span class="p">]</span>
@@ -762,13 +790,14 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compound all timeseries into one array</span>
 <span class="sd">        </span>
-<span class="sd">        Parameter</span>
-<span class="sd">        -----------</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        cyclic :bool, default False</span>
 <span class="sd">            whether make longitude cyclic or not </span>
-<span class="sd">        Return</span>
-<span class="sd">        -----------</span>
-<span class="sd">        dataarray : numpy.ndarray</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dataarray :numpy.ndarray</span>
 <span class="sd">            model values but axis 0 is time</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">cyclic</span><span class="p">:</span>
@@ -781,21 +810,24 @@
         <span class="k">return</span> <span class="n">dataarray</span></div></div>
 <div class="viewcode-block" id="isgtoolinstance"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.isgtoolinstance">[docs]</a><span class="k">def</span> <span class="nf">isgtoolinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">timestep</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">zsel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">replace_nan</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">na_values</span><span class="o">=-</span><span class="mi">999</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">	evaluate whether first argument is Gtool* instance and return it as numpy.ndarray</span>
-<span class="sd">	Paramter</span>
-<span class="sd">	---------</span>
-<span class="sd">	arr : Gtool2d or Gtool3d or numpy.ndarray</span>
+<span class="sd">	evaluate whether first argument is Gtool* instance </span>
+<span class="sd">    and return it as numpy.ndarray</span>
+
+<span class="sd">	Parameters</span>
+<span class="sd">	----------</span>
+<span class="sd">	arr :Gtool2d or Gtool3d or numpy.ndarray</span>
 <span class="sd">        model data</span>
-<span class="sd">	timestep : int, default 0</span>
+<span class="sd">	timestep :int, default 0</span>
 <span class="sd">        model timestep</span>
-<span class="sd">	cyclic : boolean, default False</span>
+<span class="sd">	cyclic :boolean, default False</span>
 <span class="sd">        whether make logitude cyclic or not</span>
-<span class="sd">	zsel : int,default 0</span>
+<span class="sd">	zsel :int, default 0</span>
 <span class="sd">        select model layer</span>
-<span class="sd">	Return</span>
-<span class="sd">	dat : numpy.ndarray</span>
+
+<span class="sd">	Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">	dat :numpy.ndarray</span>
 <span class="sd">        model values</span>
-<span class="sd">	---------</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">Gtool3d</span><span class="p">):</span>
 		<span class="n">dat</span><span class="o">=</span><span class="n">arr</span><span class="o">.</span><span class="n">getarr</span><span class="p">(</span><span class="n">timestep</span><span class="o">=</span><span class="n">timestep</span><span class="p">,</span><span class="n">cyclic</span><span class="o">=</span><span class="n">cyclic</span><span class="p">)[</span><span class="n">zsel</span><span class="p">,:,:]</span>

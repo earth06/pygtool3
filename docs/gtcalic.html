@@ -158,10 +158,7 @@
 <dl class="function">
 <dt id="gtcalic.corre_coef">
 <code class="sig-prename descclassname">gtcalic.</code><code class="sig-name descname">corre_coef</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtcalic.html#corre_coef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtcalic.corre_coef" title="Permalink to this definition">¶</a></dt>
-<dd><p>x     np.ndarray((time,y,x))
-y     np.ndarray((time,y,x))</p>
-<p>correlation  np.ndarray((y,x))</p>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="function">
 <dt id="gtcalic.get_area">
@@ -172,30 +169,71 @@ y     np.ndarray((time,y,x))</p>
 <dt id="gtcalic.getcmass_column">
 <code class="sig-prename descclassname">gtcalic.</code><code class="sig-name descname">getcmass_column</code><span class="sig-paren">(</span><em class="sig-param">cmass=None</em>, <em class="sig-param">ps=None</em>, <em class="sig-param">T=None</em>, <em class="sig-param">sigma=None</em>, <em class="sig-param">sigma_M=None</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">zmax=None</em>, <em class="sig-param">fact=1.0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtcalic.html#getcmass_column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtcalic.getcmass_column" title="Permalink to this definition">¶</a></dt>
 <dd><p>conduct vertical integration and return column concentration</p>
-<p>Cmass : Gtool3d or numpy.ndarray, mass concentration
-ps : Gtool2d or numpy.ndarray, surface pressure[hPa]
-T : Gtool3d or numpy.ndarray , temperature[K]
-sigma : GtoolSigma,sigmascale for middle grid
-sigma_M : GtoolSigma,sigmascale for boudary grid
-timestep : int, set model timestep if passed data is Gtool* instance
-cyclic : bool, whether longitude is cyclic or not.
-fact :float, factor for adjusting unit of column concentration</p>
-<p>column : numpy.ndarray, column concentration of passed tracer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>Cmass :Gtool3d or numpy.ndarray</strong></dt><dd><p>mass concentration</p>
+</dd>
+<dt><strong>ps :Gtool2d or numpy.ndarray</strong></dt><dd><p>surface pressure[hPa]</p>
+</dd>
+<dt><strong>T :Gtool3d or numpy.ndarray</strong></dt><dd><p>temperature[K]</p>
+</dd>
+<dt><strong>sigma :GtoolSigma</strong></dt><dd><p>sigmascale for middle grid</p>
+</dd>
+<dt><strong>sigma_M :GtoolSigma</strong></dt><dd><p>sigmascale for boudary grid</p>
+</dd>
+<dt><strong>timestep :int, default 0</strong></dt><dd><p>set model timestep if passed data is Gtool* instance</p>
+</dd>
+<dt><strong>cyclic :boolean</strong></dt><dd><p>whether longitude is cyclic or not.</p>
+</dd>
+<dt><strong>fact :float, default 1.0e0</strong></dt><dd><p>factor for adjusting unit of column concentration</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>column</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>column concentration of passed tracer
+column=Cmass*dz</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="gtcalic.getvmr_column">
-<code class="sig-prename descclassname">gtcalic.</code><code class="sig-name descname">getvmr_column</code><span class="sig-paren">(</span><em class="sig-param">vmr=None</em>, <em class="sig-param">ps=None</em>, <em class="sig-param">T=None</em>, <em class="sig-param">sigma=None</em>, <em class="sig-param">sigma_M=None</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">zmax=None</em>, <em class="sig-param">fact=1.0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtcalic.html#getvmr_column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtcalic.getvmr_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">gtcalic.</code><code class="sig-name descname">getvmr_column</code><span class="sig-paren">(</span><em class="sig-param">vmr=None</em>, <em class="sig-param">ps=None</em>, <em class="sig-param">T=None</em>, <em class="sig-param">sigma=None</em>, <em class="sig-param">sigma_M=None</em>, <em class="sig-param">Mtrc=28.8</em>, <em class="sig-param">Mair=28.8</em>, <em class="sig-param">timestep=0</em>, <em class="sig-param">zmax=None</em>, <em class="sig-param">fact=1.0</em>, <em class="sig-param">cyclic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtcalic.html#getvmr_column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtcalic.getvmr_column" title="Permalink to this definition">¶</a></dt>
 <dd><p>conduct vertical integration and return column concentration</p>
-<p>vmr : Gtool3d or numpy.ndarray,volume mixing ratio
-ps : Gtool2d or numpy.ndarray, surface pressure[hPa]
-T : Gtool3d or numpy.ndarray , temperature[K]
-sigma : GtoolSigma,sigmascale for middle grid
-sigma_M : GtoolSigma,sigmascale for boudary grid
-timestep : int, set model timestep if passed data is Gtool* instance
-cyclic : bool, whether longitude is cyclic or not.
-fact :float, factor for adjusting unit of column concentration</p>
-<p>column : numpy.ndarray, column concentration of passed tracer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>vmr :Gtool3d or numpy.ndarray</strong></dt><dd><p>volume mixing ratio</p>
+</dd>
+<dt><strong>ps :Gtool2d or numpy.ndarray</strong></dt><dd><p>surface pressure[hPa]</p>
+</dd>
+<dt><strong>T :Gtool3d or numpy.ndarray</strong></dt><dd><p>temperature[K]</p>
+</dd>
+<dt><strong>sigma :GtoolSigma</strong></dt><dd><p>sigmascale for middle grid</p>
+</dd>
+<dt><strong>sigma_M :GtoolSigma</strong></dt><dd><p>sigmascale for boudary grid</p>
+</dd>
+<dt><strong>timestep :int, default 0</strong></dt><dd><p>set model timestep if passed data is Gtool* instance</p>
+</dd>
+<dt><strong>cyclic :bool, default False</strong></dt><dd><p>whether longitude is cyclic or not.</p>
+</dd>
+<dt><strong>fact :float, default 1.0e0</strong></dt><dd><p>factor for adjusting unit of column concentration</p>
+</dd>
+<dt><strong>Mtrc :float, default 28.8</strong></dt><dd><p>molecular mass of foucsed tracer</p>
+</dd>
+<dt><strong>Mair :float, default 28.8</strong></dt><dd><p>molecular mass of dry air</p>
+</dd>
+<dt><strong>Returns</strong></dt><dd></dd>
+<dt><strong>——-</strong></dt><dd></dd>
+<dt><strong>column :numpy.ndarray</strong></dt><dd><p>column concentration of passed tracer</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -206,12 +244,18 @@ fact :float, factor for adjusting unit of column concentration</p>
 </dd>
 </dl>
 <p>min=0 max=1</p>
-<p>x : numpy.ndarray(x,y)
-axis :int 0 #caliculate each col</p>
-<blockquote>
-<div><p>1 #           each row</p>
-</div></blockquote>
-<p>result : np.ndarray(x,y)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x :numpy.ndarray(x,y)</strong></dt><dd><p>input data</p>
+</dd>
+<dt><strong>Returns</strong></dt><dd></dd>
+<dt><strong>——-</strong></dt><dd></dd>
+<dt><strong>result :np.ndarray(x,y)</strong></dt><dd><p>min max normalized values of x</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -223,11 +267,24 @@ axis :int 0 #caliculate each col</p>
 <dl class="function">
 <dt id="gtcalic.weighted_mean">
 <code class="sig-prename descclassname">gtcalic.</code><code class="sig-name descname">weighted_mean</code><span class="sig-paren">(</span><em class="sig-param">arr</em>, <em class="sig-param">area</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gtcalic.html#weighted_mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gtcalic.weighted_mean" title="Permalink to this definition">¶</a></dt>
-<dd><p>arr   :array_like
-area  :array_like
-Return
-————–
-weighted_mean :np.ndarray</p>
+<dd><p>calculate area weighted mean value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>arr   :array_like</strong></dt><dd><p>input model data</p>
+</dd>
+<dt><strong>area  :array_like</strong></dt><dd><p>area of each grid</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>weighted_mean :np.ndarray</dt><dd><p>weighted_mean=sum(area*arr)/sum(area)
+area should be masked based on na_values of arr</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -238,16 +295,24 @@ weighted_mean :np.ndarray</p>
 </dd>
 </dl>
 <p>average=0 std=1</p>
-<p>x : numpy.ndarray(x,y)
-axis :int 0 #caliculate each col</p>
-<blockquote>
-<div><p>1 #           each row</p>
-</div></blockquote>
-<dl class="simple">
-<dt>ddof :int 0 #when caliculate std, devide by n</dt><dd><p>1 #                   , devide by n-1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">numpy.ndarray(x,y)</span></dt><dd></dd>
+<dt><strong>axis :int</strong></dt><dd><p>0 caliculate each col
+1            each row</p>
+</dd>
+<dt><strong>ddof :int</strong></dt><dd><p>0 when caliculate std, devide by n
+1                    , devide by n-1</p>
 </dd>
 </dl>
-<p>zcore : np.ndarray(x,y)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>zcore</strong><span class="classifier">np.ndarray(x,y)</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

@@ -39,16 +39,19 @@ def set_lonticks(ax,dlon=30,labelsize=16):
     """
     set xticks as logitude
     
-    Parameter
+    Parameters
     ----------
-    ax  :matplotlib.axes
+    ax  :matplotlib.Axes
+        axes for plotting
     dlon:float, default 30
         logitude interval
     labelsize:int, default 16
         tick label size
-    Return
-    ----------
-    ax
+
+    Returns
+    -------
+    ax :matplotlib.Axes
+        axes for plotting
     """
     ax.xaxis.set_major_locator(ticker.MultipleLocator(dlon))
     ax.xaxis.set_major_formatter(lonformatter)
@@ -58,16 +61,18 @@ def set_latticks(ax,dlat=15,labelsize=16):
     """
     set xticks as latitude
     
-    Parameter
-    ----------
-    ax  :matplotlib.axes
-    dlat:float, default 15
+    Parameters
+    -----------
+    ax  :matplotlib.Axes
+        axes for plotting
+    dlat :float, default 15
         logitude interval
-    labelsize:int, default 16
+    labelsize :int, default 16
         tick label size
-    Return
-    ----------
-    ax
+
+    Returns
+    -------
+    ax :matplotlib.Axes
     """
     ax.xaxis.set_major_locator(ticker.MultipleLocator(dlat))
     ax.xaxis.set_major_formatter(latformatter)
@@ -96,36 +101,43 @@ def DDlabel(ax,labelsize=18):
     ax.tick_params(labelsize=labelsize)
     return ax
 
-def contourf(xx,yy,arr,cnum=20,clabelsize=14,extend='both',levels=None,\
+def contourf(xx,yy,z,cnum=20,clabelsize=14,extend='both',levels=None,\
     cmap='viridis',alpha=1,\
     na_values=-999,replace_nan=False,
     timestep=0,zsel=0,cyclic=False):
     """
-    Parameter
-    ---------------
-    xx,yy  :numpy.ndarray
-    arr    :numpy.ndarray or Gtool*D
-    cnum    :int or float, default 20
-            the number of contour
+    plot contourf for geopositonal data
+
+    Parameters
+    ----------
+    xx,yy :numpy.ndarray
+        the coordinates of the values in Z
+    z :numpy.ndarray or Gtool*D
+    cnum :int or float, default 20
+        the number of contour
     cmap    :string, default 'viridis'
         colormap name
     extend :string, default 'both'
-             whether fill contour when out of rang {both,neither,max,min}
+        whether fill contour when out of the levels range {both,neither,max,min}
     levels :array_like, default None
         set contour level manually
+        If None, levels are set based on z.min() and z.max()
     alpha  :float, default 1
     timestep:int, default 0
         model timestep
     zsel :int, default 0
-         select model layer for plot
+        select model layer for plot
     cyclic :bool, default False
         cyclic logntiude or not
-    Return
-    ----------------
-    fig :matplotlib.Figure
-    ax :matplotlib.Axes
-    cbar :matplotlib.colorbar
 
+    Returns
+    -------
+    fig :matplotlib.Figure
+        figure object for plotting
+    ax :matplotlib.Axes
+        axes object for plot
+    cbar :matplotlib.colorbar
+        colorbar object for contour
     """
     sformat.set_powerlimits((-1,3))
     fig=plt.figure(figsize=(10,6),facecolor='w')
@@ -151,19 +163,22 @@ def contourf(xx,yy,arr,cnum=20,clabelsize=14,extend='both',levels=None,\
     cbar.ax.tick_params(labelsize=clabelsize)
     cbar.ax.xaxis.offsetText.set_fontsize(14)
     return fig,ax,cbar
-def logcontourf(xx,yy,arr,subs=(1.0,),clabelsize=14,\
+def logcontourf(xx,yy,z,subs=(1.0,),clabelsize=14,\
     vmin=None,vmax=None,\
     cmap='viridis',alpha=1,extend='both',offsetTextsize=14,\
     na_values=-999,replace_nan=False,
     timestep=0,cyclic=False,zsel=0):
     """
-    Parameter
-    ---------------
-    xx,yy  :array_like
-    arr    :Gtool2d or Gtool3d or numpy.ndarray
+    plot log-scaled contourf for geopositional data
+
+    Parameters
+    ----------
+    xx,yy :array_like
+        The coordinates of the values in z
+    z :Gtool2d or Gtool3d or numpy.ndarray
         model data
-    subs   :sequence of float, 'all','auto',None
-           default=(1,) ex) (1.0,2.0) 
+    subs :sequence of float, 'all','auto',None
+        default=(1,) ex) (1.0,2.0) 
     cmap   :string, default 'viridis'
         colormap
     vmin   :float
@@ -174,14 +189,20 @@ def logcontourf(xx,yy,arr,subs=(1.0,),clabelsize=14,\
     extend :string
         {'max','min','both','neither'}
     timestep:int, default 0
-    zsel : int, default 0
+        model timestep
+    zsel :int, default 0
+        select model layer
     cyclic:bool, default False
+        Whether make logitude cyclic or not
 
-    Return
-    ----------------
+    Returns
+    --------
     fig :matplotlib.Figure
+        Figure object for plot
     ax  :matplotlib.axes
+        Axes object for plot
     cbar:matplotlib.colorbar
+        colorbar object for contour
     """
     fig=plt.figure(figsize=(10,6),facecolor='w')
     ax=fig.add_subplot(1,1,1,projection=ccrs.PlateCarree(central_longitude=180))
@@ -214,15 +235,17 @@ def pcolormesh(xx,yy,arr,subs=(1.0,),clabelsize=14,\
     na_values=-999,replace_nan=False,
     timestep=0,cyclic=False,zsel=0):
     """
-    Parameter
-    ---------------
+    pcolormesh for geopositional data
+
+    Parameters
+    -----------
     xx,yy  :array_like
     arr    :Gtool2d or Gtool3d or numpy.ndarray
         model data
     subs   :{sequence of float, 'all','auto',None}
-           default=(1,) ex) (1.0,2.0) 
+        default=(1,) ex) (1.0,2.0) 
     cmap   :string
-         colormap
+        colormap
     vmin   :float
         minimum value,default arr.min()
     vmax   :float
@@ -232,11 +255,15 @@ def pcolormesh(xx,yy,arr,subs=(1.0,),clabelsize=14,\
         {'max','min','both','neither'}
     scale  :string
         {'normal','log'}
-    Return
-    ----------------
+
+    Returns
+    ---------
     fig :matplotlib.Figure
-    ax  :matplotlib.Axes
-    cbar:matplotlib.Colorbar
+        Figure object for plot
+    ax  :matplotlib.axes
+        Axes object for plot
+    cbar:matplotlib.colorbar
+        colorbar object for contour
     """
     
     fig=plt.figure(figsize=(10,6),facecolor='w')
@@ -272,24 +299,28 @@ def zonal_contourf(yy,zz,arr,cnum=20,clabelsize=14,extend='both',levels=None,\
             ylabel='eta',
             timestep=0,xsel='mean',cyclic=False):
     """
-    Parameter
-    ---------------
+    plot zonal contourf
+
+    Parameters
+    ----------
     yy,zz  :array_like
+        The coordinate of the arr
     xsel   :int or string,{index of logitude,'mean'} 
     arr    :array_like
-            input data
+        input data
     cnum    :int or float
-            the number of contour
+        the number of contour
     powerlimits:tuple
-           exponent range
-    
-    
-    Return
-    ----------------
-    fig
-    ax
-    cbar
+        exponent range
 
+    Returns
+    --------
+    fig :matplotlib.Figure
+        figure object for plotting
+    ax :matplotlib.Axes
+        axes object for plotting
+    cbar :matplotlib.Colorbar
+        colorbar object for contour
     """
     sformat.set_powerlimits((powerlimits))
     fig=plt.figure(figsize=(9,6),facecolor='w')
@@ -329,25 +360,30 @@ def zonal_logcontourf(yy,zz,arr,cnum=20,clabelsize=14,extend='both',vmax=None,vm
             replace_nan=False,na_values=-999,
             timestep=0,xsel='mean',cyclic=False):
     """
-    Parameter
-    ---------------
-    yy,zz  :array_like
-    xsel   :{int ,string},{index of logitude,'mean'} 
-    arr    :array_like
-            input data
-    cnum    :int or float
-            the number of contour
-    powerlimits:tuple
-           exponent range
-     subs   :{sequence of float, 'all','auto',None}
-           default=(1,) ex) (1.0,2.0) 
-    
-    Return
-    ----------------
-    fig
-    ax
-    cbar
+    plot log-scaled zonal contourf 
 
+    Parameters
+    ----------
+    yy,zz :array_like
+    xsel :int or string, default 'mean'
+        index of logitude
+    arr :array_like
+        input data
+    cnum :int or float
+        the number of contour
+    powerlimits: tuple ,default (-1,3)
+        exponent range
+    subs   :sequence of float or {'all','auto',None}
+        default=(1,) ex) (1.0,2.0) 
+
+    Returns
+    ----------
+    fig :matplotlib.Figure
+        figure object for plotting
+    ax :matplotlib.Axes
+        axes object for plotting
+    cbar :matplotlib.Colorbar
+        colorbar object for contour
     """
     sformat.set_powerlimits((powerlimits))
     fig=plt.figure(figsize=(9,6),facecolor='w')
@@ -388,25 +424,30 @@ def zonal_pcolormesh(yy,zz,arr,cnum=20,clabelsize=14,extend='both',\
             na_values=-999,replace_nan=False,
             timestep=0,xsel='mean',cyclic=False):
     """
-    Parameter
-    ---------------
-    yy,zz  :array_like
-    xsel   :{int ,string},{index of logitude,'mean'} 
-    arr    :array_like
-            input data
-    cnum    :int or float
-            the number of contour
-    powerlimits:tuple
-           exponent range
-     subs   :{sequence of float, 'all','auto',None}
-           default=(1,) ex) (1.0,2.0) 
-    
-    Return
-    ----------------
-    fig
-    ax
-    cbar
+    plot zonal pcolormesh
 
+    Parameters
+    ----------
+    yy,zz  :array_like
+    xsel   :int or string, deafult 'mean'
+        index of logitude
+    arr    :array_like
+        input data
+    cnum    :int or float
+        the number of contour
+    powerlimits:tuple
+        exponent range
+    subs   :sequence of float or {'all','auto',None}
+        default=(1,) ex) (1.0,2.0) 
+
+    Returns
+    -------
+    fig :matplotlib.Figure
+        figure object for plotting
+    ax :matplotlib.Axes
+        axes object for plotting
+    cbar :matplotlib.Colorbar
+        colorbar object for contour
     """
     sformat.set_powerlimits((-1,3))
     fig=plt.figure(figsize=(9,6),facecolor='w')

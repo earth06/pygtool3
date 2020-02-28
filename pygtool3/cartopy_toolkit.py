@@ -18,6 +18,8 @@ def set_geogrid(ax,resolution='110m'
                ,linewidth=0.5,labelsize=15
                ,color='grey' ,alpha=0.8,linestyle='-' ):
     """
+    draw grid liens
+
     Parameters
     ----------
     ax :cartopy.mpl.geoaxes
@@ -46,7 +48,7 @@ def set_geogrid(ax,resolution='110m'
          whethet draw ticklabel of xaxis
     left :boolean
          whether draw ticklabel of yaxis
-    
+
     Returns
     -------
     ax :cartopy.mpl.Geoaxes
@@ -151,9 +153,10 @@ def Polarmap(ax):
     display cricular map
     this configure is available only in South and North Polar Stereo
 
-    Parameter
+    Parameters
     --------------
     ax     :cartopy.mpl.geoaxes
+        geopositional axes for plot
     """
     theta = np.linspace(0,2*np.pi,100)
     center,radius=[0.5,0.5],0.5

@@ -13,16 +13,23 @@ mid_lon=np.arange(1.40625,360.1,2.8125)
 
 def weighted_mean(arr,area):
     """
-    Parameter
-    --------------
+    calculate area weighted mean value
+
+    Parameters
+    ----------
     arr   :array_like
+        input model data
     area  :array_like
-    Return
-    --------------
+        area of each grid
+
+    Returns
+    -------
     weighted_mean :np.ndarray
+        weighted_mean=sum(area*arr)/sum(area)
+        area should be masked based on na_values of arr
     """
     
-    weighted_mean=(arr*area).sum()/area.sum()
+    weighted_mean=np.nansum(arr*area)/np.nansum(np.where(np.isnan(area),0,area))
     return weighted_mean
 
 def get_area(dlon=2.5e0,dlat=2.5e0):
@@ -62,14 +69,17 @@ def zscore(x,axis=None,ddof=0):
     average=0 std=1
 
     Parameters
-    -------------------
+    ----------
     x : numpy.ndarray(x,y)
-    axis :int 0 #caliculate each col
-              1 #           each row
-    ddof :int 0 #when caliculate std, devide by n
-              1 #                   , devide by n-1
+    axis :int
+        0 caliculate each col
+        1            each row
+    ddof :int
+        0 when caliculate std, devide by n
+        1                    , devide by n-1
+
     Returns
-    --------------------
+    -------
     zcore : np.ndarray(x,y)
     """
     xmean=x.mean(axis=axis,keepdims=True)
@@ -84,14 +94,13 @@ def min_max(x,axis=None):
     min=0 max=1
 
     Parameters
-    -------------------
-    x : numpy.ndarray(x,y)
-    axis :int 0 #caliculate each col
-              1 #           each row
-
+    ----------
+    x :numpy.ndarray(x,y)
+        input data
     Returns
-    --------------------
-    result : np.ndarray(x,y)
+    -------
+    result :np.ndarray(x,y)
+        min max normalized values of x
     """
     xmin =x.min(axis=axis,keepdims=True)
     xmax =x.max(axis=axis,keepdims=True)
@@ -108,20 +117,30 @@ def getcmass_column(cmass=None,ps=None,T=None,sigma=None,sigma_M=None,\
     """
     conduct vertical integration and return column concentration
 
-    Parameter
-    ---------
-    Cmass : Gtool3d or numpy.ndarray, mass concentration
-    ps : Gtool2d or numpy.ndarray, surface pressure[hPa]
-    T : Gtool3d or numpy.ndarray , temperature[K]
-    sigma : GtoolSigma,sigmascale for middle grid
-    sigma_M : GtoolSigma,sigmascale for boudary grid
-    timestep : int, set model timestep if passed data is Gtool* instance
-    cyclic : bool, whether longitude is cyclic or not.
-    fact :float, factor for adjusting unit of column concentration
- 
-    Return
+    Parameters
     ----------
-    column : numpy.ndarray, column concentration of passed tracer
+    Cmass :Gtool3d or numpy.ndarray
+        mass concentration
+    ps :Gtool2d or numpy.ndarray
+        surface pressure[hPa]
+    T :Gtool3d or numpy.ndarray 
+        temperature[K]
+    sigma :GtoolSigma
+        sigmascale for middle grid
+    sigma_M :GtoolSigma
+        sigmascale for boudary grid
+    timestep :int, default 0
+        set model timestep if passed data is Gtool* instance
+    cyclic :boolean
+        whether longitude is cyclic or not.
+    fact :float, default 1.0e0
+        factor for adjusting unit of column concentration
+ 
+    Returns
+    --------
+    column : numpy.ndarray
+        column concentration of passed tracer
+        column=Cmass*dz
     """
     P=(sigma.get_pressure(ps,timestep=timestep,cyclic=cyclic))*1e2
     PM=(sigma_M.get_pressure(ps,timestep=timestep,cyclic=cyclic))*1e2
@@ -141,34 +160,46 @@ def getcmass_column(cmass=None,ps=None,T=None,sigma=None,sigma_M=None,\
     else:
         column=col3D[0:zmax,:,:].sum(axis=0)*fact
     return column
-def getvmr_column(vmr=None,ps=None,T=None,sigma=None,sigma_M=None,\
-                    timestep=0,zmax=None,fact=1.0e0,cyclic=False):
+def getvmr_column(vmr=None,ps=None,T=None,sigma=None,sigma_M=None,Mtrc=28.8e0,Mair=28.8e0\
+                    ,timestep=0,zmax=None,fact=1.0e0,cyclic=False):
     """
     conduct vertical integration and return column concentration
 
-    Parameter
-    ---------
-    vmr : Gtool3d or numpy.ndarray,volume mixing ratio
-    ps : Gtool2d or numpy.ndarray, surface pressure[hPa]
-    T : Gtool3d or numpy.ndarray , temperature[K]
-    sigma : GtoolSigma,sigmascale for middle grid
-    sigma_M : GtoolSigma,sigmascale for boudary grid
-    timestep : int, set model timestep if passed data is Gtool* instance
-    cyclic : bool, whether longitude is cyclic or not.
-    fact :float, factor for adjusting unit of column concentration
- 
-    Return
+    Parameters
     ----------
-    column : numpy.ndarray, column concentration of passed tracer
+    vmr :Gtool3d or numpy.ndarray
+        volume mixing ratio
+    ps :Gtool2d or numpy.ndarray
+        surface pressure[hPa]
+    T :Gtool3d or numpy.ndarray
+        temperature[K]
+    sigma :GtoolSigma
+        sigmascale for middle grid
+    sigma_M :GtoolSigma
+        sigmascale for boudary grid
+    timestep :int, default 0
+        set model timestep if passed data is Gtool* instance
+    cyclic :bool, default False
+        whether longitude is cyclic or not.
+    fact :float, default 1.0e0
+        factor for adjusting unit of column concentration
+    Mtrc :float, default 28.8
+        molecular mass of foucsed tracer
+    Mair :float, default 28.8
+        molecular mass of dry air
+    Returns
+    -------
+    column :numpy.ndarray
+        column concentration of passed tracer
     """
     P=(sigma.get_pressure(ps,timestep=timestep,cyclic=cyclic))*1e2
     PM=(sigma_M.get_pressure(ps,timestep=timestep,cyclic=cyclic))*1e2
     dp=PM[1:,:,:]-PM[:-1,:,:]
     grav=9.8e0
     if isinstance(cmass,Gtool3d):
-        col3D=vmr.getarr(timestep=timestep,cyclic=cyclic)*dp/grav
+        col3D=vmr.getarr(timestep=timestep,cyclic=cyclic)*dp/grav*(Mtrc/Mair)
     else:
-        col3D=vmr*dz
+        col3D=vmr*dp/grav*(Mtrc/Mair)
     if zmax is None:
         column=col3D[0:,:,:].sum(axis=0)*fact
     else:

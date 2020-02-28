@@ -166,78 +166,95 @@
 <span class="kn">import</span> <span class="nn">gtcalic</span>
 <div class="viewcode-block" id="read3d"><a class="viewcode-back" href="../pygtool.html#pygtool.read3d">[docs]</a><span class="k">def</span> <span class="nf">read3d</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="mi">36</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parameter</span>
-<span class="sd">    -------------</span>
-<span class="sd">    file  : string</span>
+<span class="sd">    read gtool 3D data</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    -----------</span>
+<span class="sd">    file  :string</span>
 <span class="sd">         filename</span>
-<span class="sd">    count : int, default 1</span>
+<span class="sd">    count :int, default 1</span>
 <span class="sd">         total number of model data</span>
-<span class="sd">    x,y,z : int, default (x,y,z)=(128,64,36)</span>
+<span class="sd">    x,y,z :int, default (x,y,z)=(128,64,36)</span>
 <span class="sd">        num of each coordinate.</span>
-<span class="sd">    </span>
-<span class="sd">    Return</span>
+
+<span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    gtool3d :pygtool3.pygtool_core.Gtool3d</span>
+<span class="sd">        3D gtool formatted object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">gtool3d</span><span class="o">=</span><span class="n">Gtool3d</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="n">count</span><span class="o">=</span><span class="n">count</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">gtool3d</span></div>
 <div class="viewcode-block" id="read2d"><a class="viewcode-back" href="../pygtool.html#pygtool.read2d">[docs]</a><span class="k">def</span> <span class="nf">read2d</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">64</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parameter</span>
-<span class="sd">    -------------</span>
-<span class="sd">    file : string</span>
+<span class="sd">    read gtool 2d data</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file :string</span>
 <span class="sd">        filename</span>
-<span class="sd">    count : int, default 1</span>
+<span class="sd">    count :int, default 1</span>
 <span class="sd">        total number of data</span>
-<span class="sd">    x,y : int, default (x,y)=(128,64)</span>
+<span class="sd">    x,y :int, default (x,y)=(128,64)</span>
 <span class="sd">        num of each coordinate </span>
-<span class="sd">    </span>
-<span class="sd">    Return</span>
+
+<span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    gtool2d : pygtool3.pygtool_core.Gtool2d</span>
+<span class="sd">    gtool2d :pygtool3.pygtool_core.Gtool2d</span>
+<span class="sd">        2D gtool formatted object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">gtool2d</span><span class="o">=</span><span class="n">Gtool2d</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="n">count</span><span class="o">=</span><span class="n">count</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">gtool2d</span></div>
 <div class="viewcode-block" id="readgrid"><a class="viewcode-back" href="../pygtool.html#pygtool.readgrid">[docs]</a><span class="k">def</span> <span class="nf">readgrid</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span><span class="n">lonfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">latfile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parameter</span>
-<span class="sd">    -------------</span>
-<span class="sd">    x,y : int, default (x,y)=(128,64)</span>
+<span class="sd">    read gtool horizontal coordinate</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x,y :int, default (x,y)=(128,64)</span>
 <span class="sd">        num of each coordinate</span>
-<span class="sd">    lonfile,latfile : string, default None</span>
+<span class="sd">    lonfile,latfile :string, default None</span>
 <span class="sd">        gtool3 coordinate file</span>
 <span class="sd">        in default case this reads GTAXDIR/GTAXLOC.GLON(x),GTAXLOC.GGLA(y) </span>
-<span class="sd">        </span>
-<span class="sd">    Return</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    gtoolgrid : pygtool3.pygtool_core.GtoolGrid</span>
+<span class="sd">    gtoolgrid :pygtool3.pygtool_core.GtoolGrid</span>
+<span class="sd">        gtool horizontal grid object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">gtoolgrid</span><span class="o">=</span><span class="n">GtoolGrid</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span><span class="n">lonfile</span><span class="o">=</span><span class="n">lonfile</span><span class="p">,</span><span class="n">latfile</span><span class="o">=</span><span class="n">latfile</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">gtoolgrid</span></div>
 <div class="viewcode-block" id="readsigma"><a class="viewcode-back" href="../pygtool.html#pygtool.readsigma">[docs]</a><span class="k">def</span> <span class="nf">readsigma</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span><span class="n">gtaxfile</span><span class="o">=</span><span class="s1">&#39;GTAXLOC.HETA36&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parameter</span>
-<span class="sd">    -------------</span>
-<span class="sd">    z : int, default 36</span>
+<span class="sd">    read gtool sigma coordinate</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    z :int, default 36</span>
 <span class="sd">        num of z coordinate</span>
-<span class="sd">    gtaxfile : string, default:GTAXLOC.HETA36</span>
+<span class="sd">    gtaxfile :string, default:GTAXLOC.HETA36</span>
 <span class="sd">        gtool3 coordinate file</span>
-<span class="sd">    Return</span>
+
+<span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    gtoolsigma : `pygtool3.pygtool_core.Gtoolsigma`</span>
+<span class="sd">    gtoolsigma :pygtool3.pygtool_core.Gtoolsigma</span>
+<span class="sd">        gtool3 sigma-vertical coordinate object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">gtoolsigma</span><span class="o">=</span><span class="n">GtoolSigma</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span><span class="n">GTAXFILE</span><span class="o">=</span><span class="n">gtaxfile</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">gtoolsigma</span></div>
 <div class="viewcode-block" id="readpressure"><a class="viewcode-back" href="../pygtool.html#pygtool.readpressure">[docs]</a><span class="k">def</span> <span class="nf">readpressure</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span><span class="n">gtaxfile</span><span class="o">=</span><span class="s1">&#39;GTAXLOC.AR5PL35&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parameter</span>
-<span class="sd">    --------------</span>
-<span class="sd">    z : int, num of z grid</span>
+<span class="sd">    read gtool pressure coordinate</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    z :int, num of z grid</span>
 <span class="sd">    gtaxfile :string, default &#39;GTAXLOC.AR5PL35&#39;</span>
-<span class="sd">        coordinate file  </span>
-<span class="sd">    Return</span>
-<span class="sd">    ------------</span>
-<span class="sd">    gtoolpres : pygtool3.pygtool_core.GtoolPressure</span>
+<span class="sd">        coordinate file</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    gtoolpres :pygtool3.pygtool_core.GtoolPressure</span>
+<span class="sd">        gtool3 p-vertical coordinate object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">gtoolpres</span><span class="o">=</span><span class="n">GtoolPressure</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span><span class="n">GTAXFILE</span><span class="o">=</span><span class="n">gtaxfile</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">gtoolpres</span></div>
