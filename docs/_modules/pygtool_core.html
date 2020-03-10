@@ -25,6 +25,7 @@
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
         <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -78,17 +79,8 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../cartopy_toolkit.html">cartopy_toolkit module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gtaxis.html">gtaxis module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gtcalic.html">gtcalic module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gtplot.html">gtplot module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gtutil.html">gtutil module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pygtool.html">pygtool module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pygtool_core.html">pygtool_core module</a></li>
-</ul>
-
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
             
           
         </div>
@@ -446,7 +438,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        p :np.ndarray</span>
-<span class="sd">            pressure[hPa]</span>
+<span class="sd">            pressure[Pa]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ps</span><span class="p">,</span><span class="n">Gtool2d</span><span class="p">):</span>
             <span class="n">psarr</span><span class="o">=</span><span class="n">ps</span><span class="o">.</span><span class="n">getarr</span><span class="p">(</span><span class="n">cyclic</span><span class="o">=</span><span class="n">cyclic</span><span class="p">,</span><span class="n">timestep</span><span class="o">=</span><span class="n">timestep</span><span class="p">)</span>
@@ -456,7 +448,7 @@
         <span class="n">altaxis</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">P</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">aa</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">altaxis</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> \
          <span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">bb</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">altaxis</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">psarr</span>
-        <span class="k">return</span> <span class="n">P</span></div>
+        <span class="k">return</span> <span class="n">P</span><span class="o">*</span><span class="mf">1e2</span></div>
 <div class="viewcode-block" id="GtoolSigma.get_dp"><a class="viewcode-back" href="../pygtool_core.html#pygtool_core.GtoolSigma.get_dp">[docs]</a>    <span class="k">def</span> <span class="nf">get_dp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ps</span><span class="p">,</span><span class="n">timestep</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">cyclic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        convert surface pressure to 3D pressure</span>
