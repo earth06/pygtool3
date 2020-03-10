@@ -144,7 +144,7 @@ def contourf(xx,yy,z,cnum=20,clabelsize=14,extend='both',levels=None,\
     ax=fig.add_subplot(1,1,1,projection=ccrs.PlateCarree(central_longitude=180))
     cax=fig.add_axes([0.25,0,0.5,0.05])
     ax=ckit.set_geogrid(ax)
-    dat=isgtoolinstance(arr,timestep=timestep,cyclic=cyclic,zsel=zsel,replace_nan=replace_nan,
+    dat=isgtoolinstance(z,timestep=timestep,cyclic=cyclic,zsel=zsel,replace_nan=replace_nan,
             na_values=na_values)
     if levels is None:
         delta=(np.nanmax(dat)-np.nanmin(dat))/(cnum)

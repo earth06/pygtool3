@@ -294,7 +294,7 @@ class GtoolSigma():
         Returns
         -------
         p :np.ndarray
-            pressure[hPa]
+            pressure[Pa]
         """
         if isinstance(ps,Gtool2d):
             psarr=ps.getarr(cyclic=cyclic,timestep=timestep)
@@ -304,7 +304,7 @@ class GtoolSigma():
         altaxis=self.aa.shape[0]
         P=self.aa.reshape((altaxis,1,1)) \
          +self.bb.reshape((altaxis,1,1))*psarr
-        return P
+        return P*1e2
     def get_dp(self,ps,timestep=0,cyclic=False):
         """
         convert surface pressure to 3D pressure
