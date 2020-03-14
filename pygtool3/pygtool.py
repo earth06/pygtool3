@@ -7,7 +7,7 @@ import sys
 import pathlib
 thisdir=str(pathlib.Path(__file__).resolve().parent)
 sys.path.append(thisdir)
-from pygtool_core import Gtool3d,Gtool2d,GtoolGrid,GtoolSigma,GtoolPressure
+from pygtool_core import Gtool3d,Gtool2d,GtoolGrid,GtoolSigma,GtoolPressure,Gtool
 import cartopy_toolkit as ckit
 import gtplot
 import gtutil
@@ -106,3 +106,4 @@ def readpressure(z=35,gtaxfile='GTAXLOC.AR5PL35'):
     """
     gtoolpres=GtoolPressure(z=z,GTAXFILE=gtaxfile)
     return gtoolpres
+

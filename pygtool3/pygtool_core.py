@@ -514,6 +514,19 @@ class Gtool3d:
         for i in range(self.count):
             datelist.append(self.getdate(timestep=i))
         return pd.to_datetime(datelist)
+    def set_datetimeindex(self,datetime=None):
+        """
+        set datetimeindex
+        
+        Parameters
+        -----------
+        datetime :pd.DatetimeIndex or None, default None
+            set datetimeindex. set datetimeindex automatilcally when no argment is passed.
+        """
+        if datetime is None:
+            self.datetimeindex=self.getdatetimeindex()
+        else:
+            self.datetimeindex=datetime
     def getarrays(self,cyclic=False,na_values=-999,replace_nan=False):
         """
         get  all model data in read file
@@ -569,7 +582,7 @@ class Gtool3d:
         item=head[2].decode().strip()
         title=head[3].decode().strip()
         unit=head[15].decode().strip()
-        datetime=self.getdatetimeindex()
+        datetime=self.datetimeindex
         arrays=self.getarrays(cyclic=cyclic,na_values=na_values,replace_nan=replace_nan)
         kwargs['Convention']='COARDS'
         kwargs['title']=title
