@@ -28,7 +28,7 @@ t=pygtool.read3d('./sampledata/T.clim',count=4)
 pygtool.gtplot.contourf(xx,yy,bc.getarr()[0,:,:])
 ```
 
-![](./test/Figure/sample.png)
+![](./tutorials/Figure/sample.png)
 
 ## Requirement
 
@@ -151,7 +151,7 @@ ax.set_title(bc.getdate())
 fig.suptitle('BC mass')
 ```
 
-![](./test/Figure/global_contour.png)
+![](./tutorials/Figure/global_contour.png)
 
 ##### pygtool.gtplot.logcontourf
 
@@ -162,7 +162,7 @@ ax.set_title(bc.getdate())
 fig.suptitle('BC mass')
 ```
 
-![](./test/Figure/global_logcontourf.png)
+![](./tutorials/Figure/global_logcontourf.png)
 
 ##### pygtool.gtplot.pcolormesh
 
@@ -173,7 +173,7 @@ ax.set_title(bc.getdate())
 fig.suptitle('BC mass')
 ```
 
-![](./test/Figure/global_pcolormesh.png)
+![](./tutorials/Figure/global_pcolormesh.png)
 
 ```python
 fig,ax,cbar=pygtool.gtplot.pcolormesh(xx,yy,bc,scale='log')
@@ -181,7 +181,7 @@ cbar.set_label('[kg/m3]')
 ax.set_title(bc.getdate())
 fig.suptitle('BC mass')
 ```
-![](./test/Figure/global_pcolormesh_log.png)
+![](./tutorials/Figure/global_pcolormesh_log.png)
 
 #### zonal mean(経度断面)
 
@@ -201,7 +201,7 @@ fig.suptitle('BC zonal mean')
 ax.set_title(bc.getdate())
 ```
 
-![](./test/Figure/zonal_contour.png)
+![](./tutorials/Figure/zonal_contour.png)
 
 ##### pygtool.gtplot.zonal_logcontourf
 
@@ -211,7 +211,7 @@ fig.suptitle('BC zonal mean')
 ax.set_title(bc.getdate())
 ```
 
-![](./test/Figure/zonal_logcontourf.png)
+![](./tutorials/Figure/zonal_logcontourf.png)
 
 ##### pygtool.gtplot.zonal_pcolormesh
 
@@ -221,7 +221,7 @@ fig.suptitle('BC zonal mean')
 ax.set_title(bc.getdate())
 ```
 
-![](./test/Figure/zonal_pcolormesh.png)
+![](./tutorials/Figure/zonal_pcolormesh.png)
 
 ```python
 fig,ax,cbar=pygtool.gtplot.zonal_pcolormesh(yy,zz,bc,dlat=30,scale='log')
@@ -229,7 +229,7 @@ fig.suptitle('BC zonal mean')
 ax.set_title(bc.getdate())
 ```
 
-![](./test/Figure/zonal_pcolormesh_log.png)
+![](./tutorials/Figure/zonal_pcolormesh_log.png)
 
 σ座標以外の座標系だと事前に座標変換の処理が必要になってきます。
 

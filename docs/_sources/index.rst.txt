@@ -9,14 +9,9 @@ Welcome to pygtool3's documentation!
 .. toctree::
    :maxdepth: 4
    :caption: Contents:
-
-   cartopy_toolkit
-   gtaxis
-   gtcalic
-   gtplot
-   gtutil
-   pygtool
-   pygtool_core
+   installguide
+   turtolials <../turtolials/index>
+   API reference <./index> 
 
 
 Indices and tables
