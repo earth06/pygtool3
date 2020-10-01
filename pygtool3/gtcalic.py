@@ -196,7 +196,7 @@ def getvmr_column(vmr=None,ps=None,T=None,sigma=None,sigma_M=None,Mtrc=28.8e0,Ma
     PM=(sigma_M.get_pressure(ps,timestep=timestep,cyclic=cyclic))*1e2
     dp=PM[1:,:,:]-PM[:-1,:,:]
     grav=9.8e0
-    if isinstance(cmass,Gtool3d):
+    if isinstance(vmr,Gtool3d):
         col3D=vmr.getarr(timestep=timestep,cyclic=cyclic)*dp/grav*(Mtrc/Mair)
     else:
         col3D=vmr*dp/grav*(Mtrc/Mair)
